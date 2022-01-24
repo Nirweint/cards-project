@@ -1,0 +1,22 @@
+.label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.checkbox {
+    appearance: none;
+    cursor: pointer;
+
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+
+    width: 20px;
+    height: 20px;
+}
+
+.checkbox:checked {
+    appearance: none;
+    background: url("../../../assets/images/check.png") center/15px no-repeat;
+}

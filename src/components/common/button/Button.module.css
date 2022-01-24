@@ -1,0 +1,39 @@
+.btn {
+    padding: 10px 20px;
+
+    border: 2px solid #e7e7e7;
+    border-radius: 5px;
+    background-color: #fff;
+    color: black;
+    cursor: pointer;
+
+    transition-duration: 0.3s;
+}
+
+.default {
+
+}
+
+.default:hover {
+    background-color: #e7e7e7;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.btn:disabled:hover {
+    background-color: #fff;
+}
+
+.red {
+    background: red;
+    color: #fff;
+}
+
+.red:hover {
+    background-color: #fff;
+    color: #000;
+    border: 2px solid red;
+}
