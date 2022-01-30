@@ -1,2 +1,5 @@
-export {appReducer} from './app';
 export {profileReducer} from './profile';
+export {loginReducer} from './login';
+export {signUpReducer} from './signUp';
+export {newPasswordEnterReducer} from './newPasswordEnter';
+export {passwordRecoveryReducer} from './passwordRecovery';
