@@ -1,3 +1,18 @@
+.nav {
+    margin: 20px;
+}
+
+
 .nav a {
-    margin-right: 10px;
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+    padding: 8px;
+    margin: 0px 20px 0px 20px;
+}
+
+.nav a:hover {
+    background-color: blueviolet;
+    padding: 8px;
+    border-radius: 10px;
 }
