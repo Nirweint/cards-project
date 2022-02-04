@@ -4,7 +4,7 @@ import './index.css';
 import {App} from "./app/App";
 import {Provider} from "react-redux";
 import {store} from "./state";
-
+//1221
 ReactDOM.render(
     <Provider store={store}>
         <App/>
