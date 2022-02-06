@@ -1,9 +1,49 @@
-import React from 'react';
+import React, {ChangeEvent, useState} from 'react';
+import {Button, InputText} from "../../components/common";
+import {useDispatch} from "react-redux";
+import { sendEmailThunk } from '../../state/middlewares/forgotPassword';
+import {ForgotPasswordDataRequestType} from "../../api/api";
+
 
 export const PasswordRecovery = () => {
+    const [email, setEmail] = useState<string>('')
+    const [forgot, setForgot] = useState<boolean>(false)
+
+    const dispatch = useDispatch()
+
+    const dataRequest: ForgotPasswordDataRequestType = {
+        email,
+        from: "test-front-admin <ivan.ravinskiy@gmail.com>", // можно указать разработчика фронта)
+        message: `<div style="background-color: lime; padding: 15px">	
+	                password recovery link: 
+	                <a href='http://localhost:3000/#/set-new-password/$token$'>link</a>
+	                </div>` // хтмп-письмо, вместо $token$ бэк вставит токен
+
+    }
+
+
+    const onChangeEmailHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.currentTarget.value)
+    }
+
+    const sendEmailHandler= () => {
+        dispatch(sendEmailThunk(dataRequest))
+                setForgot(true)
+    }
+
     return (
         <div>
-            PasswordRecovery page
+            Forgot your password?
+            {!forgot
+                ? <div>
+                    <InputText placeholder={'Email'}
+                               value={email}
+                               onChange={onChangeEmailHandler}/>
+                    <Button onClick={sendEmailHandler}>Send instructions
+                    </Button>
+                </div>
+                : <div>Check Email. We've sent an Email with instructions to {email}</div>}
         </div>
     );
 };
+
