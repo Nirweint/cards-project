@@ -1,4 +1,23 @@
+.nav {
+    margin: 20px;
+    font-family: "Calibri";
+
+}
+
+
 .nav a {
-    margin-right: 10px;
-    background-color: cornflowerblue;
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    margin: 0px 20px 0px 20px;
+    transition-duration: 0.3s;
+    border: 2px solid #e7e7e7;
+    border-radius: 5px;
+}
+
+.nav a:hover {
+    background-color: blueviolet;
+    padding: 10px 20px;
+    border-radius: 5px;
 }

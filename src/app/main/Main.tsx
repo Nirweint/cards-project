@@ -1,6 +1,6 @@
 import React from 'react';
-import {Header} from "../header";
 import {RoutesComponent} from "../routes";
+import {Header} from "../header";
 
 export const Main = () => {
     return (
