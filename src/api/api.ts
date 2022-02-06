@@ -20,5 +20,8 @@ const instance = axios.create({
 export const api = {
     forgotPassword(data: ForgotPasswordDataRequestType){
         return instance.post<ForgotPasswordDataRequestType, AxiosResponse<ResponseType>>('/auth/forgot', data)
+    },
+    signUp(email: string,password: string){
+        return instance.post('/auth/register',{email, password})
     }
 }
