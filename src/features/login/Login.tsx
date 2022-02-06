@@ -2,8 +2,12 @@ import React, {ChangeEvent, useState} from 'react';
 import {Button, InputText} from "../../components/common";
 import {NavLink} from "react-router-dom";
 import {PATH} from "../../app/routes/RoutesComponent";
+import {useDispatch} from "react-redux";
+import {fetchLogin} from "../../state/middlewares/login";
 
 export const Login = () => {
+
+    const dispatch = useDispatch()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -15,7 +19,10 @@ export const Login = () => {
         setPassword(e.currentTarget.value)
     }
     const handleLoginClick = () => {
-        // dispatch login request
+        dispatch(fetchLogin(email,password))
+        // if (auth) {
+        //     return <Navigate to={PATH.PROFILE}/>
+        // }
     }
 
     return (

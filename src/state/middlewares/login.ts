@@ -1,18 +1,19 @@
 import {ThunkType} from "../types";
-import {someActionProfile} from "../actions/profile";
 import {api} from "../../api";
+import {setProfile} from "../actions/profile";
+import {AxiosResponse} from "axios";
 import {LoginResponseType} from "../../api/api";
 
 
 export const fetchLogin = (email: string, password: string): ThunkType => (dispatch) => {
     api.login({email, password})
-        .then((res: LoginResponseType) => {
-            // dispatch(setProfile(res.data))
+        .then((res: AxiosResponse<LoginResponseType>) => {
+            dispatch(setProfile(res.data))
         })
-    //     .catch(error: any) {
-    //     const error = error.response
-    //         ? error.response.data.error
-    //         : (error.message + ', more details in the console');
-    // }
-    // dispatch(someActionProfile())
+        .catch((e: any) => {
+        const error = e.response
+            ? e.response.data.error
+            : (e.message + ', more details in the console');
+            console.log('Error', {...e})
+    })
 }

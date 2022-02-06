@@ -1,8 +1,8 @@
-import {SomeProfileActionType} from "../index";
+import {SetProfileActionType} from "../index";
 
 export enum PROFILE_ACTIONS {
-    SOME_ACTION = "profileReducer/SOME_ACTION",
+    SET_PROFILE = "profileReducer/SET_PROFILE",
 }
 
-export type ProfileActionsType = SomeProfileActionType
+export type ProfileActionsType = SetProfileActionType
 
