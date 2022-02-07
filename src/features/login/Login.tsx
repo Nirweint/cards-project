@@ -4,11 +4,11 @@ import {Navigate, NavLink} from "react-router-dom";
 import {PATH} from "../../app/routes/RoutesComponent";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchLogin} from "../../state/middlewares/login";
-import {authMeState} from "../../state/selectors/auth";
+import {selectIsAuth} from "../../state/selectors/auth";
 
 export const Login = () => {
 
-    const auth = useSelector(authMeState)
+    const auth = useSelector(selectIsAuth)
     const dispatch = useDispatch()
 
     const [email, setEmail] = useState('')

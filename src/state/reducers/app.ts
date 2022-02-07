@@ -14,7 +14,6 @@ export const appReducer = (state = initState, action: AppActionsType): AppStateT
     switch (action.type) {
         case APP_ACTIONS.SET_STATUS:
             return {...state, status: action.status}
-
         default:
             return state;
     }

@@ -37,6 +37,7 @@ export type LoginResponseType = {
 
 const instance = axios.create({
     baseURL: 'https://neko-back.herokuapp.com/2.0',
+    withCredentials: true,
 })
 
 export const api = {
@@ -48,5 +49,8 @@ export const api = {
     },
     login(payload: LoginPayloadType) {
         return instance.post<LoginResponseType>('/auth/login', payload)
+    },
+    authMe(){
+        return instance.post<LoginResponseType>('/auth/me')
     }
 }
