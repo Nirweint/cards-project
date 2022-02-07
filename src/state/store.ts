@@ -5,6 +5,7 @@ import {
     loginReducer, newPasswordEnterReducer, passwordRecoveryReducer,
     profileReducer, signUpReducer
 } from "./reducers";
+import {authReducer} from "./reducers/auth";
 
 
 const rootReducer = combineReducers({
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
     signUp: signUpReducer,
     newPasswordEnter: newPasswordEnterReducer,
     passwordRecovery: passwordRecoveryReducer,
+    auth: authReducer,
     app: appReducer,
 })
 
