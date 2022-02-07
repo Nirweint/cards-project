@@ -1,12 +1,14 @@
 import React, {ChangeEvent, useState} from 'react';
 import {Button, InputText} from "../../components/common";
-import {NavLink} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 import {PATH} from "../../app/routes/RoutesComponent";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {fetchLogin} from "../../state/middlewares/login";
+import {authMeState} from "../../state/selectors/auth";
 
 export const Login = () => {
 
+    const auth = useSelector(authMeState)
     const dispatch = useDispatch()
 
     const [email, setEmail] = useState('')
@@ -20,9 +22,9 @@ export const Login = () => {
     }
     const handleLoginClick = () => {
         dispatch(fetchLogin(email,password))
-        // if (auth) {
-        //     return <Navigate to={PATH.PROFILE}/>
-        // }
+        if (auth) {
+            return <Navigate to={PATH.PROFILE}/>
+        }
     }
 
     return (
