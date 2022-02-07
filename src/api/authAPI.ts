@@ -1,5 +1,25 @@
 import axios, {AxiosResponse} from "axios";
 
+const instance = axios.create({
+    baseURL: 'https://neko-back.herokuapp.com/2.0',
+    withCredentials: true,
+})
+
+export const authAPI = {
+    forgotPassword(data: ForgotPasswordDataRequestType){
+        return instance.post<ForgotPasswordDataRequestType, AxiosResponse<ResponseType>>('/auth/forgot', data)
+    },
+    signUp(email: string,password: string){
+        return instance.post('/auth/register',{email, password})
+    },
+    login(payload: LoginPayloadType) {
+        return instance.post<LoginResponseType>('/auth/login', payload)
+    },
+    me(){
+        return instance.post<LoginResponseType>('/auth/me')
+    }
+}
+
 export type ForgotPasswordDataRequestType = {
     email: string,
     from: string,
@@ -16,7 +36,7 @@ type ResponseType = {
 type LoginPayloadType = {
     email: string
     password: string
-    rememberMe?: boolean
+    rememberMe: boolean
 }
 
 export type LoginResponseType = {
@@ -33,24 +53,4 @@ export type LoginResponseType = {
     rememberMe: boolean;
 
     error?: string;
-}
-
-const instance = axios.create({
-    baseURL: 'https://neko-back.herokuapp.com/2.0',
-    withCredentials: true,
-})
-
-export const api = {
-    forgotPassword(data: ForgotPasswordDataRequestType){
-        return instance.post<ForgotPasswordDataRequestType, AxiosResponse<ResponseType>>('/auth/forgot', data)
-    },
-    signUp(email: string,password: string){
-        return instance.post('/auth/register',{email, password})
-    },
-    login(payload: LoginPayloadType) {
-        return instance.post<LoginResponseType>('/auth/login', payload)
-    },
-    authMe(){
-        return instance.post<LoginResponseType>('/auth/me')
-    }
 }
