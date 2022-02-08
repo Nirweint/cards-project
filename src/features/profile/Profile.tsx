@@ -3,6 +3,7 @@ import {Navigate} from "react-router-dom";
 import {PATH} from "../../app/routes/RoutesComponent";
 import {useSelector} from "react-redux";
 import {selectIsAuth} from "../../state/selectors/auth";
+import {ProfileInfo} from "./profileInfo/profileInfo";
 
 export const Profile = () => {
     const isAuth = useSelector(selectIsAuth)
@@ -14,6 +15,7 @@ export const Profile = () => {
     return (
         <div>
             Profile page
+            <ProfileInfo/>
         </div>
     );
 };
