@@ -22,7 +22,7 @@ export const Profile = () => {
 
     return (
         <div>
-            Profile page
+            Profile page!
             <ProfileInfo/>
             {isAuth && <Button onClick={onLogoutClick}>Log Out</Button>}
         </div>
