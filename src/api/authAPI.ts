@@ -6,21 +6,30 @@ const instance = axios.create({
 })
 
 export const authAPI = {
-    forgotPassword(data: ForgotPasswordDataRequestType) {
+    forgotPassword(data: ForgotPasswordDataRequestType){
         return instance.post<ForgotPasswordDataRequestType, AxiosResponse<ResponseType>>('/auth/forgot', data)
     },
-    signUp(email: string, password: string) {
-        return instance.post('/auth/register', {email, password})
+    signUp(email: string,password: string){
+        return instance.post('/auth/register',{email, password})
     },
     login(payload: LoginPayloadType) {
         return instance.post<LoginResponseType>('/auth/login', payload)
     },
-    me() {
+    logout(){
+        return instance.delete<ResponseType>('/auth/me')
+    },
+    me(){
         return instance.post<LoginResponseType>('/auth/me')
     },
     setProfileName(data: SetNameAvaType) {
         return instance.put<SetNameAvaResponseType>('/auth/me', data)
-    }
+    },
+}
+
+export type ForgotPasswordDataRequestType = {
+    email: string,
+    from: string,
+    message: string,
 }
 
 export type SetNameAvaType = {
@@ -32,12 +41,6 @@ export type SetNameAvaResponseType = {
     updatedUser: SetNameAvaType,
 
     error?: string,
-}
-
-export type ForgotPasswordDataRequestType = {
-    email: string,
-    from: string,
-    message: string,
 }
 
 type ResponseType = {
