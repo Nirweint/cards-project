@@ -1,5 +1,5 @@
 import {PROFILE_ACTIONS, ProfileActionsType} from "../actions/profile/types";
-import {LoginResponseType} from "../../api/api";
+import {LoginResponseType} from "../../api/authAPI";
 
 export type ProfileStateType = {
     profileData: LoginResponseType | null

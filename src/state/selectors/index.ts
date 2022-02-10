@@ -1,1 +1,0 @@
-export {selectProfileState} from './profile';

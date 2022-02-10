@@ -1,7 +1,7 @@
 import {ThunkType} from "../types";
-import {api} from "../../api";
+import {authAPI} from "../../api";
 
 export const signUpThunk = (email:string,password:string): ThunkType => (dispatch) => {
-    api.signUp(email,password)
+    authAPI.signUp(email,password)
         .then(res => console.log(res.data))
 }

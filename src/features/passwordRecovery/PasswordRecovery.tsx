@@ -2,7 +2,7 @@ import React, {ChangeEvent, useState} from 'react';
 import {Button, InputText} from "../../components/common";
 import {useDispatch} from "react-redux";
 import { sendEmailThunk } from '../../state/middlewares/forgotPassword';
-import {ForgotPasswordDataRequestType} from "../../api/api";
+import {ForgotPasswordDataRequestType} from "../../api/authAPI";
 
 
 export const PasswordRecovery = () => {
