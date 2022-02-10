@@ -3,7 +3,9 @@ import axios, {AxiosResponse} from "axios";
 const instance = axios.create({
     baseURL: 'https://neko-back.herokuapp.com/2.0',
     withCredentials: true,
-})
+});
+
+//'http://localhost:7542/2.0/'
 
 export const authAPI = {
     forgotPassword(data: ForgotPasswordDataRequestType){
@@ -24,7 +26,13 @@ export const authAPI = {
     setProfileName(data: SetNameAvaType) {
         return instance.put<SetNameAvaResponseType>('/auth/me', data)
     },
-}
+    setNewPassword(newPassword: string, token: string | undefined) {
+        return instance.post<SetNewPasswordResponeType>('/auth/set-new-password', {
+            password: newPassword,
+            resetPasswordToken: token
+        })
+    }
+};
 
 export type ForgotPasswordDataRequestType = {
     email: string,
@@ -71,3 +79,8 @@ export type LoginResponseType = {
 
     error?: string;
 }
+
+type SetNewPasswordResponeType = {
+    info?: string
+    error?: string
+};
