@@ -33,12 +33,12 @@ export type ForgotPasswordDataRequestType = {
 }
 
 export type SetNameAvaType = {
-    name: string,
-    avatar: string,
+    name?: string,
+    avatar?: string,
 }
 
 export type SetNameAvaResponseType = {
-    updatedUser: SetNameAvaType,
+    updatedUser: LoginResponseType,
 
     error?: string,
 }

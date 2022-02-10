@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {selectProfileAvatar} from "../../../state/selectors/auth";
-import {setProfileAva} from "../../../state/middlewares/authMe";
+import {changeProfileAvatar} from "../../../state/middlewares/profile";
+import {selectProfileAvatar} from "../../../state/selectors/profile";
 
 export const ProfileInfoAvatar = () => {
 
@@ -21,9 +21,12 @@ export const ProfileInfoAvatar = () => {
     }
 
     const activateViewModeAvatar = () => {
-        setEditMode(false);
-        dispatch(setProfileAva(avatar))
+        if (avatar) {
+            setEditMode(false);
+            dispatch(changeProfileAvatar(avatar))
+        }
     }
+
 
     return (
         <div>
@@ -31,7 +34,8 @@ export const ProfileInfoAvatar = () => {
             {!editMode
                 ? <div onDoubleClick={activateEditModeAvatar}>Avatar url: {profileAvatar}</div>
                 : <div>
-                    Avatar url: <input autoFocus value={avatar} onChange={changeTitleAvatar} onBlur={activateViewModeAvatar}/>
+                    Avatar url: <input autoFocus value={avatar} onChange={changeTitleAvatar}
+                                       onBlur={activateViewModeAvatar}/>
                 </div>
             }
         </div>

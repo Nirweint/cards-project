@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {selectProfileName} from "../../../state/selectors/auth";
-import {setProfileName} from "../../../state/middlewares/authMe";
+import {changeProfileName} from "../../../state/middlewares/profile";
+import {selectProfileName} from "../../../state/selectors/profile";
 
 export const ProfileInfoName = () => {
 
@@ -21,8 +21,10 @@ export const ProfileInfoName = () => {
     }
 
     const activateViewModeName = () => {
-        setEditMode(false);
-        dispatch(setProfileName(name))
+        if (name) {
+            setEditMode(false);
+            dispatch(changeProfileName(name))
+        }
     }
 
     return (
