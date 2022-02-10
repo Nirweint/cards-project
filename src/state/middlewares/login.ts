@@ -7,7 +7,7 @@ import {authMeAction} from "../actions/auth";
 import {setAppStatus} from "../actions/app";
 
 
-export const fetchLogin = (email: string, password: string, rememberMe: boolean): ThunkType => dispatch => {
+export const setLogin = (email: string, password: string, rememberMe: boolean): ThunkType => dispatch => {
     dispatch(setAppStatus('loading'))
     authAPI.login({email, password, rememberMe})
         .then((res: AxiosResponse<LoginResponseType>) => {
