@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState} from 'react';
-import {Button, Checkbox, InputText, Loading} from "../../components/common";
+import {Button, Checkbox, InputText, Loading} from "../../components";
 import {Navigate, NavLink} from "react-router-dom";
 import {PATH} from "../../app/routes/RoutesComponent";
 import {useDispatch, useSelector} from "react-redux";
@@ -16,8 +16,8 @@ export const Login = () => {
 
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
-    const [error, setError] = useState<string | null>(null)
     const [checked, setChecked] = useState<boolean>(false)
+    const [error, setError] = useState<string | null>(null)
 
     const isEmailValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)
     const isPasswordLengthValid = password.length > 7
