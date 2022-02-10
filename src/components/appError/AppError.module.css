@@ -1,0 +1,27 @@
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: -500px;
+    bottom: -90%;
+    transition: .3s;
+}
+
+.notification {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    padding: 15px 0;
+    background-color: #ffccba;
+    color: #de523a;
+}
+
+.show {
+    left: 20px;
+}
+
+.errorIcon {
+    width: 20px;
+    margin-right: 5px;
+}
