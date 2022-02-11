@@ -8,6 +8,7 @@ import {PATH} from "../../app/routes/RoutesComponent";
 import {isEmailValid, isPasswordLengthValid} from "../../utils";
 import {selectIsSignUpSuccess} from "../../state/selectors/auth";
 import s from '../../components/common/styles/Common.module.css'
+import style from './SignUp.module.css'
 
 export const SignUp = () => {
 
@@ -36,7 +37,7 @@ export const SignUp = () => {
         }
     }
 
-    const cancelHandler = ()=> {
+    const cancelHandler = () => {
         console.log('dont work')
     }
 
@@ -46,6 +47,7 @@ export const SignUp = () => {
 
     return (
         <div className={s.wrapper}>
+            <h1>It-incubator</h1>
             <h2>Sign Up</h2>
             <div>
                 <label>Email</label>
@@ -64,8 +66,11 @@ export const SignUp = () => {
                     onChangeText={setConfirmPassword}
                 />
                 {error && <div className={s.error}>{error}</div>}
-                    <Button onClick={submitRegister}>Register</Button>
-                    <Button onClick={cancelHandler}>Cancel</Button>
+                <div className={style.btn}>
+                    <Button className={style.btnCancel} onClick={cancelHandler}>Cancel</Button>
+                    <Button className={style.btnRegister} onClick={submitRegister}>Register</Button>
+                </div>
+
             </div>
         </div>
     );

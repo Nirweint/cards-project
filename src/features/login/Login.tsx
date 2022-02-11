@@ -44,27 +44,31 @@ export const Login = () => {
 
     return (
         <div className={s.wrapper}>
+            <h1>It-incubator</h1>
             <h2>Sign In</h2>
-            <label>Email</label>
-            <InputText
-                type='email'
-                name='email'
-                onChangeText={setEmail}
-                value={email}
-            />
-            <label>Password</label>
-            <InputText
-                onChangeText={setPassword}
-                type='password'
-                value={password}
-            />
-            <Checkbox
-                style={{width: '20px'}}
-                checked={checked}
-                onChangeChecked={setChecked}
-            >
-                Remember me?
-            </Checkbox>
+            <div>
+                <label>Email</label>
+                <InputText
+                    type='email'
+                    name='email'
+                    onChangeText={setEmail}
+                    value={email}
+                />
+                <label>Password</label>
+                <InputText
+                    onChangeText={setPassword}
+                    type='password'
+                    value={password}
+                />
+                <Checkbox
+                    style={{width: '20px'}}
+                    checked={checked}
+                    onChangeChecked={setChecked}
+                >
+                    Remember me?
+                </Checkbox>
+            </div>
+
             {error && <div className={s.error}>{error}</div>}
             <div>
                 <NavLink to={PATH.PASSWORD_RECOVERY}>Forgot Password?</NavLink>

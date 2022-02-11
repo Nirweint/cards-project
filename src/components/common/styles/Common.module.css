@@ -1,32 +1,33 @@
 .wrapper {
-    /*position: absolute;*/
     width: 413px;
     height: 600px;
-    /*left: 434px;*/
-    /*top: 90px;*/
 
     background: #F9F9FE;
     border-radius: 8px;
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
-.wrapper h2{
-    /*position: absolute;*/
-    /*width: 75px;*/
-    /*height: 33px;*/
-    /*left: 598px;*/
-    /*top: 156px;*/
+.wrapper h1{
+    font-family: Poppins, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 39px;
 
-    font-family: Poppins;
+    color: #2D2E46;
+}
+
+.wrapper h2{
+    margin-bottom: 65px;
+
+    font-family: Poppins, sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 22px;
     line-height: 33px;
-     /*identical to box height */
 
     text-align: center;
 
@@ -34,39 +35,61 @@
 
 }
 
+.wrapper label{
+    font-family: Poppins, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 20px;
+
+    color: #24254A;
+
+    opacity: 0.5;
+}
+
+.wrapper a{
+    text-decoration: none;
+    font-family: Poppins, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+
+    text-align: center;
+
+    color: #21268F;
+}
+
 .wrapper input{
     width: 300px;
 }
 
-
 .button {
-
     margin-top: 92px;
     width: 266px;
     height: 36px;
     background: #21268F;
-    box-shadow: 0px 4px 18px rgba(33, 38, 143, 0.35), inset 0px 1px 0px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 18px rgba(33, 38, 143, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
     border-radius: 30px;
 
-    font-family: SF UI Display;
+    font-family: Poppins, sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
     line-height: 19px;
-    /* identical to box height */
 
     text-align: center;
     letter-spacing: 0.01em;
 
     color: #ECECF9;
 
-    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
 }
 
 .wrapper p{
     margin-top: 31px;
 
-    font-family: SF UI Display;
+    font-family: Poppins, sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 14px;

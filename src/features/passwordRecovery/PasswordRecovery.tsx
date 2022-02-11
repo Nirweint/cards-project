@@ -1,11 +1,13 @@
 import React, {ChangeEvent, useState} from 'react';
 import {Button, InputText} from "../../components";
 import {useDispatch} from "react-redux";
-import { sendEmailThunk } from '../../state/middlewares/forgotPassword';
+import {sendEmailThunk} from '../../state/middlewares/forgotPassword';
 import {ForgotPasswordDataRequestType} from "../../api/authAPI";
 import s from '../../components/common/styles/Common.module.css'
 import {NavLink} from "react-router-dom";
 import {PATH} from "../../app/routes/RoutesComponent";
+import emailLetterImg from '../../assets/images/emailLetter.png'
+import styles from './PasswordRecovery.module.css'
 
 export const PasswordRecovery = () => {
     const [email, setEmail] = useState<string>('')
@@ -28,28 +30,40 @@ export const PasswordRecovery = () => {
         setEmail(e.currentTarget.value)
     }
 
-    const sendEmailHandler= () => {
+    const sendEmailHandler = () => {
         dispatch(sendEmailThunk(dataRequest))
-                setForgot(true)
+        setForgot(true)
     }
 
     return (
         <div className={s.wrapper}>
+            <h1>It-incubator</h1>
             <h2>Forgot your password?</h2>
             {!forgot
                 ? <div>
-                    <InputText placeholder={'Email'}
-                               name='email'
-                               value={email}
-                               onChange={onChangeEmailHandler}/>
+                    <div>
+                        <InputText placeholder={'Email'}
+                                   name='email'
+                                   value={email}
+                                   onChange={onChangeEmailHandler}/>
+                        <p>
+                            Enter your email address and we will send you <br/>
+                            further instructions
+                        </p>
+                    </div>
+
                     <Button className={s.button} onClick={sendEmailHandler}>Send instructions
                     </Button>
-                    <p>Did you remember your password?</p>
-                    <div>
-                        <NavLink to={PATH.LOGIN}>Try logging in</NavLink>
-                    </div>
+                        <p>Did you remember your password?</p>
+                        <div>
+                            <NavLink to={PATH.LOGIN}>Try logging in</NavLink>
+                        </div>
                 </div>
-                : <div>Check Email. We've sent an Email with instructions to {email}</div>}
+                : <div className={styles.emailContainer}>
+                    <img src={emailLetterImg} className={styles.emailLetter} alt={'Send'}/>
+                    <h2> Check Email </h2>
+                    <p> We've sent an Email with instructions to <br/> {email} </p>
+                </div>}
         </div>
     );
 };

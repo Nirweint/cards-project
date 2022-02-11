@@ -33,17 +33,20 @@ export const NewPasswordEnter = () => {
 
     return (
         <div className={s.wrapper}>
+            <h1>It-incubator</h1>
             <h2>Create new password</h2>
             <div>
                 <InputText placeholder="Password"
                            type="password"
                            onChangeText={setNewPassword}/>
+
+                <p>
+                    Create new password and we will send you<br/>
+                    further instructions to email
+                </p>
             </div>
-            <p>
-                Create new password and we will send you<br/>
-                further instructions to email
-            </p>
-            <Button className={s.button} onClick={createNewPasswordHandler}>Create new password</Button>
+                <Button className={s.button} onClick={createNewPasswordHandler}>Create new password</Button>
+
         </div>
     );
 };
