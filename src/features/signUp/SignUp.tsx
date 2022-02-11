@@ -63,7 +63,7 @@ export const SignUp = () => {
                     type='password'
                     onChangeText={setConfirmPassword}
                 />
-                {error && <div>{error}</div>}
+                {error && <div className={s.error}>{error}</div>}
                     <Button onClick={submitRegister}>Register</Button>
                     <Button onClick={cancelHandler}>Cancel</Button>
             </div>

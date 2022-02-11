@@ -59,12 +59,13 @@ export const Login = () => {
                 value={password}
             />
             <Checkbox
+                style={{width: '20px'}}
                 checked={checked}
                 onChangeChecked={setChecked}
             >
                 Remember me?
             </Checkbox>
-            {error && <div>{error}</div>}
+            {error && <div className={s.error}>{error}</div>}
             <div>
                 <NavLink to={PATH.PASSWORD_RECOVERY}>Forgot Password?</NavLink>
             </div>

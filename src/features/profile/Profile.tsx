@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectIsAuth} from "../../state/selectors/auth";
 import {ProfileInfo} from "./profileInfo/profileInfo";
 import {LogOutTC} from "../../state/middlewares/login";
-import {Button} from "../../components/common";
+import {Button} from "../../components";
 
 export const Profile = () => {
     const isAuth = useSelector(selectIsAuth)
