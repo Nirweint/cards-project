@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {useState} from 'react';
 import {Button, Checkbox, InputText, Loading} from "../../components";
 import {Navigate, NavLink} from "react-router-dom";
 import {PATH} from "../../app/routes/RoutesComponent";
@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setLogin} from "../../state/middlewares/login";
 import {selectAppStatus} from "../../state/selectors/app";
 import {selectIsAuth} from "../../state/selectors/auth";
+import {isEmailValid, isPasswordLengthValid} from "../../utils";
 
 export const Login = () => {
 
@@ -19,27 +20,14 @@ export const Login = () => {
     const [checked, setChecked] = useState<boolean>(false)
     const [error, setError] = useState<string | null>(null)
 
-    const isEmailValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)
-    const isPasswordLengthValid = password.length > 7
-
-    const onEmailInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.currentTarget.value
-        setEmail(value)
-    }
-
-    const onPasswordInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.currentTarget.value
-        setPassword(value)
-    }
-
     const onLoginClick = () => {
-        if (!isEmailValid) {
+        if (!isEmailValid(email)) {
             setError('Invalid email address')
         }
-        if (!isPasswordLengthValid) {
+        if (!isPasswordLengthValid(password)) {
             setError('Invalid password')
         }
-        if (isEmailValid && isPasswordLengthValid) {
+        if (isEmailValid(email) && isPasswordLengthValid(password)) {
             dispatch(setLogin(email, password, checked))
             setError(null)
         }
@@ -60,12 +48,12 @@ export const Login = () => {
             <InputText
                 type='email'
                 name='email'
-                onChange={onEmailInputChange}
+                onChangeText={setEmail}
                 value={email}
             />
             <label>Password</label>
             <InputText
-                onChange={onPasswordInputChange}
+                onChangeText={setPassword}
                 type='password'
                 value={password}
             />

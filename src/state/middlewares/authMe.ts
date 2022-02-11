@@ -4,7 +4,7 @@ import {AxiosResponse} from "axios";
 import {LoginResponseType} from "../../api/authAPI";
 import {authMeAction} from "../actions/auth";
 import {setProfile} from "../actions/profile";
-import {setAppError, setAppStatus} from "../actions/app";
+import {setAppStatus} from "../actions/app";
 
 
 export const fetchAuthMe = (): ThunkType => dispatch => {

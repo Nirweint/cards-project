@@ -15,9 +15,9 @@ export const setLogin = (email: string, password: string, rememberMe: boolean): 
             dispatch(authMeAction(true))
             dispatch(setAppStatus('succeeded'))
         })
-        .catch((e: any) => {
+        .catch((e) => {
             dispatch(setAppStatus('failed'))
-            const error = e.response.data.error;
+            const error = e.response ? e.response.data.error : e.message;
             if (error === "not correct password /ᐠ-ꞈ-ᐟ\\" || error === "user not found /ᐠ-ꞈ-ᐟ\\") {
                 dispatch(setAppError('Please enter valid email or password'))
             }
@@ -31,9 +31,9 @@ export const LogOutTC = (): ThunkType => dispatch => {
             dispatch(authMeAction(false))
             dispatch(setAppStatus('succeeded'))
         })
-        .catch((e: any) => {
+        .catch((e) => {
             dispatch(setAppStatus('failed'))
-            const error = e.response.data.error;
+            const error = e.response ? e.response.data.error : e.message;
             dispatch(setAppError(error))
         })
 }
