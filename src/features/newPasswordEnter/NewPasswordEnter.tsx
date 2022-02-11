@@ -1,21 +1,35 @@
 import React, {useState} from 'react';
-import {InputText} from "../../components";
+import {InputText, Loading} from "../../components";
 import {Button} from "../../components";
-import {useDispatch} from "react-redux";
-import {setNewPasswordTC} from "../../state/reducers/newPasswordEnter";
-import {useParams} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {Navigate, useParams} from "react-router-dom";
+import {PATH} from "../../app/routes/RoutesComponent";
+import {setNewPasswordTC} from "../../state/middlewares/forgotPassword";
+import {selectIsSettingNewPasswordSucceeded} from "../../state/selectors/forgotPassword";
+import {selectAppStatus} from "../../state/selectors/app";
 import s from '../../components/common/styles/Common.module.css'
 
 export const NewPasswordEnter = () => {
 
-    const [newPassword, setNewPassword] = useState<string>('');
+    const dispatch = useDispatch();
     const {token} = useParams();
 
-    const dispatch = useDispatch();
+    const appStatus = useSelector(selectAppStatus)
+    const isSettingNewPasswordSucceeded = useSelector(selectIsSettingNewPasswordSucceeded)
+
+    const [newPassword, setNewPassword] = useState<string>('');
 
     const createNewPasswordHandler = () => {
         dispatch(setNewPasswordTC(newPassword, token))
     };
+
+    if (appStatus === 'loading') {
+        return <Loading/>
+    }
+
+    if (isSettingNewPasswordSucceeded) {
+        return <Navigate to={PATH.LOGIN}/>
+    }
 
     return (
         <div className={s.wrapper}>
@@ -23,7 +37,7 @@ export const NewPasswordEnter = () => {
             <div>
                 <InputText placeholder="Password"
                            type="password"
-                           onChange={e => setNewPassword(e.currentTarget.value)}/>
+                           onChangeText={setNewPassword}/>
             </div>
             <p>
                 Create new password and we will send you<br/>
