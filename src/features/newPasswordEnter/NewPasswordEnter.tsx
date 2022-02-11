@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import {InputText} from "../../components/common/inputText";
-import {Button} from "../../components/common/button";
+import {InputText} from "../../components";
+import {Button} from "../../components";
 import {useDispatch} from "react-redux";
 import {setNewPasswordTC} from "../../state/reducers/newPasswordEnter";
-import {Navigate, useParams} from "react-router-dom";
-import {PATH} from "../../app/routes/RoutesComponent";
+import {useParams} from "react-router-dom";
+import s from '../../components/common/styles/Common.module.css'
 
 export const NewPasswordEnter = () => {
 
@@ -18,8 +18,8 @@ export const NewPasswordEnter = () => {
     };
 
     return (
-        <div>
-            <h3>Create new password</h3>
+        <div className={s.wrapper}>
+            <h2>Create new password</h2>
             <div>
                 <InputText placeholder="Password"
                            type="password"
@@ -29,7 +29,7 @@ export const NewPasswordEnter = () => {
                 Create new password and we will send you<br/>
                 further instructions to email
             </p>
-            <Button onClick={createNewPasswordHandler}>Create new password</Button>
+            <Button className={s.button} onClick={createNewPasswordHandler}>Create new password</Button>
         </div>
     );
 };

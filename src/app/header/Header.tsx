@@ -5,7 +5,7 @@ import s from "./Header.module.css";
 
 export const Header = () => {
     return (
-        <header>
+        <header className={s.header}>
             <nav className={s.nav}>
                 <NavLink to={PATH.PROFILE}>Profile</NavLink>
                 <NavLink to={PATH.LOGIN}>Login</NavLink>

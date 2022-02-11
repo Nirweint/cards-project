@@ -7,6 +7,7 @@ import {Navigate} from "react-router-dom";
 import {PATH} from "../../app/routes/RoutesComponent";
 import {isEmailValid, isPasswordLengthValid} from "../../utils";
 import {selectIsSignUpSuccess} from "../../state/selectors/auth";
+import s from '../../components/common/styles/Common.module.css'
 
 export const SignUp = () => {
 
@@ -35,13 +36,17 @@ export const SignUp = () => {
         }
     }
 
+    const cancelHandler = ()=> {
+        console.log('dont work')
+    }
+
     if (isSignUpSuccess) {
         return <Navigate to={PATH.LOGIN}/>
     }
 
     return (
-        <div>
-            <h1>Sign Up</h1>
+        <div className={s.wrapper}>
+            <h2>Sign Up</h2>
             <div>
                 <label>Email</label>
                 <InputText
@@ -59,7 +64,8 @@ export const SignUp = () => {
                     onChangeText={setConfirmPassword}
                 />
                 {error && <div>{error}</div>}
-                <Button onClick={submitRegister}>Register</Button>
+                    <Button onClick={submitRegister}>Register</Button>
+                    <Button onClick={cancelHandler}>Cancel</Button>
             </div>
         </div>
     );

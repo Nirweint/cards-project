@@ -7,6 +7,7 @@ import {setLogin} from "../../state/middlewares/login";
 import {selectAppStatus} from "../../state/selectors/app";
 import {selectIsAuth} from "../../state/selectors/auth";
 import {isEmailValid, isPasswordLengthValid} from "../../utils";
+import s from '../../components/common/styles/Common.module.css'
 
 export const Login = () => {
 
@@ -42,7 +43,7 @@ export const Login = () => {
     }
 
     return (
-        <div>
+        <div className={s.wrapper}>
             <h2>Sign In</h2>
             <label>Email</label>
             <InputText
@@ -67,7 +68,7 @@ export const Login = () => {
             <div>
                 <NavLink to={PATH.PASSWORD_RECOVERY}>Forgot Password?</NavLink>
             </div>
-            <Button onClick={onLoginClick}>Login</Button>
+            <Button className={s.button} onClick={onLoginClick}>Login</Button>
             <p>Don't have an account?</p>
             <div>
                 <NavLink to={PATH.SIGN_UP}>Sign Up</NavLink>

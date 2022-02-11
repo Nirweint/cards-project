@@ -1,9 +1,11 @@
 import React, {ChangeEvent, useState} from 'react';
-import {Button, InputText} from "../../components/common";
+import {Button, InputText} from "../../components";
 import {useDispatch} from "react-redux";
 import { sendEmailThunk } from '../../state/middlewares/forgotPassword';
 import {ForgotPasswordDataRequestType} from "../../api/authAPI";
-
+import s from '../../components/common/styles/Common.module.css'
+import {NavLink} from "react-router-dom";
+import {PATH} from "../../app/routes/RoutesComponent";
 
 export const PasswordRecovery = () => {
     const [email, setEmail] = useState<string>('')
@@ -32,15 +34,19 @@ export const PasswordRecovery = () => {
     }
 
     return (
-        <div>
-            Forgot your password?
+        <div className={s.wrapper}>
+            <h2>Forgot your password?</h2>
             {!forgot
                 ? <div>
                     <InputText placeholder={'Email'}
                                value={email}
                                onChange={onChangeEmailHandler}/>
-                    <Button onClick={sendEmailHandler}>Send instructions
+                    <Button className={s.button} onClick={sendEmailHandler}>Send instructions
                     </Button>
+                    <p>Did you remember your password?</p>
+                    <div>
+                        <NavLink to={PATH.LOGIN}>Try logging in</NavLink>
+                    </div>
                 </div>
                 : <div>Check Email. We've sent an Email with instructions to {email}</div>}
         </div>
