@@ -1,8 +1,8 @@
-import {SomePasswordRecoveryActionType} from "../index";
+import {SetNewPasswordSuccessType} from "../index";
 
 export enum PASSWORD_RECOVERY_ACTIONS {
-    SOME_ACTION = "passwordRecoveryReducer/SOME_ACTION",
+    SET_NEW_PASSWORD_SUCCESS = "passwordRecoveryReducer/SET_NEW_PASSWORD_SUCCESS",
 }
 
-export type PasswordRecoveryActionsType = SomePasswordRecoveryActionType
+export type PasswordRecoveryActionsType = SetNewPasswordSuccessType
 

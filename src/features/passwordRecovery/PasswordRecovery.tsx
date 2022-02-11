@@ -37,6 +37,7 @@ export const PasswordRecovery = () => {
             {!forgot
                 ? <div>
                     <InputText placeholder={'Email'}
+                               name='email'
                                value={email}
                                onChange={onChangeEmailHandler}/>
                     <Button onClick={sendEmailHandler}>Send instructions
