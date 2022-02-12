@@ -33,7 +33,6 @@ export const NewPasswordEnter = () => {
 
     return (
         <div className={s.wrapper}>
-            <h1>It-incubator</h1>
             <h2>Create new password</h2>
             <div>
                 <InputText placeholder="Password"

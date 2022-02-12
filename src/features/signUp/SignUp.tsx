@@ -47,7 +47,6 @@ export const SignUp = () => {
 
     return (
         <div className={s.wrapper}>
-            <h1>It-incubator</h1>
             <h2>Sign Up</h2>
             <div>
                 <label>Email</label>
@@ -66,7 +65,7 @@ export const SignUp = () => {
                     onChangeText={setConfirmPassword}
                 />
                 {error && <div className={s.error}>{error}</div>}
-                <div className={style.btn}>
+                <div className={style.btnWrapper}>
                     <Button className={style.btnCancel} onClick={cancelHandler}>Cancel</Button>
                     <Button className={style.btnRegister} onClick={submitRegister}>Register</Button>
                 </div>

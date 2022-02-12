@@ -5,6 +5,7 @@
     left: -500px;
     bottom: -90%;
     transition: .3s;
+    z-index: 0;
 }
 
 .notification {
