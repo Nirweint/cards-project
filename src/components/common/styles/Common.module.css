@@ -1,13 +1,12 @@
 .wrapper {
-    width: 413px;
-    height: 600px;
-
+    padding:30px;
     background: #F9F9FE;
     border-radius: 8px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 1;
 }
 
 .wrapper h1{
@@ -84,6 +83,10 @@
     color: #ECECF9;
 
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.button:hover {
+    color: #000;
 }
 
 .wrapper p{

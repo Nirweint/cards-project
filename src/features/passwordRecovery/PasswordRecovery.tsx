@@ -37,7 +37,6 @@ export const PasswordRecovery = () => {
 
     return (
         <div className={s.wrapper}>
-            <h1>It-incubator</h1>
             <h2>Forgot your password?</h2>
             {!forgot
                 ? <div>
@@ -51,13 +50,14 @@ export const PasswordRecovery = () => {
                             further instructions
                         </p>
                     </div>
-
-                    <Button className={s.button} onClick={sendEmailHandler}>Send instructions
-                    </Button>
+                    <div className={styles.emailContainer}>
+                        <Button className={s.button} onClick={sendEmailHandler}>Send instructions
+                        </Button>
                         <p>Did you remember your password?</p>
                         <div>
                             <NavLink to={PATH.LOGIN}>Try logging in</NavLink>
                         </div>
+                    </div>
                 </div>
                 : <div className={styles.emailContainer}>
                     <img src={emailLetterImg} className={styles.emailLetter} alt={'Send'}/>

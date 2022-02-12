@@ -44,7 +44,6 @@ export const Login = () => {
 
     return (
         <div className={s.wrapper}>
-            <h1>It-incubator</h1>
             <h2>Sign In</h2>
             <div>
                 <label>Email</label>
@@ -61,7 +60,7 @@ export const Login = () => {
                     value={password}
                 />
                 <Checkbox
-                    style={{width: '20px'}}
+                    style={{width: '20px', marginTop: '5px'}}
                     checked={checked}
                     onChangeChecked={setChecked}
                 >
