@@ -74,7 +74,7 @@ export type LoginResponseType = {
 
     error?: string;
 }
-
+//test
 export type SetNewPasswordResponseType = {
     info?: string
     error?: string
