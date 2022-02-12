@@ -1,39 +1,34 @@
-import axios, {AxiosResponse} from "axios";
-
-const instance = axios.create({
-    baseURL: 'https://neko-back.herokuapp.com/2.0',
-    withCredentials: true,
-});
-
-//'http://localhost:7542/2.0/'
+import {AxiosResponse} from "axios";
+import {instance} from "./config";
 
 export const authAPI = {
-    forgotPassword(data: ForgotPasswordDataRequestType){
+    forgotPassword(data: ForgotPasswordDataRequestType) {
         return instance.post<ForgotPasswordDataRequestType, AxiosResponse<ResponseType>>('/auth/forgot', data)
     },
-    signUp(email: string,password: string){
-        return instance.post('/auth/register',{email, password})
+    signUp(email: string, password: string) {
+        return instance.post('/auth/register', {email, password})
     },
     login(payload: LoginPayloadType) {
         return instance.post<LoginResponseType>('/auth/login', payload)
     },
-    logout(){
+    logout() {
         return instance.delete<ResponseType>('/auth/me')
     },
-    me(){
+    me() {
         return instance.post<LoginResponseType>('/auth/me')
     },
     setProfileName(data: SetNameAvaType) {
         return instance.put<SetNameAvaResponseType>('/auth/me', data)
     },
     setNewPassword(newPassword: string, token: string | undefined) {
-        return instance.post<SetNewPasswordResponeType>('/auth/set-new-password', {
+        return instance.post<SetNewPasswordResponseType>('/auth/set-new-password', {
             password: newPassword,
             resetPasswordToken: token
         })
     }
 };
 
+// types
 export type ForgotPasswordDataRequestType = {
     email: string,
     from: string,
@@ -51,14 +46,14 @@ export type SetNameAvaResponseType = {
     error?: string,
 }
 
-type ResponseType = {
+export type ResponseType = {
     answer: boolean,
     html: boolean,
     info: string,
     success: boolean,
 }
 
-type LoginPayloadType = {
+export type LoginPayloadType = {
     email: string
     password: string
     rememberMe: boolean
@@ -80,7 +75,7 @@ export type LoginResponseType = {
     error?: string;
 }
 
-type SetNewPasswordResponeType = {
+export type SetNewPasswordResponseType = {
     info?: string
     error?: string
 };

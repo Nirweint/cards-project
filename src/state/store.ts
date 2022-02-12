@@ -1,7 +1,7 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import thunk from "redux-thunk";
 import {
-    appReducer, authReducer,
+    appReducer, authReducer, cardsReducer, packsReducer,
     passwordRecoveryReducer,
     profileReducer
 } from "./reducers";
@@ -9,6 +9,8 @@ import {
 
 const rootReducer = combineReducers({
     profile: profileReducer,
+    cards: cardsReducer,
+    packs: packsReducer,
     passwordRecovery: passwordRecoveryReducer,
     auth: authReducer,
     app: appReducer,
