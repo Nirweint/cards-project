@@ -27,7 +27,8 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello, world
+        with:
+          target_branch: gh-pages
         env:
           REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
 
