@@ -23,7 +23,7 @@ jobs:
         REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
 
     - name: Deploy
-      uses: Nirweint/github-pages-deploy-action@releases/v3
+      uses: Nirweint/cards-project@releases/v3
       with:
         BRANCH: gh-pages
         FOLDER: build
