@@ -9,6 +9,7 @@ import {
     SignUp,
     Test
 } from "../../features";
+import ShopTable from "../../features/showTable/ShopTable";
 
 export const PATH = {
     PROFILE: '/profile',
@@ -18,6 +19,7 @@ export const PATH = {
     PASSWORD_RECOVERY: '/password-recovery',
     ERROR_404: '/error404',
     TEST: '/test',
+    SHOP_TABLE: 'shoptable'
 };
 
 export const RoutesComponent = () => {
@@ -33,6 +35,7 @@ export const RoutesComponent = () => {
                 <Route path={PATH.PASSWORD_RECOVERY} element={<PasswordRecovery/>}/>
                 <Route path={PATH.ERROR_404} element={<Error404/>}/>
                 <Route path={PATH.TEST} element={<Test/>}/>
+                <Route path={PATH.SHOP_TABLE} element={<ShopTable/>}/>
             </Routes>
         </>
     );
