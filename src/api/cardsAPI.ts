@@ -1,6 +1,5 @@
 import {instance} from "./config";
-import {AxiosResponse} from "axios";
-import {ResponseType} from "./authAPI";
+
 
 export const cardsAPI = {
     getShopTable(){
@@ -10,10 +9,19 @@ export const cardsAPI = {
 
 
 export type ShopTableType = {
+    cardPacks: CardPacksType[]
     packName?: string
     min?: number
     max?: number
     sortPacks?: string
     page?: number
     pageCount?: number
+}
+
+type CardPacksType = {
+    cardPacksTotalCount: number // количество колод
+    maxCardsCount: number
+    minCardsCount: number
+    page: number // выбранная страница
+    pageCount: number // количество элементов на странице
 }

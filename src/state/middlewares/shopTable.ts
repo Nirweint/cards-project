@@ -7,6 +7,7 @@ import {someActionCards} from "../actions/cards";
 export const shopTableGet = (): ThunkType => dispatch => {
     cardsAPI.getShopTable()
         .then((res) => {
+
             dispatch(someActionCards(res.data))
         })
         .catch((e: any) => {
