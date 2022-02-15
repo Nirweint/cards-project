@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {shopTableGet} from "../../state/middlewares/shopTable";
 import {RootStateType} from "../../state/store";
 import {AppStatusType} from "../../state/reducers/app";
+import {Paginator} from "../../components/paginator";
 
 
 const ShopTable = () => {
@@ -31,6 +32,7 @@ const ShopTable = () => {
                     <div>{card.page}</div>
                 )
             })}
+            <Paginator/>
         </div>
     );
 };
