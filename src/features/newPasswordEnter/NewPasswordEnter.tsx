@@ -12,7 +12,7 @@ import s from '../../components/common/styles/Common.module.css'
 export const NewPasswordEnter = () => {
 
     const dispatch = useDispatch();
-    const {token} = useParams();
+    const {token} = useParams<'token'>();
 
     const appStatus = useSelector(selectAppStatus)
     const isSettingNewPasswordSucceeded = useSelector(selectIsSettingNewPasswordSucceeded)

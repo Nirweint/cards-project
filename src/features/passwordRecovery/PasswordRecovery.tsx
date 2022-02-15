@@ -20,7 +20,7 @@ export const PasswordRecovery = () => {
         from: "test-front-admin <ivan.ravinskiy@gmail.com>", // можно указать разработчика фронта)
         message: `<div style="background-color: lime; padding: 15px">	
 	                password recovery link: 
-	                <a href='http://localhost:3000/#/set-new-password/$token$'>link</a>
+	                <a href='https://nirweint.github.io/cards-project/#/set-new-password/$token$'>link</a>
 	                </div>` // хтмп-письмо, вместо $token$ бэк вставит токен
 
     }

@@ -1,12 +1,13 @@
 import {ThunkType} from "../types";
-import {setAppStatus} from "../actions/app";
-import {cardsAPI} from "../../api";
-
-import {someActionCards} from "../actions/cards";
 import {RootStateType} from "../store";
+import {packsAPI} from "../../api";
+import {someActionCards} from "../actions/cards";
+import {setAppStatus} from "../actions/app";
 
-export const shopTableGet = (): ThunkType => (dispatch, getState: () => RootStateType) => {
-    cardsAPI.getCards({cardsPack_id: ''})
+
+export const getPacksOfCards = (): ThunkType => (dispatch, getState: () => RootStateType) => {
+    const userId = getState().profile.profileData._id
+    packsAPI.getPacks({})
         .then((res) => {
 
             dispatch(someActionCards(res.data))
