@@ -15,6 +15,7 @@ export const Header = () => {
                 <NavLink to={PATH.ERROR_404}>Error 404</NavLink>
                 <NavLink to={PATH.TEST}>Test</NavLink>
                 <NavLink to={PATH.SHOP_TABLE}>ShopTable</NavLink>
+                <NavLink to={PATH.CARDS_LIST}>CardsList</NavLink>
             </nav>
         </header>
     );
