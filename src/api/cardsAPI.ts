@@ -1,10 +1,9 @@
 import {instance} from "./config";
-import {AxiosResponse} from "axios";
-import {CardPacksType} from "../state/reducers/cards";
+import {CardsPackType} from "../state/reducers/cards";
 
 export const cardsAPI = {
     getCards(payload: CardsParamsType) {
-        return instance.get<CardsParamsType, AxiosResponse<CardPacksType>>('cards/card', {params: payload})
+        return instance.get<CardsPackType>('cards/card', {params: payload})
     },
     postCard(card: PostCardDataType) {
         return instance.post('cards/card', {card})
@@ -12,7 +11,7 @@ export const cardsAPI = {
     deleteCard(cardId: string) {
         return instance.delete(`cards/card?id=${cardId}`)
     },
-    updateCard(card: PostCardDataType) {
+    updateCard(card: updateCardType) {
         return instance.put('cards/card', {card})
     },
 }
@@ -39,4 +38,9 @@ export type PostCardDataType = {
     questionImg?: string
     questionVideo?: string
     answerVideo?: string
+}
+
+export type updateCardType = {
+    _id: string
+    question: string
 }

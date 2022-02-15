@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {Button} from "../../components";
 import show_Table from './shopTable.module.css'
 import {useDispatch, useSelector} from "react-redux";
-import {shopTableGet} from "../../state/middlewares/shopTable";
+import {shopTableGet} from "../../state/middlewares/cards";
 import {RootStateType} from "../../state/store";
 import {AppStatusType} from "../../state/reducers/app";
 import {getPacksOfCards} from "../../state/middlewares/packs";
@@ -11,7 +11,7 @@ import {getPacksOfCards} from "../../state/middlewares/packs";
 const ShopTable = () => {
 
     const dispatch = useDispatch()
-    const cardPacks = useSelector((state: RootStateType) => state.cards.cardPack.cards)
+    const cardPacks = useSelector((state: RootStateType) => state.cards.cardsPack.cards)
 
     useEffect(() => {
         dispatch(getPacksOfCards())

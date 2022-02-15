@@ -1,8 +1,8 @@
-import {SomeActionCardsType} from "../index";
+import {SetCardsPackType} from "../index";
 
 export enum CARDS_ACTIONS {
-    SOME_ACTION = "cardsReducer/SOME_ACTION",
+    SET_CARDS_PACK = "cardsReducer/SET_CARDS_PACK",
 }
 
-export type CardsActionsType = SomeActionCardsType
+export type CardsActionsType = SetCardsPackType
 

@@ -4,7 +4,7 @@ import {PacksType} from "../state/reducers/packs";
 
 export const packsAPI = {
     getPacks(payload: CardPacksParamsType) {
-        return instance.get<CardPacksParamsType, AxiosResponse<PacksType>>('cards/pack', {params: payload})
+        return instance.get<PacksType>('cards/pack', {params: payload})
     },
     postPack(cardsPack: Omit<PostCardsPacksBodyType, '_id'>) {
         return instance.post(`cards/pack`, {cardsPack})

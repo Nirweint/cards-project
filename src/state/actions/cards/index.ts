@@ -1,11 +1,11 @@
 import {CARDS_ACTIONS} from "./types";
-import {ShopTableType} from "../../../api/cardsAPI";
+import {CardsPackType} from "../../reducers/cards";
 
-export type SomeActionCardsType = ReturnType<typeof someActionCards>
+export type SetCardsPackType = ReturnType<typeof setCardsPack>
 
-export const someActionCards = (payload: ShopTableType) => {
+export const setCardsPack = (payload: CardsPackType) => {
     return {
-        type: CARDS_ACTIONS.SOME_ACTION,
+        type: CARDS_ACTIONS.SET_CARDS_PACK,
         payload,
     } as const
 }

@@ -1,11 +1,13 @@
 import {CARDS_ACTIONS, CardsActionsType} from "../actions/cards/types";
+import {CardsParamsType} from "../../api/cardsAPI";
 
 export type cardsReducerStateType = {
-    cardPack: CardPacksType
+    cardsPack: CardsPackType
+    params: Omit<CardsParamsType, 'cardsPack_id'>
 }
 
 const initState: cardsReducerStateType = {
-    cardPack: {
+    cardsPack: {
         cards:[
             {
                 "_id":"60141efcf8f3eb00042c7c49",
@@ -69,20 +71,30 @@ const initState: cardsReducerStateType = {
         page: 1,
         pageCount: 1000,
         packUserId: '60141d7ef8f3eb00042c7c40',
+    },
+    params: {
+        pageCount: 1000,
+        page: 1,
+        max: 6,
+        cardAnswer: 'cardAnswer',
+        cardQuestion: 'cardQuestion',
+        sortCards: '',
+        min: 0,
     }
+
 }
 
 export const cardsReducer = (state = initState, action: CardsActionsType): cardsReducerStateType => {
     switch (action.type) {
-        case CARDS_ACTIONS.SOME_ACTION:
-            return {...state, cardPack: action.payload}
+        case CARDS_ACTIONS.SET_CARDS_PACK:
+            return {...state, cardsPack: action.payload}
         default:
             return state;
     }
 }
 
 // types
-export type CardPacksType = {
+export type CardsPackType = {
     cards: CardType[]
     cardsTotalCount: number
     maxGrade: number
