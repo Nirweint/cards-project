@@ -6,6 +6,9 @@ import {RootStateType} from "../../state/store";
 import {getPacksOfCards} from "../../state/middlewares/packs";
 import PackItem from "../../components/packItem/PackItem";
 import {Paginator} from "../../components/paginator";
+// import s from "../cardsList/CardsList.module.css";
+import PacksCards from "../ShowPacksCards/PacksCards";
+
 
 const ShopTable = () => {
 
@@ -18,22 +21,35 @@ const ShopTable = () => {
 
 
     return (
-        <div>
-            <Paginator/>
-            <h2>Table</h2>
-            <div className={show_Table.container}>
-                <div>Name</div>
-                <div>Cards Count</div>
-                <div>Update</div>
-                <div>URL</div>
-                <Button>Add</Button>
+        <div className={show_Table.wrapper}>
+            <div className={show_Table.row}>
 
-            </div>
-            <div className={show_Table.container}>
-                {cardPacks.map(({_id, cardsCount,updated, name}) => {
-                    return  <PackItem name={name} cardsCount={cardsCount} update={updated}/>
+                <div className={show_Table.container}>
+                    <PacksCards />
+                </div>
 
-                })}
+                <div className={show_Table.ct}>
+                    <h2>Table</h2>
+                    <table className={show_Table.table}>
+                        <tr>
+                            <th>Name</th>
+                            <th>Cards Count</th>
+                            <th>Update</th>
+                            <th>
+                                <Button>Add</Button>
+                            </th>
+                        </tr>
+                        {cardPacks.map(({_id, cardsCount,updated, name}) => {
+                            return  <PackItem name={name} cardsCount={cardsCount} update={updated}/>
+                        })}
+
+
+                    </table>
+                    <div className={show_Table.paginator}>
+                        <Paginator/>
+                    </div>
+                </div>
+
             </div>
         </div>
     );

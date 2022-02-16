@@ -1,4 +1,5 @@
 import React, {FC} from 'react';
+import {Button} from "../common/button";
 
 
 type PackItemType = {
@@ -12,11 +13,16 @@ type PackItemType = {
 
 export const PackItem: FC<PackItemType>= ({name,cardsCount,update}) => {
     return (
-        <div>
-            <div>{name}</div>
-            <div>{cardsCount}</div>
-            <div>{update}</div>
-        </div>
+        <tr>
+            <td>{name}</td>
+            <td>{cardsCount}</td>
+            <td>{update}</td>
+            <td>
+                <Button>Add</Button>
+                <Button>Update</Button>
+                <Button>Delete</Button>
+            </td>
+        </tr>
     );
 };
 
