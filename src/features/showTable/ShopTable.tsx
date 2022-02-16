@@ -4,6 +4,7 @@ import show_Table from './shopTable.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {RootStateType} from "../../state/store";
 import {getPacksOfCards} from "../../state/middlewares/packs";
+import {Paginator} from "../../components/paginator";
 
 
 const ShopTable = () => {
@@ -19,6 +20,7 @@ const ShopTable = () => {
 
     return (
         <div>
+            <Paginator/>
             <h2>Table</h2>
             <div className={show_Table.container}>
                 <div>Product Name</div>

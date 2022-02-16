@@ -1,0 +1,12 @@
+.pages{
+    padding: 5px 10px;
+    margin: 0 10px;
+    border: 1px solid lightgray;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.selectedPage {
+    border: 2px solid gray;
+    font-weight: bold;
+}
