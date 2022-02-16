@@ -1,25 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import {paginatorThunk} from "../../state/middlewares/paginator";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import s from './Paginator.module.css'
 import {setCurrentPage} from "../../state/actions/packs";
 import {Button} from "../common";
-import {selectCurrentPage, selectPacksTotalCount, selectPageCount} from "../../state/selectors/packs";
 
-// type PaginatorType = {
-//     totalCountItems: number,
-//     itemsPerPage: number,
-//     currentPage: number
-//     portionSize: number,
-// }
+type PaginatorType = {
+    totalCountItems: number,
+    itemsPerPage: number,
+    currentPage: number
+    portionSize: number,
+}
 
-export const Paginator = () => {
-    // const {totalCountItems, itemsPerPage, currentPage, portionSize} = props
-
-    let totalCountItems = useSelector(selectPacksTotalCount)    //всего эл-тов
-    let itemsPerPage = useSelector(selectPageCount)   //кол-во элементов на стр
-    let currentPage = useSelector(selectCurrentPage)    // текущая стр
-    let portionSize = 5    //размер одной порции страниц пагинации
+export const Paginator = (props: PaginatorType) => {
+    const {totalCountItems, itemsPerPage, currentPage, portionSize} = props
 
     const dispatch = useDispatch()
 
@@ -53,11 +47,11 @@ export const Paginator = () => {
 
     return (
         <div>
-            <select>
-                {[5, 10, 25, 50, 100].map(op => {
-                    return <option>{op}</option>
-                })}
-            </select>
+            {/*<select>*/}
+            {/*    {[5, 10, 25, 50, 100].map(op => {*/}
+            {/*        return <option>{op}</option>*/}
+            {/*    })}*/}
+            {/*</select>*/}
             {portionNumber > 1 &&
             <Button onClick={onClickPreviousPortion}>PREV</Button>
             }
