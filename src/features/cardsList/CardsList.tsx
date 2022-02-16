@@ -43,8 +43,6 @@ export const CardsList = () => {
                         />
                     )
                 })}
-
-
             </table>
         </div>
     );

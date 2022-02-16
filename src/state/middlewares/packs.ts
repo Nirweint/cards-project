@@ -2,6 +2,7 @@ import {ThunkType} from "../types";
 import {RootStateType} from "../store";
 import {packsAPI} from "../../api";
 import {setAppStatus} from "../actions/app";
+import {setCurrentPack} from "../actions/packs";
 
 
 export const getPacksOfCards = (): ThunkType => (dispatch, getState: () => RootStateType) => {
@@ -9,7 +10,7 @@ export const getPacksOfCards = (): ThunkType => (dispatch, getState: () => RootS
     packsAPI.getPacks({})
         .then((res) => {
 
-            // dispatch(someActionCards(res.data))
+            dispatch(setCurrentPack(res.data))
         })
         .catch((e: any) => {
             dispatch(setAppStatus('failed'))

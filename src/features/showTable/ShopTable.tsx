@@ -4,7 +4,7 @@ import show_Table from './shopTable.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {RootStateType} from "../../state/store";
 import {getPacksOfCards} from "../../state/middlewares/packs";
-import PackItam from "../../components/packItem/PackItam";
+import PackItem from "../../components/packItem/PackItem";
 import {Paginator} from "../../components/paginator";
 
 const ShopTable = () => {
@@ -30,8 +30,8 @@ const ShopTable = () => {
 
             </div>
             <div className={show_Table.container}>
-                {cardPacks.map(card => {
-                    return  <PackItam  name={card._id} cardcount={card.cardsCount} update={card.updated}/>
+                {cardPacks.map(({_id, cardsCount,updated, name}) => {
+                    return  <PackItem name={name} cardsCount={cardsCount} update={updated}/>
 
                 })}
             </div>

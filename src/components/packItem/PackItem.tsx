@@ -1,23 +1,23 @@
 import React, {FC} from 'react';
 
 
-type PackItamType = {
+type PackItemType = {
     name: string,
-    cardcount: number,
+    cardsCount: number,
     update: string
 }
 
 
 
 
-export const PackItam: FC<PackItamType>= ({name,cardcount,update}) => {
+export const PackItem: FC<PackItemType>= ({name,cardsCount,update}) => {
     return (
         <div>
             <div>{name}</div>
-            <div>{cardcount}</div>
+            <div>{cardsCount}</div>
             <div>{update}</div>
         </div>
     );
 };
 
-export default PackItam;
+export default PackItem;

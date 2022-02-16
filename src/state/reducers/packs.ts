@@ -30,6 +30,8 @@ export const packsReducer = (state = initState, action: PacksActionsType): packs
             return {...state, page:action.page}
         case PACKS_ACTIONS.SET_PAGE_COUNT:
             return {...state, pageCount: action.pageCount}
+        case PACKS_ACTIONS.SET_CURRENT_PACK:
+            return {...state, pack: action.payload}
         default:
             return state;
     }
