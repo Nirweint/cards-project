@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {Range, getTrackBackground} from 'react-range';
+import {useDispatch} from "react-redux";
+import {changePackRangeThunk} from "../../state/middlewares/range";
 
 interface IPriceRangeProps {
 // loading: boolean;
@@ -20,7 +22,14 @@ export const PriceRange: React.FC<IPriceRangeProps> = (
 // logoutCallback,
     }
 ) => {
-    const [values, setValues] = useState([4000, 8000]);
+    const [values, setValues] = useState<number[]>([4000, 8000]);
+
+    const dispatch = useDispatch()
+
+    const changeValuesHandler = (values: number[]) => {
+        setValues(values)
+        dispatch(changePackRangeThunk(values[0]/1000, values[1]/1000))
+    }
 
     return (
         <Range
@@ -28,7 +37,7 @@ export const PriceRange: React.FC<IPriceRangeProps> = (
             step={500}
             min={3000}
             max={9000}
-            onChange={values => setValues(values)}
+            onChange={changeValuesHandler}
             renderTrack={({props, children}) => (
                 <div
                     onMouseDown={props.onMouseDown}
