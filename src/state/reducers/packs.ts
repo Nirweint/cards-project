@@ -1,9 +1,10 @@
 import {PACKS_ACTIONS, PacksActionsType} from "../actions/packs/types";
 
 export type packsReducerStateType = {
-    page: number,
-    pageCount: number,
-    cardPacksTotalCount: number,
+    page: number
+    pageCount: number
+    cardPacksTotalCount: number
+    pack: PacksType
 }
 
 
@@ -11,6 +12,14 @@ const initState: packsReducerStateType = {
     page: 1,
     pageCount: 100,
     cardPacksTotalCount: 0,
+    pack: {
+        cardPacks:[],
+        cardPacksTotalCount: 4088,
+        maxCardsCount: 103,
+        minCardsCount: 0,
+        page: 1,
+        pageCount: 4,
+    }
 }
 
 export const packsReducer = (state = initState, action: PacksActionsType): packsReducerStateType => {
