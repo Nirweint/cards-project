@@ -6,6 +6,7 @@ import {shopTableGet} from "../../state/middlewares/shopTable";
 import {RootStateType} from "../../state/store";
 import {AppStatusType} from "../../state/reducers/app";
 import {getPacksOfCards} from "../../state/middlewares/packs";
+import {Paginator} from "../../components/paginator";
 
 
 const ShopTable = () => {
@@ -21,6 +22,7 @@ const ShopTable = () => {
 
     return (
         <div>
+            <Paginator/>
             <h2>Table</h2>
             <div className={show_Table.container}>
                 <div>Product Name</div>
