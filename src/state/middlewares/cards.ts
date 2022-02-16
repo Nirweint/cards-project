@@ -8,7 +8,7 @@ import {setCardsPack} from "../actions/cards";
 
 export const getCards = (): ThunkType => (dispatch, getState: () => RootStateType) => {
     // const _id = getState().packs
-    cardsAPI.getCards({cardsPack_id: '60141e54f8f3eb00042c7c44'})
+    cardsAPI.getCards({cardsPack_id: '620ca7f3e1222800041437a7', pageCount: 10})
         .then((res) => {
             dispatch(setCardsPack(res.data))
         })
@@ -22,13 +22,13 @@ export const getCards = (): ThunkType => (dispatch, getState: () => RootStateTyp
 export const setNewCard = (): ThunkType => (dispatch, getState: () => RootStateType) => {
     // const _id = getState().packs
     const data: PostCardDataType = {
-        cardsPack_id: '60141e54f8f3eb00042c7c44',
+        cardsPack_id: '620ca7f3e1222800041437a7',
         question: 'new question',
         answer: 'new answer',
     }
     cardsAPI.postCard(data)
         .then((res) => {
-            //
+            dispatch(getCards())
         })
         .catch((e: any) => {
             dispatch(setAppStatus('failed'))
@@ -40,7 +40,7 @@ export const setNewCard = (): ThunkType => (dispatch, getState: () => RootStateT
 export const deleteCard = (cardId: string): ThunkType => dispatch => {
     cardsAPI.deleteCard(cardId)
         .then((res) => {
-            //
+            dispatch(getCards())
         })
         .catch((e: any) => {
             dispatch(setAppStatus('failed'))
@@ -53,7 +53,7 @@ export const updateCard = (data: updateCardType): ThunkType => (dispatch, getSta
 
     cardsAPI.updateCard(data)
         .then((res) => {
-            //
+            dispatch(getCards())
         })
         .catch((e: any) => {
             dispatch(setAppStatus('failed'))
