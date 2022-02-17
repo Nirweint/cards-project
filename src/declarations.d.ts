@@ -5,3 +5,5 @@ declare module "*.svg" {
     const content: any;
     export default content;
 }
+// fixing png type error
+declare module '*.png';

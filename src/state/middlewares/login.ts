@@ -4,10 +4,10 @@ import {setProfile} from "../actions/profile";
 import {AxiosResponse} from "axios";
 import {LoginResponseType} from "../../api/authAPI";
 import {authMeAction} from "../actions/auth";
-import {setAppStatus} from "../actions/app";
+import {setAppError, setAppStatus} from "../actions/app";
 
 
-export const fetchLogin = (email: string, password: string, rememberMe: boolean): ThunkType => dispatch => {
+export const setLogin = (email: string, password: string, rememberMe: boolean): ThunkType => dispatch => {
     dispatch(setAppStatus('loading'))
     authAPI.login({email, password, rememberMe})
         .then((res: AxiosResponse<LoginResponseType>) => {
@@ -15,10 +15,12 @@ export const fetchLogin = (email: string, password: string, rememberMe: boolean)
             dispatch(authMeAction(true))
             dispatch(setAppStatus('succeeded'))
         })
-        .catch((e: any) => {
+        .catch((e) => {
             dispatch(setAppStatus('failed'))
-            const error = e.response ? e.response.data.error : (e.message + ', more details in the console');
-            console.log('Error', {...e})
+            const error = e.response ? e.response.data.error : e.message;
+            if (error === "not correct password /ᐠ-ꞈ-ᐟ\\" || error === "user not found /ᐠ-ꞈ-ᐟ\\") {
+                dispatch(setAppError('Please enter valid email or password'))
+            }
         })
 }
 
@@ -26,13 +28,12 @@ export const LogOutTC = (): ThunkType => dispatch => {
     dispatch(setAppStatus('loading'))
     authAPI.logout()
         .then((res) => {
-            // dispatch(setProfile(res))
             dispatch(authMeAction(false))
             dispatch(setAppStatus('succeeded'))
         })
-        .catch((e: any) => {
+        .catch((e) => {
             dispatch(setAppStatus('failed'))
-            const error = e.response ? e.response.data.error : (e.message + ', more details in the console');
-            console.log('Error', {...e})
+            const error = e.response ? e.response.data.error : e.message;
+            dispatch(setAppError(error))
         })
 }

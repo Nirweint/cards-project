@@ -1,31 +1,37 @@
-import React, {ChangeEvent, useState} from 'react';
-import {Button, Checkbox, InputText, Loading} from "../../components/common";
+import React, {useState} from 'react';
+import {Button, Checkbox, InputText, Loading} from "../../components";
 import {Navigate, NavLink} from "react-router-dom";
 import {PATH} from "../../app/routes/RoutesComponent";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchLogin} from "../../state/middlewares/login";
+import {setLogin} from "../../state/middlewares/login";
 import {selectAppStatus} from "../../state/selectors/app";
 import {selectIsAuth} from "../../state/selectors/auth";
+import {isEmailValid, isPasswordLengthValid} from "../../utils";
+import s from '../../components/common/styles/Common.module.css'
 
 export const Login = () => {
 
     const dispatch = useDispatch()
+
     const appStatus = useSelector(selectAppStatus)
     const isAuth = useSelector(selectIsAuth)
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
     const [checked, setChecked] = useState<boolean>(false)
+    const [error, setError] = useState<string | null>(null)
 
-    const handleChangeEmailInput = (e: ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.currentTarget.value)
-    }
-    const handleChangePasswordInput = (e: ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.currentTarget.value)
-    }
-    const handleLoginClick = () => {
-        dispatch(fetchLogin(email, password, checked))
-
+    const onLoginClick = () => {
+        if (!isEmailValid(email)) {
+            setError('Invalid email address')
+        }
+        if (!isPasswordLengthValid(password)) {
+            setError('Invalid password')
+        }
+        if (isEmailValid(email) && isPasswordLengthValid(password)) {
+            dispatch(setLogin(email, password, checked))
+            setError(null)
+        }
     }
 
     if (appStatus === 'loading') {
@@ -37,21 +43,40 @@ export const Login = () => {
     }
 
     return (
-        <div>
-            <p>Sign In</p>
-            Email
-            <InputText onChange={handleChangeEmailInput} value={email}/>
-            Password
-            <InputText onChange={handleChangePasswordInput}
-                       type={'password'}
-                       value={password}/>
-            <Checkbox checked={checked}
-                      onChangeChecked={setChecked}>Remember me?</Checkbox>
+        <div className={s.wrapper}>
+            <h2>Sign In</h2>
+            <div>
+                <label>Email</label>
+                <InputText
+                    type='email'
+                    name='email'
+                    onChangeText={setEmail}
+                    value={email}
+                />
+                <label>Password</label>
+                <InputText
+                    onChangeText={setPassword}
+                    type='password'
+                    value={password}
+                />
+                <Checkbox
+                    style={{width: '20px', marginTop: '5px'}}
+                    checked={checked}
+                    onChangeChecked={setChecked}
+                >
+                    Remember me?
+                </Checkbox>
+            </div>
+
+            {error && <div className={s.error}>{error}</div>}
             <div>
                 <NavLink to={PATH.PASSWORD_RECOVERY}>Forgot Password?</NavLink>
             </div>
-            <Button onClick={handleLoginClick}>Login</Button>
-
+            <Button className={s.button} onClick={onLoginClick}>Login</Button>
+            <p>Don't have an account?</p>
+            <div>
+                <NavLink to={PATH.SIGN_UP}>Sign Up</NavLink>
+            </div>
         </div>
     );
 };

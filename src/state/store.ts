@@ -1,17 +1,16 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import thunk from "redux-thunk";
 import {
-    appReducer, authReducer,
-    loginReducer, newPasswordEnterReducer, passwordRecoveryReducer,
-    profileReducer, signUpReducer
+    appReducer, authReducer, cardsReducer, packsReducer,
+    passwordRecoveryReducer,
+    profileReducer
 } from "./reducers";
 
 
 const rootReducer = combineReducers({
     profile: profileReducer,
-    login: loginReducer,
-    signUp: signUpReducer,
-    newPasswordEnter: newPasswordEnterReducer,
+    cards: cardsReducer,
+    packs: packsReducer,
     passwordRecovery: passwordRecoveryReducer,
     auth: authReducer,
     app: appReducer,
@@ -20,3 +19,6 @@ const rootReducer = combineReducers({
 export const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export type RootStateType = ReturnType<typeof rootReducer>
+
+//@ts-ignore
+window.store=store

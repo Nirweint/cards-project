@@ -2,6 +2,7 @@ import React, {ChangeEvent, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {changeProfileAvatar} from "../../../state/middlewares/profile";
 import {selectProfileAvatar} from "../../../state/selectors/profile";
+import s from './profileInfo.module.css'
 
 export const ProfileInfoAvatar = () => {
 
@@ -30,7 +31,10 @@ export const ProfileInfoAvatar = () => {
 
     return (
         <div>
-            <img style={{width: '200px'}} src={avatar} alt={'Avatar'}/>
+            <div className={s.imgAvatarZone}>
+                <img className={s.imgAvatarPic} src={avatar} alt={'Avatar'}/>
+            </div>
+
             {!editMode
                 ? <div onDoubleClick={activateEditModeAvatar}>Avatar url: {profileAvatar}</div>
                 : <div>

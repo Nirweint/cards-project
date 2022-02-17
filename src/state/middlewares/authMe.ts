@@ -4,7 +4,7 @@ import {AxiosResponse} from "axios";
 import {LoginResponseType} from "../../api/authAPI";
 import {authMeAction} from "../actions/auth";
 import {setProfile} from "../actions/profile";
-import {setAppError, setAppStatus} from "../actions/app";
+import {setAppStatus} from "../actions/app";
 
 
 export const fetchAuthMe = (): ThunkType => dispatch => {
@@ -18,7 +18,6 @@ export const fetchAuthMe = (): ThunkType => dispatch => {
         .catch((e: any) => {
             dispatch(setAppStatus('failed'))
             const error = e.response ? e.response.data.error : (e.message + ', more details in the console');
-            dispatch(setAppError(error))
             console.log('Error', {...e})
         })
 }

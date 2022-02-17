@@ -1,0 +1,34 @@
+.wrapper {
+    width: 413px;
+    height: 600px;
+
+    background: #F9F9FE;
+    border-radius: 8px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.wrapper h2 {
+    font-family: Poppins, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 33px;
+
+    text-align: right;
+
+    color: #2D2E46;
+}
+
+.imgAvatarZone {
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 96px;
+    height: 96px;
+}
+.imgAvatarPic {
+    width: 100%;
+    object-fit: cover;
+}

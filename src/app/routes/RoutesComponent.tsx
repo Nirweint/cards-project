@@ -1,6 +1,7 @@
 import React from "react";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {
+    CardsList,
     Error404,
     Login,
     NewPasswordEnter,
@@ -9,6 +10,7 @@ import {
     SignUp,
     Test
 } from "../../features";
+import ShopTable from "../../features/showTable/ShopTable";
 
 export const PATH = {
     PROFILE: '/profile',
@@ -18,6 +20,8 @@ export const PATH = {
     PASSWORD_RECOVERY: '/password-recovery',
     ERROR_404: '/error404',
     TEST: '/test',
+    SHOP_TABLE: '/shoptable',
+    CARDS_LIST: '/cards-list/:id',
 };
 
 export const RoutesComponent = () => {
@@ -33,6 +37,8 @@ export const RoutesComponent = () => {
                 <Route path={PATH.PASSWORD_RECOVERY} element={<PasswordRecovery/>}/>
                 <Route path={PATH.ERROR_404} element={<Error404/>}/>
                 <Route path={PATH.TEST} element={<Test/>}/>
+                <Route path={PATH.SHOP_TABLE} element={<ShopTable/>}/>
+                <Route path={PATH.CARDS_LIST} element={<CardsList/>}/>
             </Routes>
         </>
     );
