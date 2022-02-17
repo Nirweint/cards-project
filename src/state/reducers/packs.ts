@@ -1,37 +1,38 @@
 import {PACKS_ACTIONS, PacksActionsType} from "../actions/packs/types";
+import {CardPacksParamsType} from "../../api/packsAPI";
 
 export type packsReducerStateType = {
-    page: number
-    pageCount: number
-    cardPacksTotalCount: number
-    pack: PacksType
+    pack: PacksType,
+    params: CardPacksParamsType,
 }
 
 
 const initState: packsReducerStateType = {
-    page: 1,
-    pageCount: 100,
-    cardPacksTotalCount: 0,
     pack: {
         cardPacks:[],
-        cardPacksTotalCount: 4088,
+        cardPacksTotalCount: 0,
         maxCardsCount: 103,
         minCardsCount: 0,
         page: 1,
         pageCount: 4,
+    },
+    params: {
+        packName: '',
+        min: 3,
+        max: 9,
+        sortPacks: '0updated',
+        page: 1,
+        pageCount: 10,
+        user_id: '',
     }
 }
 
 export const packsReducer = (state = initState, action: PacksActionsType): packsReducerStateType => {
     switch (action.type) {
-        case PACKS_ACTIONS.SET_PACKS_TOTAL_COUNT:
-            return {...state, cardPacksTotalCount: action.packsTotalCount}
-        case PACKS_ACTIONS.SET_CURRENT_PAGE:
-            return {...state, page:action.page}
-        case PACKS_ACTIONS.SET_PAGE_COUNT:
-            return {...state, pageCount: action.pageCount}
         case PACKS_ACTIONS.SET_CURRENT_PACK:
             return {...state, pack: action.payload}
+        case PACKS_ACTIONS.SET_CURRENT_PAGE:
+            return {...state, params: {...state.params, page: action.payload}}
         default:
             return state;
     }

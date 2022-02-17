@@ -1,5 +1,4 @@
 import {instance} from "./config";
-import {AxiosResponse} from "axios";
 import {PacksType} from "../state/reducers/packs";
 
 export const packsAPI = {
@@ -22,8 +21,8 @@ export type CardPacksParamsType = {
     packName?: string
     min?: number
     max?: number
-    sortPacks?: number
-    page?: number
+    sortPacks?: string
+    page: number
     pageCount?: number
     user_id?: string
 }

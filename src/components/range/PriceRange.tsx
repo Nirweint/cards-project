@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Range, getTrackBackground} from 'react-range';
 import {useDispatch} from "react-redux";
-import {changePackRangeThunk} from "../../state/middlewares/range";
+import {getPacksOfCards} from "../../state/middlewares/packs";
 
 interface IPriceRangeProps {
 // loading: boolean;
@@ -22,21 +22,22 @@ export const PriceRange: React.FC<IPriceRangeProps> = (
 // logoutCallback,
     }
 ) => {
-    const [values, setValues] = useState<number[]>([4000, 8000]);
+    const [values, setValues] = useState<number[]>([1, 99]);
 
     const dispatch = useDispatch()
 
     const changeValuesHandler = (values: number[]) => {
         setValues(values)
-        dispatch(changePackRangeThunk(values[0]/1000, values[1]/1000))
+        dispatch(getPacksOfCards())
+        console.log(values)
     }
 
     return (
         <Range
             values={values}
-            step={500}
-            min={3000}
-            max={9000}
+            step={1}
+            min={1}
+            max={99}
             onChange={changeValuesHandler}
             renderTrack={({props, children}) => (
                 <div
@@ -46,7 +47,7 @@ export const PriceRange: React.FC<IPriceRangeProps> = (
                         ...props.style,
                         height: '36px',
                         display: 'flex',
-                        width: '50%',
+                        width: '100%',
                         margin: '30px',
                     }}
                 >
@@ -54,13 +55,13 @@ export const PriceRange: React.FC<IPriceRangeProps> = (
                         ref={props.ref}
                         style={{
                             height: '5px',
-                            width: '100%',
+                            width: '50%',
                             borderRadius: '4px',
                             background: getTrackBackground({
                                 values: values,
                                 colors: ['#ccc', '#548BF4', '#ccc'],
-                                min: 3000,
-                                max: 9000
+                                min: 1,
+                                max: 99
                             }),
                             alignSelf: 'center'
                         }}

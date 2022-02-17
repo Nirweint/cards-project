@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import {paginatorThunk} from "../../state/middlewares/paginator";
+import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
 import s from './Paginator.module.css'
-import {setCurrentPage} from "../../state/actions/packs";
 import {Button} from "../common";
+// import {changePage} from "../../state/middlewares/packs";
+import {setCurrentPage} from "../../state/actions/packs";
 
 type PaginatorType = {
     totalCountItems: number,
@@ -16,10 +16,6 @@ export const Paginator = (props: PaginatorType) => {
     const {totalCountItems, itemsPerPage, currentPage, portionSize} = props
 
     const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(paginatorThunk(currentPage))
-    }, [dispatch, currentPage])
 
     let pagesCount = Math.ceil(totalCountItems / itemsPerPage)     //всего страниц
 
@@ -38,11 +34,9 @@ export const Paginator = (props: PaginatorType) => {
     }
     const onClickPreviousPortion = () => {
         setPortionNumber(portionNumber - 1)
-        dispatch(setCurrentPage(rightPortionPageNumber - portionSize))
     }
     const onClickNextPortion = () => {
         setPortionNumber(portionNumber + 1)
-        dispatch(setCurrentPage(leftPortionPageNumber + portionSize))
     }
 
     return (
@@ -55,7 +49,6 @@ export const Paginator = (props: PaginatorType) => {
             {portionNumber > 1 &&
             <Button onClick={onClickPreviousPortion}>PREV</Button>
             }
-
             {pagesCountArr
                 .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                 .map(p => {

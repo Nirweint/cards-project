@@ -1,20 +1,20 @@
 import {ThunkType} from "../types";
 import {RootStateType} from "../store";
 import {packsAPI} from "../../api";
-import {setAppStatus} from "../actions/app";
+import {setAppError, setAppStatus} from "../actions/app";
 import {setCurrentPack} from "../actions/packs";
 
 
 export const getPacksOfCards = (): ThunkType => (dispatch, getState: () => RootStateType) => {
     const userId = getState().profile.profileData._id
-    packsAPI.getPacks({})
+    const page = getState().packs.params.page
+    packsAPI.getPacks({page})
         .then((res) => {
-
             dispatch(setCurrentPack(res.data))
         })
-        .catch((e: any) => {
+        .catch((e) => {
             dispatch(setAppStatus('failed'))
-            const error = e.response ? e.response.data.error : (e.message + ', more details in the console');
-            console.log('Error', {...e})
+            const error = e.response ? e.response.data.error : e.message;
+            dispatch(setAppError(error))
         })
 }
