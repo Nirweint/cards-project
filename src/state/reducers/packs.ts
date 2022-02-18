@@ -1,6 +1,5 @@
 import {PACKS_ACTIONS, PacksActionsType} from "../actions/packs/types";
 import {CardPacksParamsType} from "../../api/packsAPI";
-import {CARDS_ACTIONS} from "../actions/cards/types";
 
 export type packsReducerStateType = {
     pack: PacksType,
@@ -11,7 +10,7 @@ export type packsReducerStateType = {
 
 const initState: packsReducerStateType = {
     pack: {
-        cardPacks: [],
+        cardPacks:[],
         cardPacksTotalCount: 0,
         maxCardsCount: 103,
         minCardsCount: 0,
@@ -38,6 +37,10 @@ export const packsReducer = (state = initState, action: PacksActionsType): packs
             return {...state, params: {...state.params, page: action.payload}}
         case PACKS_ACTIONS.SET_SHOW_ALL_PACKS:
             return {...state, showAllPacks: action.payload}
+        case PACKS_ACTIONS.SET_MIN_VALUE:
+            return {...state, params: {...state.params, min: action.payload}}
+        case PACKS_ACTIONS.SET_MAX_VALUE:
+            return {...state, params: {...state.params, max: action.payload}}
         default:
             return state;
     }

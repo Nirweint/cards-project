@@ -3,21 +3,18 @@ import {Button, Paginator, PriceRange} from "../../components";
 import {useDispatch, useSelector} from "react-redux";
 import {getPacksOfCards} from "../../state/middlewares/packs";
 import PackItem from "../../components/packItem/PackItem";
-import {
-    selectCardPacks,
-    selectCurrentPage,
+import {    selectCardPacks,
+    selectCurrentPage, selectMaxCardCount, selectMaxCardCountFromState,
+    selectMinCardCount, selectMinCardCountFromState,
     selectPacksTotalCount,
-    selectPageCount,
-    selectShowAllPacks
-} from "../../state/selectors/packs";
+    selectPageCount, selectShowAllPacks} from "../../state/selectors/packs";
 import PacksCards from "../ShowPacksCards/PacksCards";
 import s from './shopTable.module.css'
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../app/routes/RoutesComponent";
 import {selectIsAuth} from "../../state/selectors/auth";
 
-
-const PORTION_SIZE = 5    //размер одной порции страниц пагинации
+let PORTION_SIZE = 5    //размер одной порции страниц пагинации
 
 const ShopTable = () => {
 
@@ -26,15 +23,18 @@ const ShopTable = () => {
     let packsPerPage = useSelector(selectPageCount)   //кол-во элементов на стр
     let currentPage = useSelector(selectCurrentPage)    // текущая стр
     const isShowAllPacks = useSelector(selectShowAllPacks)
+    let minCardCount = useSelector(selectMinCardCount)
+    let maxCardCount = useSelector(selectMaxCardCount)
 
-
+    let minCardCountFromState = useSelector(selectMinCardCountFromState)
+    let maxCardCountFromState = useSelector(selectMaxCardCountFromState)
 
     const dispatch = useDispatch()
     const cardPacks = useSelector(selectCardPacks)
 
     useEffect(() => {
         dispatch(getPacksOfCards())
-    }, [dispatch, currentPage, isShowAllPacks])
+    }, [dispatch, currentPage, minCardCount, maxCardCount, isShowAllPacks])
 
     if (!isAuth) {
         return <Navigate replace to={PATH.LOGIN}/>
@@ -46,7 +46,7 @@ const ShopTable = () => {
 
                 <div className={s.container}>
                     <PacksCards/>
-                    <PriceRange/>
+                    <PriceRange min={minCardCountFromState || 0} max={maxCardCountFromState || 1}/>
                 </div>
 
                 <div className={s.ct}>
@@ -66,7 +66,7 @@ const ShopTable = () => {
                     </table>
                     <div className={s.paginator}>
                         <Paginator totalCountItems={totalCountPacks} itemsPerPage={packsPerPage}
-                                   currentPage={currentPage} portionSize={PORTION_SIZE}/>
+                                   currentPage={currentPage || 1} portionSize={PORTION_SIZE}/>
                     </div>
                 </div>
 

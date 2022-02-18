@@ -9,11 +9,14 @@ import {CardPacksParamsType} from "../../api/packsAPI";
 export const getPacksOfCards = (): ThunkType => (dispatch, getState: () => RootStateType) => {
     const userId = getState().profile.profileData._id
     const page = getState().packs.params.page
+    const min = getState().packs.params.min
+    const max = getState().packs.params.max
     const showAllPacks = getState().packs.showAllPacks
 
     dispatch(setAppStatus('loading'))
     let params: CardPacksParamsType = {
-        page, pageCount: 10
+        page, pageCount: 10,
+        min, max
     }
     if (!showAllPacks) {
         params = {...params, user_id: userId}

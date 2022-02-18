@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import s from './Paginator.module.css'
 import {Button} from "../common";
-// import {changePage} from "../../state/middlewares/packs";
 import {setCurrentPage} from "../../state/actions/packs";
 import {selectAppStatus} from "../../state/selectors/app";
 

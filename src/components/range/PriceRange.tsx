@@ -1,44 +1,55 @@
 import React, {useState} from 'react';
 import {Range, getTrackBackground} from 'react-range';
 import {useDispatch} from "react-redux";
-import {getPacksOfCards} from "../../state/middlewares/packs";
+import {setMaxValue, setMinValue} from "../../state/actions/packs";
 
 interface IPriceRangeProps {
-// loading: boolean;
-// error: string;
-//
-// name: string;
-//
-// logoutCallback: () => void;
+    // loading: boolean;
+    // error: string;
+    //
+    // name: string;
+    //
+    // logoutCallback: () => void;
+    min: number;
+    max: number;
 }
 
 export const PriceRange: React.FC<IPriceRangeProps> = (
     {
-// loading,
-// error,
-//
-// name,
-//
-// logoutCallback,
+        // loading,
+        // error,
+        //
+        // name,
+        //
+        // logoutCallback,
+        min,
+        max,
     }
 ) => {
-    const [values, setValues] = useState<number[]>([1, 99]);
+    const minValue = min
+    const maxValue = max
+
+    const [values, setValues] = useState<number[]>([minValue, maxValue]);
 
     const dispatch = useDispatch()
 
     const changeValuesHandler = (values: number[]) => {
         setValues(values)
-        dispatch(getPacksOfCards())
-        console.log(values)
+    }
+
+    const changeValuesResponseHandler = (values: number[]) => {
+        dispatch(setMinValue(values[0]))
+        dispatch(setMaxValue(values[1]))
     }
 
     return (
         <Range
             values={values}
             step={1}
-            min={1}
-            max={99}
+            min={minValue}
+            max={maxValue}
             onChange={changeValuesHandler}
+            onFinalChange={changeValuesResponseHandler}
             renderTrack={({props, children}) => (
                 <div
                     onMouseDown={props.onMouseDown}
@@ -60,8 +71,8 @@ export const PriceRange: React.FC<IPriceRangeProps> = (
                             background: getTrackBackground({
                                 values: values,
                                 colors: ['#ccc', '#548BF4', '#ccc'],
-                                min: 1,
-                                max: 99
+                                min: +`${minValue}`,
+                                max: +`${maxValue}`,
                             }),
                             alignSelf: 'center'
                         }}

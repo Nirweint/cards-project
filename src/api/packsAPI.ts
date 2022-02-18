@@ -22,7 +22,7 @@ export type CardPacksParamsType = {
     min?: number
     max?: number
     sortPacks?: string
-    page: number
+    page?: number
     pageCount?: number
     user_id?: string
 }
