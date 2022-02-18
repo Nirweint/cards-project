@@ -33,3 +33,43 @@ export const getPacksOfCards = (): ThunkType => (dispatch, getState: () => RootS
             dispatch(setAppError(error))
         })
 }
+
+export const addPackTC = (): ThunkType => (dispatch, getState: () => RootStateType) => {
+    packsAPI.postPack({})
+        .then((res) => {
+            dispatch(setCurrentPack(res.data))
+        })
+        .catch((e) => {
+            dispatch(setAppStatus('failed'))
+            const error = e.response ? e.response.data.error : e.message;
+            dispatch(setAppError(error))
+        })
+};
+
+export const deletePackTC = (_id: string): ThunkType => (dispatch, getState: () => RootStateType) => {
+    const currentPack = getState().packs.pack.cardPacks.find(p => p._id === _id);
+
+    packsAPI.deletePack(currentPack._id)
+        .then((res) => {
+            dispatch(setCurrentPack(res.data))
+        })
+        .catch((e) => {
+            dispatch(setAppStatus('failed'));
+            const error = e.response ? e.response.data.error : e.message;
+            dispatch(setAppError(error))
+        })
+};
+
+export const updatePackTC = (_id: string): ThunkType => (dispatch, getState: () => RootStateType) => {
+    const currentPack = getState().packs.pack.cardPacks.find(p => p._id === _id)
+
+    packsAPI.updatePack(currentPack._id)
+        .then((res) => {
+            dispatch(setCurrentPack(res.data))
+        })
+        .catch((e) => {
+            dispatch(setAppStatus('failed'));
+            const error = e.response ? e.response.data.error : e.message;
+            dispatch(setAppError(error))
+        })
+};
