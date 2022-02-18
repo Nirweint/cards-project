@@ -8,7 +8,9 @@ import {setCurrentPack} from "../actions/packs";
 export const getPacksOfCards = (): ThunkType => (dispatch, getState: () => RootStateType) => {
     const userId = getState().profile.profileData._id
     const page = getState().packs.params.page
-    packsAPI.getPacks({page})
+    const min = getState().packs.params.min
+    const max = getState().packs.params.max
+    packsAPI.getPacks({page, min, max})
         .then((res) => {
             dispatch(setCurrentPack(res.data))
         })

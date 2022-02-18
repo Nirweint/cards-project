@@ -17,3 +17,18 @@ export const setCurrentPage = (payload: number) => {
         payload,
     } as const
 }
+
+export type SetMinValueType = ReturnType<typeof setMinValue>
+export const setMinValue = (payload: number) => {
+    return {
+        type: PACKS_ACTIONS.SET_MIN_VALUE,
+        payload,
+    } as const
+}
+export type SetMaxValueType = ReturnType<typeof setMaxValue>
+export const setMaxValue = (payload: number) => {
+    return {
+        type: PACKS_ACTIONS.SET_MAX_VALUE,
+        payload,
+    } as const
+}

@@ -33,6 +33,10 @@ export const packsReducer = (state = initState, action: PacksActionsType): packs
             return {...state, pack: action.payload}
         case PACKS_ACTIONS.SET_CURRENT_PAGE:
             return {...state, params: {...state.params, page: action.payload}}
+        case PACKS_ACTIONS.SET_MIN_VALUE:
+            return {...state, params: {...state.params, min: action.payload}}
+        case PACKS_ACTIONS.SET_MAX_VALUE:
+            return {...state, params: {...state.params, max: action.payload}}
         default:
             return state;
     }

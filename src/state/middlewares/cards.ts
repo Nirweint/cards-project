@@ -12,10 +12,10 @@ export const getCards = (): ThunkType => (dispatch, getState: () => RootStateTyp
         .then((res) => {
             dispatch(setCardsPack(res.data))
         })
-        .catch((e: any) => {
+        .catch((e) => {
             dispatch(setAppStatus('failed'))
-            const error = e.response ? e.response.data.error : (e.message + ', more details in the console');
-            console.log('Error', {...e})
+            const error = e.response ? e.response.data.error : e.message;
+            dispatch(setAppError(error))
         })
 }
 
