@@ -5,3 +5,4 @@ export const selectPacksTotalCount = (state: RootStateType): number => state.pac
 export const selectPageCount = (state: RootStateType): number => state.packs.pack.pageCount
 export const selectCurrentPage = (state: RootStateType): number => state.packs.params.page
 export const selectCardPacks = (state: RootStateType): CardsPackType[] => state.packs.pack.cardPacks
+export const selectShowAllPacks = (state: RootStateType): boolean => state.packs.showAllPacks

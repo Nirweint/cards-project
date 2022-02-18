@@ -17,3 +17,11 @@ export const setCurrentPage = (payload: number) => {
         payload,
     } as const
 }
+
+export type SetShowAllPacksType = ReturnType<typeof setShowAllPacks>
+export const setShowAllPacks = (payload: boolean) => {
+    return {
+        type: PACKS_ACTIONS.SET_SHOW_ALL_PACKS,
+        payload,
+    } as const
+}

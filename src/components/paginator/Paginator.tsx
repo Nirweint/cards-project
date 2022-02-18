@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import s from './Paginator.module.css'
 import {Button} from "../common";
 // import {changePage} from "../../state/middlewares/packs";
 import {setCurrentPage} from "../../state/actions/packs";
+import {selectAppStatus} from "../../state/selectors/app";
 
 type PaginatorType = {
     totalCountItems: number,
@@ -16,6 +17,8 @@ export const Paginator = (props: PaginatorType) => {
     const {totalCountItems, itemsPerPage, currentPage, portionSize} = props
 
     const dispatch = useDispatch()
+
+    const appStatus = useSelector(selectAppStatus)
 
     let pagesCount = Math.ceil(totalCountItems / itemsPerPage)     //всего страниц
 
@@ -46,14 +49,13 @@ export const Paginator = (props: PaginatorType) => {
             {/*        return <option>{op}</option>*/}
             {/*    })}*/}
             {/*</select>*/}
-            {portionNumber > 1 &&
-            <Button onClick={onClickPreviousPortion}>PREV</Button>
-            }
+            <Button disabled={portionNumber === 1} onClick={onClickPreviousPortion}>PREV</Button>
+
             {pagesCountArr
                 .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                 .map(p => {
-                    return <span key={p} className={`${currentPage === p ? s.selectedPage : ''} ${s.pages}`}
-                                 onClick={() => onClickPageChange(p)}>{p}</span>
+                    return <button disabled={appStatus === 'loading'} key={p} className={`${currentPage === p ? s.selectedPage : ''} ${s.pages}`}
+                                 onClick={() => onClickPageChange(p)}>{p}</button>
                 })
             }
 

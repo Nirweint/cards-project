@@ -4,11 +4,12 @@ import {CardsParamsType} from "../../api/cardsAPI";
 export type cardsReducerStateType = {
     cardsPack: CardsPackType
     params: Omit<CardsParamsType, 'cardsPack_id'>
+    currentCardsPack_id: string
 }
 
 const initState: cardsReducerStateType = {
     cardsPack: {
-        cards:[],
+        cards: [],
         cardsTotalCount: 5,
         maxGrade: 6,
         minGrade: 0,
@@ -24,14 +25,16 @@ const initState: cardsReducerStateType = {
         cardQuestion: 'cardQuestion',
         sortCards: '',
         min: 0,
-    }
-
+    },
+    currentCardsPack_id: '',
 }
 
 export const cardsReducer = (state = initState, action: CardsActionsType): cardsReducerStateType => {
     switch (action.type) {
         case CARDS_ACTIONS.SET_CARDS_PACK:
             return {...state, cardsPack: action.payload}
+        case CARDS_ACTIONS.SET_CARDS_CURRENT_ID:
+            return {...state, currentCardsPack_id: action.payload}
         default:
             return state;
     }

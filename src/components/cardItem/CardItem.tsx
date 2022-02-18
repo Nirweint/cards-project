@@ -1,7 +1,9 @@
 import React, {FC} from 'react';
 import {Button} from "../common";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {deleteCard, updateCard} from "../../state/middlewares/cards";
+import {selectCurrentCardsPacksId} from "../../state/selectors/cards";
+import {selectProfileId} from "../../state/selectors/profile";
 
 type CardItemType = {
     question: string
@@ -13,6 +15,11 @@ type CardItemType = {
 export const CardItem: FC<CardItemType> = ({question,updated,answer, cardId}) => {
 
     const dispatch = useDispatch()
+
+    const cardsPackId = useSelector(selectCurrentCardsPacksId)
+    const profileId = useSelector(selectProfileId)
+
+    const isUserCardsPack = cardsPackId === profileId
 
     const onDeleteCardClick = () => {
         dispatch(deleteCard(cardId))
@@ -27,10 +34,11 @@ export const CardItem: FC<CardItemType> = ({question,updated,answer, cardId}) =>
             <td>{question}</td>
             <td>{answer}</td>
             <td>{updated}</td>
-            <td>
-                   <Button onClick={onDeleteCardClick}>delete</Button>
-                   <Button onClick={onUpdateCardClick}>update</Button>
-            </td>
+            {isUserCardsPack && <td>
+				<Button onClick={onDeleteCardClick}>delete</Button>
+				<Button onClick={onUpdateCardClick}>update</Button>
+			</td>}
+
         </tr>
     );
 }

@@ -20,6 +20,7 @@ export const setLogin = (email: string, password: string, rememberMe: boolean): 
             const error = e.response ? e.response.data.error : e.message;
             if (error === "not correct password /ᐠ-ꞈ-ᐟ\\" || error === "user not found /ᐠ-ꞈ-ᐟ\\") {
                 dispatch(setAppError('Please enter valid email or password'))
+                dispatch(authMeAction(false))
             }
         })
 }

@@ -1,14 +1,17 @@
 import React, {FC} from 'react';
 import {Button} from "../common";
+import {NavLink} from "react-router-dom";
+import {PATH} from "../../app/routes/RoutesComponent";
 
 
 type PackItemType = {
-    name: string,
-    cardsCount: number,
+    name: string
+    cardsCount: number
     update: string
+    _id: string
 }
 
-export const PackItem: FC<PackItemType>= ({name,cardsCount,update}) => {
+export const PackItem: FC<PackItemType>= ({name,cardsCount,update, _id}) => {
 
 
     const addHandler = () => {
@@ -23,7 +26,9 @@ export const PackItem: FC<PackItemType>= ({name,cardsCount,update}) => {
 
     return (
         <tr>
-            <td>{name}</td>
+            <td>
+                <NavLink to={`/cards-list/${_id}`}>{name}</NavLink>
+            </td>
             <td>{cardsCount}</td>
             <td>{update}</td>
             <td>
