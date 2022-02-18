@@ -15,9 +15,6 @@ export const PackItem: FC<PackItemType>= ({name,cardsCount,update, _id}) => {
 
     const dispatch = useDispatch();
 
-    const addHandler = () => {
-        dispatch(addPackTC());
-    };
     const updateHandler = () => {
         dispatch(updatePackTC(_id));
     };
@@ -33,7 +30,6 @@ export const PackItem: FC<PackItemType>= ({name,cardsCount,update, _id}) => {
             <td>{cardsCount}</td>
             <td>{update}</td>
             <td>
-                <Button onClick={addHandler}>Add</Button>
                 <Button onClick={updateHandler}>Update</Button>
                 <Button onClick={deleteHandler}>Delete</Button>
             </td>

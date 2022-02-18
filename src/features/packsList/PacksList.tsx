@@ -1,22 +1,22 @@
 import React, {useEffect} from 'react';
 import {Button, Paginator, PriceRange} from "../../components";
 import {useDispatch, useSelector} from "react-redux";
-import {getPacksOfCards} from "../../state/middlewares/packs";
+import {addPackTC, getPacksOfCards} from "../../state/middlewares/packs";
 import PackItem from "../../components/packItem/PackItem";
 import {    selectCardPacks,
     selectCurrentPage, selectMaxCardCount, selectMaxCardCountFromState,
     selectMinCardCount, selectMinCardCountFromState,
     selectPacksTotalCount,
     selectPageCount, selectShowAllPacks} from "../../state/selectors/packs";
-import PacksCards from "../ShowPacksCards/PacksCards";
-import s from './shopTable.module.css'
+import SideBar from "./sideBar/SideBar";
+import s from './PacksList.module.css'
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../app/routes/RoutesComponent";
 import {selectIsAuth} from "../../state/selectors/auth";
 
 let PORTION_SIZE = 5    //размер одной порции страниц пагинации
 
-const ShopTable = () => {
+const PacksList = () => {
 
     const isAuth = useSelector(selectIsAuth)
     let totalCountPacks = useSelector(selectPacksTotalCount)    //всего эл-тов
@@ -32,6 +32,10 @@ const ShopTable = () => {
     const dispatch = useDispatch()
     const cardPacks = useSelector(selectCardPacks)
 
+    const onAddNewPackClick = () => {
+        dispatch(addPackTC());
+    };
+
     useEffect(() => {
         dispatch(getPacksOfCards())
     }, [dispatch, currentPage, minCardCount, maxCardCount, isShowAllPacks])
@@ -45,7 +49,7 @@ const ShopTable = () => {
             <div className={s.row}>
 
                 <div className={s.container}>
-                    <PacksCards/>
+                    <SideBar/>
                     <PriceRange min={minCardCountFromState || 0} max={maxCardCountFromState || 1}/>
                 </div>
 
@@ -57,7 +61,7 @@ const ShopTable = () => {
                             <th>Cards Count</th>
                             <th>Update</th>
                             <th>
-                                <Button>Add</Button>
+                                <Button onClick={onAddNewPackClick}>Add</Button>
                             </th>
                         </tr>
                         {cardPacks.map(({_id, cardsCount, updated, name}) => {
@@ -75,4 +79,4 @@ const ShopTable = () => {
     );
 };
 
-export default ShopTable;
+export default PacksList;

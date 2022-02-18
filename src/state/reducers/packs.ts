@@ -12,14 +12,14 @@ const initState: packsReducerStateType = {
     pack: {
         cardPacks:[],
         cardPacksTotalCount: 0,
-        maxCardsCount: 103,
+        maxCardsCount: 100,
         minCardsCount: 0,
         page: 1,
         pageCount: 4,
     },
     params: {
         packName: '',
-        min: 3,
+        min: 0,
         max: 9,
         sortPacks: '0updated',
         page: 1,

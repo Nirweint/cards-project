@@ -35,9 +35,11 @@ export const getPacksOfCards = (): ThunkType => (dispatch, getState: () => RootS
 }
 
 export const addPackTC = (): ThunkType => (dispatch, getState: () => RootStateType) => {
-    packsAPI.postPack({})
+    dispatch(setAppStatus('loading'))
+    packsAPI.postPack({name: 'new pack'})
         .then((res) => {
-            dispatch(setCurrentPack(res.data))
+            dispatch(getPacksOfCards())
+            dispatch(setAppStatus('succeeded'))
         })
         .catch((e) => {
             dispatch(setAppStatus('failed'))
@@ -47,11 +49,12 @@ export const addPackTC = (): ThunkType => (dispatch, getState: () => RootStateTy
 };
 
 export const deletePackTC = (_id: string): ThunkType => (dispatch, getState: () => RootStateType) => {
-    const currentPack = getState().packs.pack.cardPacks.find(p => p._id === _id);
-
-    packsAPI.deletePack(currentPack._id)
+    // const currentPack = getState().packs.pack.cardPacks.find(p => p._id === _id);
+    dispatch(setAppStatus('loading'))
+    packsAPI.deletePack(_id)
         .then((res) => {
-            dispatch(setCurrentPack(res.data))
+            dispatch(getPacksOfCards())
+            dispatch(setAppStatus('succeeded'))
         })
         .catch((e) => {
             dispatch(setAppStatus('failed'));
@@ -61,11 +64,12 @@ export const deletePackTC = (_id: string): ThunkType => (dispatch, getState: () 
 };
 
 export const updatePackTC = (_id: string): ThunkType => (dispatch, getState: () => RootStateType) => {
-    const currentPack = getState().packs.pack.cardPacks.find(p => p._id === _id)
-
-    packsAPI.updatePack(currentPack._id)
+    // const currentPack = getState().packs.pack.cardPacks.find(p => p._id === _id)
+    dispatch(setAppStatus('loading'))
+    packsAPI.updatePack({_id, name: 'updated'})
         .then((res) => {
-            dispatch(setCurrentPack(res.data))
+            dispatch(getPacksOfCards())
+            dispatch(setAppStatus('succeeded'))
         })
         .catch((e) => {
             dispatch(setAppStatus('failed'));

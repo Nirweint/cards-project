@@ -10,7 +10,7 @@ import {
     SignUp,
     Test
 } from "../../features";
-import ShopTable from "../../features/showTable/ShopTable";
+import PacksList from "../../features/packsList/PacksList";
 
 export const PATH = {
     PROFILE: '/profile',
@@ -37,7 +37,7 @@ export const RoutesComponent = () => {
                 <Route path={PATH.PASSWORD_RECOVERY} element={<PasswordRecovery/>}/>
                 <Route path={PATH.ERROR_404} element={<Error404/>}/>
                 <Route path={PATH.TEST} element={<Test/>}/>
-                <Route path={PATH.SHOP_TABLE} element={<ShopTable/>}/>
+                <Route path={PATH.SHOP_TABLE} element={<PacksList/>}/>
                 <Route path={PATH.CARDS_LIST} element={<CardsList/>}/>
             </Routes>
         </>

@@ -1,12 +1,12 @@
 import React from 'react';
-import {Button} from "../../components";
-import s from './packsCard.module.css';
+import {Button} from "../../../components";
+import s from './SideBar.module.css';
 import {useDispatch, useSelector} from "react-redux";
-import {setShowAllPacks} from "../../state/actions/packs";
-import {selectShowAllPacks} from "../../state/selectors/packs";
-import {selectAppStatus} from "../../state/selectors/app";
+import {setShowAllPacks} from "../../../state/actions/packs";
+import {selectShowAllPacks} from "../../../state/selectors/packs";
+import {selectAppStatus} from "../../../state/selectors/app";
 
-const PacksCards = () => {
+const SideBar = () => {
 
     const dispatch = useDispatch()
 
@@ -38,4 +38,4 @@ const PacksCards = () => {
     );
 };
 
-export default PacksCards;
+export default SideBar;
