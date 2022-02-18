@@ -1,24 +1,28 @@
 import React, {FC} from 'react';
 import {Button} from "../common";
+import {useDispatch} from "react-redux";
+import {addPackTC, deletePackTC, updatePackTC} from "../../state/middlewares/packs";
 
 
 type PackItemType = {
+    _id: string,
     name: string,
     cardsCount: number,
     update: string
 }
 
-export const PackItem: FC<PackItemType>= ({name,cardsCount,update}) => {
+export const PackItem: FC<PackItemType>= ({_id, name, cardsCount, update}) => {
 
+    const dispatch = useDispatch();
 
     const addHandler = () => {
-        console.log("addHandler")
+        dispatch(addPackTC());
     };
     const updateHandler = () => {
-        console.log("updateHandler")
+        dispatch(updatePackTC(_id));
     };
     const deleteHandler = () => {
-        console.log("deleteHandler")
+        dispatch(deletePackTC(_id));
     };
 
     return (

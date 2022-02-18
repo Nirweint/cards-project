@@ -45,7 +45,7 @@ const ShopTable = () => {
                             </th>
                         </tr>
                         {cardPacks.map(({_id, cardsCount, updated, name}) => {
-                            return <PackItem name={name} cardsCount={cardsCount} update={updated}/>
+                            return <PackItem _id={_id} name={name} cardsCount={cardsCount} update={updated}/>
                         })}
                     </table>
                     <div className={show_Table.paginator}>
