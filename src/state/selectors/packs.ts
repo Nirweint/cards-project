@@ -8,6 +8,6 @@ export const selectShowAllPacks = (state: RootStateType): boolean => state.packs
 export const selectCurrentPage = (state: RootStateType) => state.packs.params.page
 export const selectMinCardCount = (state: RootStateType) => state.packs.params.min
 export const selectMaxCardCount = (state: RootStateType) => state.packs.params.max
-
-export const selectMinCardCountFromState = (state: RootStateType): number => state.packs.pack.minCardsCount
-export const selectMaxCardCountFromState = (state: RootStateType): number => state.packs.pack.maxCardsCount
+export const selectPageSize = (state: RootStateType) => state.packs.params.pageCount
+export const selectMinCardCountFromState = (state: RootStateType): number => state.packs.minRangeValue
+export const selectMaxCardCountFromState = (state: RootStateType): number => state.packs.maxRangeValue

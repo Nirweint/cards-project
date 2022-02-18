@@ -4,7 +4,9 @@ import {CardPacksParamsType} from "../../api/packsAPI";
 export type packsReducerStateType = {
     pack: PacksType,
     params: CardPacksParamsType,
-    showAllPacks: boolean
+    showAllPacks: boolean,
+    minRangeValue: number,
+    maxRangeValue: number,
 }
 
 
@@ -23,10 +25,12 @@ const initState: packsReducerStateType = {
         max: 9,
         sortPacks: '0updated',
         page: 1,
-        pageCount: 10,
+        pageCount: 5,
         user_id: '',
     },
     showAllPacks: true,
+    minRangeValue: 0,
+    maxRangeValue: 103,
 }
 
 export const packsReducer = (state = initState, action: PacksActionsType): packsReducerStateType => {
@@ -41,6 +45,8 @@ export const packsReducer = (state = initState, action: PacksActionsType): packs
             return {...state, params: {...state.params, min: action.payload}}
         case PACKS_ACTIONS.SET_MAX_VALUE:
             return {...state, params: {...state.params, max: action.payload}}
+        case PACKS_ACTIONS.SET_PAGE_SIZE:
+            return {...state, params: {...state.params, pageCount: action.payload}}
         default:
             return state;
     }

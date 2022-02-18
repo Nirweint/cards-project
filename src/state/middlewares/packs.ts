@@ -11,11 +11,12 @@ export const getPacksOfCards = (): ThunkType => (dispatch, getState: () => RootS
     const page = getState().packs.params.page
     const min = getState().packs.params.min
     const max = getState().packs.params.max
+    const pageCount = getState().packs.params.pageCount
     const showAllPacks = getState().packs.showAllPacks
 
     dispatch(setAppStatus('loading'))
     let params: CardPacksParamsType = {
-        page, pageCount: 10,
+        page, pageCount,
         min, max
     }
     if (!showAllPacks) {

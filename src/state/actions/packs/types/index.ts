@@ -1,5 +1,5 @@
 import {
-    SetCurrentPackType, SetCurrentPageType, SetMaxValueType, SetMinValueType, SetShowAllPacksType
+    SetCurrentPackType, SetCurrentPageType, SetMaxValueType, SetMinValueType, SetPageSizeType, SetShowAllPacksType
 } from "../index";
 
 export enum PACKS_ACTIONS {
@@ -8,6 +8,7 @@ export enum PACKS_ACTIONS {
     SET_SHOW_ALL_PACKS = "packsReducer/SET_SHOW_ALL_PACKS",
     SET_MIN_VALUE = "packsReducer/SET_MIN_VALUE",
     SET_MAX_VALUE = "packsReducer/SET_MAX_VALUE",
+    SET_PAGE_SIZE = "packsReducer/SET_PAGE_SIZE",
 }
 
 export type PacksActionsType =
@@ -16,3 +17,4 @@ export type PacksActionsType =
     | SetShowAllPacksType
     | SetMinValueType
     | SetMaxValueType
+    | SetPageSizeType
