@@ -40,3 +40,11 @@ export const setShowAllPacks = (payload: boolean) => {
         payload,
     } as const
 }
+
+export type SetPageSizeType = ReturnType<typeof setPageSize>
+export const setPageSize = (payload: number) => {
+    return {
+        type: PACKS_ACTIONS.SET_PAGE_SIZE,
+        payload,
+    } as const
+}

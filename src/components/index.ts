@@ -4,3 +4,4 @@ export {CardItem} from './cardItem';
 export {Paginator} from './paginator';
 export {Search} from './search'
 export {PriceRange} from './range'
+export {Select} from './select'

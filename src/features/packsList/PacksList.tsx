@@ -1,13 +1,20 @@
 import React, {useEffect} from 'react';
-import {Button, Paginator, PriceRange} from "../../components";
+import {Button, Paginator, PriceRange, Select} from "../../components";
 import {useDispatch, useSelector} from "react-redux";
 import {addPackTC, getPacksOfCards} from "../../state/middlewares/packs";
 import PackItem from "../../components/packItem/PackItem";
-import {    selectCardPacks,
-    selectCurrentPage, selectMaxCardCount, selectMaxCardCountFromState,
-    selectMinCardCount, selectMinCardCountFromState,
+import {
+    selectCardPacks,
+    selectCurrentPage,
+    selectMaxCardCount,
+    selectMaxCardCountFromState,
+    selectMinCardCount,
+    selectMinCardCountFromState,
     selectPacksTotalCount,
-    selectPageCount, selectShowAllPacks} from "../../state/selectors/packs";
+    selectPageCount,
+    selectPageSize,
+    selectShowAllPacks
+} from "../../state/selectors/packs";
 import SideBar from "./sideBar/SideBar";
 import s from './PacksList.module.css'
 import {Navigate} from "react-router-dom";
@@ -25,7 +32,7 @@ const PacksList = () => {
     const isShowAllPacks = useSelector(selectShowAllPacks)
     let minCardCount = useSelector(selectMinCardCount)
     let maxCardCount = useSelector(selectMaxCardCount)
-
+    let pageSize = useSelector(selectPageSize)
     let minCardCountFromState = useSelector(selectMinCardCountFromState)
     let maxCardCountFromState = useSelector(selectMaxCardCountFromState)
 
@@ -38,7 +45,7 @@ const PacksList = () => {
 
     useEffect(() => {
         dispatch(getPacksOfCards())
-    }, [dispatch, currentPage, minCardCount, maxCardCount, isShowAllPacks])
+    }, [dispatch, currentPage, minCardCount, maxCardCount, isShowAllPacks, pageSize])
 
     if (!isAuth) {
         return <Navigate replace to={PATH.LOGIN}/>
@@ -69,11 +76,11 @@ const PacksList = () => {
                         })}
                     </table>
                     <div className={s.paginator}>
+                        {/*<Select/>*/}
                         <Paginator totalCountItems={totalCountPacks} itemsPerPage={packsPerPage}
                                    currentPage={currentPage || 1} portionSize={PORTION_SIZE}/>
                     </div>
                 </div>
-
             </div>
         </div>
     );

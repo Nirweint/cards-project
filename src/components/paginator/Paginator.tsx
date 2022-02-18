@@ -43,18 +43,14 @@ export const Paginator = (props: PaginatorType) => {
 
     return (
         <div>
-            {/*<select>*/}
-            {/*    {[5, 10, 25, 50, 100].map(op => {*/}
-            {/*        return <option>{op}</option>*/}
-            {/*    })}*/}
-            {/*</select>*/}
             <Button disabled={portionNumber === 1} onClick={onClickPreviousPortion}>PREV</Button>
 
             {pagesCountArr
                 .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                 .map(p => {
-                    return <button disabled={appStatus === 'loading'} key={p} className={`${currentPage === p ? s.selectedPage : ''} ${s.pages}`}
-                                 onClick={() => onClickPageChange(p)}>{p}</button>
+                    return <button disabled={appStatus === 'loading'} key={p}
+                                   className={`${currentPage === p ? s.selectedPage : ''} ${s.pages}`}
+                                   onClick={() => onClickPageChange(p)}>{p}</button>
                 })
             }
 
