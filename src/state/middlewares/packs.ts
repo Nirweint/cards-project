@@ -50,7 +50,6 @@ export const addPackTC = (): ThunkType => (dispatch, getState: () => RootStateTy
 };
 
 export const deletePackTC = (_id: string): ThunkType => (dispatch, getState: () => RootStateType) => {
-    // const currentPack = getState().packs.pack.cardPacks.find(p => p._id === _id);
     dispatch(setAppStatus('loading'))
     packsAPI.deletePack(_id)
         .then((res) => {
@@ -65,7 +64,6 @@ export const deletePackTC = (_id: string): ThunkType => (dispatch, getState: () 
 };
 
 export const updatePackTC = (_id: string): ThunkType => (dispatch, getState: () => RootStateType) => {
-    // const currentPack = getState().packs.pack.cardPacks.find(p => p._id === _id)
     dispatch(setAppStatus('loading'))
     packsAPI.updatePack({_id, name: 'updated'})
         .then((res) => {

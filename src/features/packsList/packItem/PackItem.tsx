@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
-import {Button} from "../common";
+import {Button} from "../../../components";
 import {useDispatch} from "react-redux";
-import {addPackTC, deletePackTC, updatePackTC} from "../../state/middlewares/packs";
+import {addPackTC, deletePackTC, updatePackTC} from "../../../state/middlewares/packs";
 import {NavLink} from "react-router-dom";
 
 type PackItemType = {

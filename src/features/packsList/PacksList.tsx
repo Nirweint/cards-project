@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {Button, Paginator, PriceRange, Select} from "../../components";
 import {useDispatch, useSelector} from "react-redux";
 import {addPackTC, getPacksOfCards} from "../../state/middlewares/packs";
-import PackItem from "../../components/packItem/PackItem";
+import PackItem from "./packItem/PackItem";
 import {
     selectCardPacks,
     selectCurrentPage,
