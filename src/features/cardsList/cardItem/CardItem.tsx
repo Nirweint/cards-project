@@ -1,9 +1,10 @@
 import React, {FC} from 'react';
-import {Button} from "../common";
+import {Button} from "../../../components";
 import {useDispatch, useSelector} from "react-redux";
-import {deleteCard, updateCard} from "../../state/middlewares/cards";
-import {selectCurrentCardsPacksId} from "../../state/selectors/cards";
-import {selectProfileId} from "../../state/selectors/profile";
+import {deleteCard, updateCard} from "../../../state/middlewares/cards";
+import {selectCurrentCardsPacksId} from "../../../state/selectors/cards";
+import {selectProfileId} from "../../../state/selectors/profile";
+import {selectAppStatus} from "../../../state/selectors/app";
 
 type CardItemType = {
     question: string
@@ -18,6 +19,7 @@ export const CardItem: FC<CardItemType> = ({question,updated,answer, cardId}) =>
 
     const cardsPackId = useSelector(selectCurrentCardsPacksId)
     const profileId = useSelector(selectProfileId)
+    const appStatus = useSelector(selectAppStatus)
 
     const isUserCardsPack = cardsPackId === profileId
 
@@ -35,8 +37,8 @@ export const CardItem: FC<CardItemType> = ({question,updated,answer, cardId}) =>
             <td>{answer}</td>
             <td>{updated}</td>
             {isUserCardsPack && <td>
-				<Button onClick={onDeleteCardClick}>delete</Button>
-				<Button onClick={onUpdateCardClick}>update</Button>
+				<Button disabled={appStatus === 'loading'} onClick={onDeleteCardClick}>delete</Button>
+				<Button disabled={appStatus === 'loading'} onClick={onUpdateCardClick}>update</Button>
 			</td>}
 
         </tr>

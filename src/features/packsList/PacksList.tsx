@@ -53,8 +53,7 @@ const PacksList = () => {
                     <PriceRange min={minCardCountFromState || 0} max={maxCardCountFromState || 1}/>
                 </div>
 
-                <div className={s.ct}>
-                    <h2>Table</h2>
+                <div className={s.tableWrapper}>
                     <table className={s.table}>
                         <tr>
                             <th>Name</th>
@@ -65,7 +64,7 @@ const PacksList = () => {
                             </th>
                         </tr>
                         {cardPacks.map(({_id, cardsCount, updated, name}) => {
-                            return <PackItem name={name} cardsCount={cardsCount} update={updated} _id={_id}/>
+                            return <PackItem key={_id} name={name} cardsCount={cardsCount} update={updated} _id={_id}/>
                         })}
                     </table>
                     <div className={s.paginator}>

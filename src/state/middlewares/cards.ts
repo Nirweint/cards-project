@@ -25,8 +25,6 @@ export const getCards = (): ThunkType => (dispatch, getState: () => RootStateTyp
 export const setNewCard = (): ThunkType => (dispatch, getState: () => RootStateType) => {
     dispatch(setAppStatus('loading'))
     const cardsPack_id  = getState().cards.currentCardsPack_id;
-    const profile_id  = getState().profile.profileData._id;
-    if (cardsPack_id === profile_id) {
         const data: PostCardDataType = {
             cardsPack_id,
             question: 'new question',
@@ -42,7 +40,6 @@ export const setNewCard = (): ThunkType => (dispatch, getState: () => RootStateT
                 const error = e.response ? e.response.data.error : e.message;
                 dispatch(setAppError(error))
             })
-    }
 }
 
 export const deleteCard = (cardId: string): ThunkType => dispatch => {

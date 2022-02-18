@@ -4,7 +4,7 @@
     background-color: white;
     padding: 20px;
     border-radius: 10px;
-    height: 70vh;
+    min-height: 70vh;
 }
 
 
