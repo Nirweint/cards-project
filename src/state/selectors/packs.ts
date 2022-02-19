@@ -13,3 +13,4 @@ export const selectMinCardCountFromState = (state: RootStateType): number => sta
 export const selectMaxCardCountFromState = (state: RootStateType): number => state.packs.maxRangeValue
 export const selectSelectQuantityItems = (state: RootStateType): number => state.packs.selectQuantityItems
 export const selectSearchPack = (state: RootStateType): string | undefined => state.packs.params.packName
+export const selectSortPacks = (state: RootStateType): '0updated' | '1updated' | undefined => state.packs.params.sortPacks

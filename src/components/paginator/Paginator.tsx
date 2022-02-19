@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import s from './Paginator.module.css'
 import {Button} from "../common";
@@ -10,10 +10,12 @@ type PaginatorType = {
     itemsPerPage: number,
     currentPage: number
     portionSize: number,
+    portionNumber: number,
+    setPortionNumber: (portionNumber: number)=> void,
 }
 
 export const Paginator = (props: PaginatorType) => {
-    const {totalCountItems, itemsPerPage, currentPage, portionSize} = props
+    const {totalCountItems, itemsPerPage, currentPage, portionSize, portionNumber, setPortionNumber} = props
 
     const dispatch = useDispatch()
 
@@ -27,7 +29,6 @@ export const Paginator = (props: PaginatorType) => {
     }
 
     let portionCount = Math.ceil(pagesCount / portionSize)     //кол-во порций страниц
-    let [portionNumber, setPortionNumber] = useState(1)     //изменение текущей порции
     let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1       //стр начало порции
     let rightPortionPageNumber = portionNumber * portionSize         //стр конец порции
 

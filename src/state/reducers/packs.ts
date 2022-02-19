@@ -51,6 +51,8 @@ export const packsReducer = (state = initState, action: PacksActionsType): packs
             return {...state, selectQuantityItems: action.payload, params: {...state.params, pageCount: action.payload}}
         case PACKS_ACTIONS.SEARCH_PACK:
             return {...state, params: {...state.params, packName: action.payload}}
+        case PACKS_ACTIONS.SORT_PACKS_NAME:
+            return {...state, params: {...state.params, sortPacks: action.payload}}
         default:
             return state;
     }

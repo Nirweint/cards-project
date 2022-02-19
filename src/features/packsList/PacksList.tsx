@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Paginator, PriceRange, Search, Select} from "../../components";
 import {useDispatch, useSelector} from "react-redux";
 import {addPackTC, getPacksOfCards} from "../../state/middlewares/packs";
@@ -13,13 +13,14 @@ import {
     selectPacksTotalCount,
     selectPageCount,
     selectPageSize, selectSearchPack, selectSelectQuantityItems,
-    selectShowAllPacks
+    selectShowAllPacks, selectSortPacks
 } from "../../state/selectors/packs";
 import SideBar from "./sideBar/SideBar";
 import s from './PacksList.module.css'
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../app/routes/RoutesComponent";
 import {selectIsAuth} from "../../state/selectors/auth";
+import {Sort} from "../../components/sort";
 
 let PORTION_SIZE = 5    //размер одной порции страниц пагинации
 
@@ -37,6 +38,9 @@ const PacksList = () => {
     const maxCardCountFromState = useSelector(selectMaxCardCountFromState)
     const selectItem = useSelector(selectSelectQuantityItems)
     const searchPack = useSelector(selectSearchPack)
+    const sortPacks = useSelector(selectSortPacks)
+
+    let [portionNumber, setPortionNumber] = useState(1)     //изменение текущей порции
 
     const dispatch = useDispatch()
     const cardPacks = useSelector(selectCardPacks)
@@ -47,7 +51,7 @@ const PacksList = () => {
 
     useEffect(() => {
         dispatch(getPacksOfCards())
-    }, [dispatch, currentPage, minCardCount, maxCardCount, isShowAllPacks, pageSize, searchPack])
+    }, [dispatch, currentPage, minCardCount, maxCardCount, isShowAllPacks, pageSize, searchPack, sortPacks])
 
     if (!isAuth) {
         return <Navigate replace to={PATH.LOGIN}/>
@@ -68,7 +72,7 @@ const PacksList = () => {
                         <tr>
                             <th>Name</th>
                             <th>Cards Count</th>
-                            <th>Update</th>
+                            <th>Update <Sort setPortionNumber={setPortionNumber}/></th>
                             <th>
                                 <Button onClick={onAddNewPackClick}>Add</Button>
                             </th>
@@ -80,7 +84,8 @@ const PacksList = () => {
                     <div className={s.paginator}>
                         <Select selectItemsPerPage={selectItem} listValues={[5, 10, 20]}/>
                         <Paginator totalCountItems={totalCountPacks} itemsPerPage={packsPerPage}
-                                   currentPage={currentPage || 1} portionSize={PORTION_SIZE}/>
+                                   currentPage={currentPage || 1} portionSize={PORTION_SIZE}
+                                   portionNumber={portionNumber} setPortionNumber={setPortionNumber}/>
                     </div>
                 </div>
             </div>

@@ -56,3 +56,10 @@ export const searchPack = (payload: string) => {
         payload,
     } as const
 }
+export type SortPacksNameType = ReturnType<typeof SortPacksName>
+export const SortPacksName = (payload: '0updated' | '1updated') => {
+    return {
+        type: PACKS_ACTIONS.SORT_PACKS_NAME,
+        payload,
+    } as const
+}
