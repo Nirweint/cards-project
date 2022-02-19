@@ -12,3 +12,4 @@ export const selectPageSize = (state: RootStateType) => state.packs.params.pageC
 export const selectMinCardCountFromState = (state: RootStateType): number => state.packs.minRangeValue
 export const selectMaxCardCountFromState = (state: RootStateType): number => state.packs.maxRangeValue
 export const selectSelectQuantityItems = (state: RootStateType): number => state.packs.selectQuantityItems
+export const selectSearchPack = (state: RootStateType): string | undefined => state.packs.params.packName

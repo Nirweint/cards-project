@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Button, Paginator, PriceRange, Select} from "../../components";
+import {Button, Paginator, PriceRange, Search, Select} from "../../components";
 import {useDispatch, useSelector} from "react-redux";
 import {addPackTC, getPacksOfCards} from "../../state/middlewares/packs";
 import PackItem from "./packItem/PackItem";
@@ -12,7 +12,7 @@ import {
     selectMinCardCountFromState,
     selectPacksTotalCount,
     selectPageCount,
-    selectPageSize, selectSelectQuantityItems,
+    selectPageSize, selectSearchPack, selectSelectQuantityItems,
     selectShowAllPacks
 } from "../../state/selectors/packs";
 import SideBar from "./sideBar/SideBar";
@@ -36,6 +36,7 @@ const PacksList = () => {
     const minCardCountFromState = useSelector(selectMinCardCountFromState)
     const maxCardCountFromState = useSelector(selectMaxCardCountFromState)
     const selectItem = useSelector(selectSelectQuantityItems)
+    const searchPack = useSelector(selectSearchPack)
 
     const dispatch = useDispatch()
     const cardPacks = useSelector(selectCardPacks)
@@ -46,7 +47,7 @@ const PacksList = () => {
 
     useEffect(() => {
         dispatch(getPacksOfCards())
-    }, [dispatch, currentPage, minCardCount, maxCardCount, isShowAllPacks, pageSize])
+    }, [dispatch, currentPage, minCardCount, maxCardCount, isShowAllPacks, pageSize, searchPack])
 
     if (!isAuth) {
         return <Navigate replace to={PATH.LOGIN}/>
@@ -62,6 +63,7 @@ const PacksList = () => {
                 </div>
 
                 <div className={s.tableWrapper}>
+                    <Search/>
                     <table className={s.table}>
                         <tr>
                             <th>Name</th>
