@@ -11,3 +11,4 @@ export const selectMaxCardCount = (state: RootStateType) => state.packs.params.m
 export const selectPageSize = (state: RootStateType) => state.packs.params.pageCount
 export const selectMinCardCountFromState = (state: RootStateType): number => state.packs.minRangeValue
 export const selectMaxCardCountFromState = (state: RootStateType): number => state.packs.maxRangeValue
+export const selectSelectQuantityItems = (state: RootStateType): number => state.packs.selectQuantityItems

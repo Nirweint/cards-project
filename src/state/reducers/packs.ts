@@ -7,6 +7,7 @@ export type packsReducerStateType = {
     showAllPacks: boolean,
     minRangeValue: number,
     maxRangeValue: number,
+    selectQuantityItems: number,
 }
 
 
@@ -31,6 +32,7 @@ const initState: packsReducerStateType = {
     showAllPacks: true,
     minRangeValue: 0,
     maxRangeValue: 103,
+    selectQuantityItems: 5,
 }
 
 export const packsReducer = (state = initState, action: PacksActionsType): packsReducerStateType => {
@@ -46,7 +48,7 @@ export const packsReducer = (state = initState, action: PacksActionsType): packs
         case PACKS_ACTIONS.SET_MAX_VALUE:
             return {...state, params: {...state.params, max: action.payload}}
         case PACKS_ACTIONS.SET_PAGE_SIZE:
-            return {...state, params: {...state.params, pageCount: action.payload}}
+            return {...state, selectQuantityItems: action.payload, params: {...state.params, pageCount: action.payload}}
         default:
             return state;
     }

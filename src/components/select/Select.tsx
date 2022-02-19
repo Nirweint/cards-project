@@ -3,14 +3,18 @@ import s from './Select.module.css'
 import {useDispatch} from "react-redux";
 import {setPageSize} from "../../state/actions/packs";
 
-export const Select = () => {
+type SelectType = {
+    selectItemsPerPage: number,
+    listValues: number[],
+}
+
+export const Select = ({selectItemsPerPage, listValues}: SelectType) => {
 
     const dispatch = useDispatch()
 
-    const [selects, setSelects] = useState('')
+    const [selects, setSelects] = useState(`${selectItemsPerPage}`)
 
     const changeSelectValue = (e: ChangeEvent<HTMLSelectElement>) => {
-
         dispatch(setPageSize(+e.currentTarget.value))
         setSelects(e.currentTarget.value)
     }
@@ -18,9 +22,7 @@ export const Select = () => {
     return (
         <div className={s.select}>
            <select value={selects} onChange={changeSelectValue}>
-               <option value={5}>5</option>
-               <option value={10}>10</option>
-               <option value={20}>20</option>
+               {listValues.map(it => <option key={it} value={it}>{it}</option>)}
            </select>
         </div>
     );

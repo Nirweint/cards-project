@@ -12,7 +12,7 @@ import {
     selectMinCardCountFromState,
     selectPacksTotalCount,
     selectPageCount,
-    selectPageSize,
+    selectPageSize, selectSelectQuantityItems,
     selectShowAllPacks
 } from "../../state/selectors/packs";
 import SideBar from "./sideBar/SideBar";
@@ -26,15 +26,16 @@ let PORTION_SIZE = 5    //размер одной порции страниц п
 const PacksList = () => {
 
     const isAuth = useSelector(selectIsAuth)
-    let totalCountPacks = useSelector(selectPacksTotalCount)    //всего эл-тов
-    let packsPerPage = useSelector(selectPageCount)   //кол-во элементов на стр
-    let currentPage = useSelector(selectCurrentPage)    // текущая стр
+    const totalCountPacks = useSelector(selectPacksTotalCount)    //всего эл-тов
+    const packsPerPage = useSelector(selectPageCount)   //кол-во элементов на стр
+    const currentPage = useSelector(selectCurrentPage)    // текущая стр
     const isShowAllPacks = useSelector(selectShowAllPacks)
-    let minCardCount = useSelector(selectMinCardCount)
-    let maxCardCount = useSelector(selectMaxCardCount)
-    let pageSize = useSelector(selectPageSize)
-    let minCardCountFromState = useSelector(selectMinCardCountFromState)
-    let maxCardCountFromState = useSelector(selectMaxCardCountFromState)
+    const minCardCount = useSelector(selectMinCardCount)
+    const maxCardCount = useSelector(selectMaxCardCount)
+    const pageSize = useSelector(selectPageSize)
+    const minCardCountFromState = useSelector(selectMinCardCountFromState)
+    const maxCardCountFromState = useSelector(selectMaxCardCountFromState)
+    const selectItem = useSelector(selectSelectQuantityItems)
 
     const dispatch = useDispatch()
     const cardPacks = useSelector(selectCardPacks)
@@ -75,7 +76,7 @@ const PacksList = () => {
                         })}
                     </table>
                     <div className={s.paginator}>
-                        {/*<Select/>*/}
+                        <Select selectItemsPerPage={selectItem} listValues={[5, 10, 20]}/>
                         <Paginator totalCountItems={totalCountPacks} itemsPerPage={packsPerPage}
                                    currentPage={currentPage || 1} portionSize={PORTION_SIZE}/>
                     </div>
