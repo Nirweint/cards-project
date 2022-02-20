@@ -37,9 +37,9 @@ export const getPacksOfCards = (): ThunkType => (dispatch, getState: () => RootS
         })
 }
 
-export const addPackTC = (): ThunkType => (dispatch, getState: () => RootStateType) => {
+export const addPackTC = (name: string): ThunkType => (dispatch, getState: () => RootStateType) => {
     dispatch(setAppStatus('loading'))
-    packsAPI.postPack({name: 'new pack'})
+    packsAPI.postPack({name})
         .then((res) => {
             dispatch(getPacksOfCards())
             dispatch(setAppStatus('succeeded'))
@@ -65,9 +65,9 @@ export const deletePackTC = (_id: string): ThunkType => (dispatch, getState: () 
         })
 };
 
-export const updatePackTC = (_id: string): ThunkType => (dispatch, getState: () => RootStateType) => {
+export const updatePackTC = (_id: string, name: string): ThunkType => (dispatch, getState: () => RootStateType) => {
     dispatch(setAppStatus('loading'))
-    packsAPI.updatePack({_id, name: 'updated'})
+    packsAPI.updatePack({_id, name})
         .then((res) => {
             dispatch(getPacksOfCards())
             dispatch(setAppStatus('succeeded'))
