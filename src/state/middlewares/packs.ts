@@ -7,20 +7,12 @@ import {CardPacksParamsType} from "../../api/packsAPI";
 
 
 export const getPacksOfCards = (): ThunkType => (dispatch, getState: () => RootStateType) => {
+    dispatch(setAppStatus('loading'))
+
     const userId = getState().profile.profileData._id
     const showAllPacks = getState().packs.showAllPacks
-    // const page = getState().packs.params.page
-    // const min = getState().packs.params.min
-    // const max = getState().packs.params.max
-    // const pageCount = getState().packs.params.pageCount
-    // const packName = getState().packs.params.packName
     let params: CardPacksParamsType = getState().packs.params
 
-    dispatch(setAppStatus('loading'))
-    // let params: CardPacksParamsType = {
-    //     page, pageCount,
-    //     min, max, packName
-    // }
     if (!showAllPacks) {
         params = {...params, user_id: userId}
     }
@@ -37,12 +29,11 @@ export const getPacksOfCards = (): ThunkType => (dispatch, getState: () => RootS
         })
 }
 
-export const addPackTC = (name: string): ThunkType => (dispatch, getState: () => RootStateType) => {
+export const addPackTC = (name: string): ThunkType => dispatch => {
     dispatch(setAppStatus('loading'))
     packsAPI.postPack({name})
         .then((res) => {
             dispatch(getPacksOfCards())
-            dispatch(setAppStatus('succeeded'))
         })
         .catch((e) => {
             dispatch(setAppStatus('failed'))
@@ -51,12 +42,11 @@ export const addPackTC = (name: string): ThunkType => (dispatch, getState: () =>
         })
 };
 
-export const deletePackTC = (_id: string): ThunkType => (dispatch, getState: () => RootStateType) => {
+export const deletePackTC = (_id: string): ThunkType => dispatch => {
     dispatch(setAppStatus('loading'))
     packsAPI.deletePack(_id)
         .then((res) => {
             dispatch(getPacksOfCards())
-            dispatch(setAppStatus('succeeded'))
         })
         .catch((e) => {
             dispatch(setAppStatus('failed'));
@@ -65,12 +55,11 @@ export const deletePackTC = (_id: string): ThunkType => (dispatch, getState: () 
         })
 };
 
-export const updatePackTC = (_id: string, name: string): ThunkType => (dispatch, getState: () => RootStateType) => {
+export const updatePackTC = (_id: string, name: string): ThunkType => dispatch => {
     dispatch(setAppStatus('loading'))
     packsAPI.updatePack({_id, name})
         .then((res) => {
             dispatch(getPacksOfCards())
-            dispatch(setAppStatus('succeeded'))
         })
         .catch((e) => {
             dispatch(setAppStatus('failed'));

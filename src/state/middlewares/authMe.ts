@@ -15,7 +15,7 @@ export const fetchAuthMe = (): ThunkType => dispatch => {
             dispatch(setProfile(res.data))
             dispatch(setAppStatus('succeeded'))
         })
-        .catch((e: any) => {
+        .catch((e) => {
             dispatch(setAppStatus('failed'))
             dispatch(authMeAction(false))
             const error = e.response ? e.response.data.error : e.message;

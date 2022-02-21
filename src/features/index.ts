@@ -4,5 +4,4 @@ export {Login} from './login';
 export {NewPasswordEnter} from './newPasswordEnter';
 export {PasswordRecovery} from './passwordRecovery';
 export {SignUp} from './signUp';
-export {Test} from './test';
 export {CardsList} from './cardsList';

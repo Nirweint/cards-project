@@ -8,7 +8,6 @@ import {
     PasswordRecovery,
     Profile,
     SignUp,
-    Test
 } from "../../features";
 import PacksList from "../../features/packsList/PacksList";
 
@@ -19,7 +18,6 @@ export const PATH = {
     NEW_PASSWORD_ENTER: '/set-new-password/:token',
     PASSWORD_RECOVERY: '/password-recovery',
     ERROR_404: '/error404',
-    TEST: '/test',
     SHOP_TABLE: '/shoptable',
     CARDS_LIST: '/cards-list/:id',
 };
@@ -36,7 +34,6 @@ export const RoutesComponent = () => {
                 <Route path={PATH.NEW_PASSWORD_ENTER} element={<NewPasswordEnter/>}/>
                 <Route path={PATH.PASSWORD_RECOVERY} element={<PasswordRecovery/>}/>
                 <Route path={PATH.ERROR_404} element={<Error404/>}/>
-                <Route path={PATH.TEST} element={<Test/>}/>
                 <Route path={PATH.SHOP_TABLE} element={<PacksList/>}/>
                 <Route path={PATH.CARDS_LIST} element={<CardsList/>}/>
             </Routes>

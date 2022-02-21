@@ -1,6 +1,6 @@
 .wrapper {
     width: 1200px;
-    margin: 0 auto;
+    margin: 0 auto 20px auto;
     background-color: white;
     border-radius: 10px;
     min-height: 70vh;
@@ -73,5 +73,5 @@
 .paginator {
     display: flex;
     justify-content: flex-end;
-   margin-top: 20px;
+   margin: 20px 0;
 }
