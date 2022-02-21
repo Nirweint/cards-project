@@ -13,7 +13,7 @@
     line-height: 33px;
     text-decoration: none;
     color: #000;
-    margin-right: 10px;
+    margin-right: 15px;
 }
 
 .table {
@@ -53,6 +53,21 @@
 
 .emptyPackWrapper p {
     opacity: .5;
+}
+
+.paginator {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 0;
+}
+
+.header {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.search {
+    margin: 0;
 }
 
 @media screen  and (max-width: 1286px){

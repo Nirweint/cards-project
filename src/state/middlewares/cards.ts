@@ -8,9 +8,9 @@ import {fetchAuthMe} from "./authMe";
 
 export const getCards = (): ThunkType => (dispatch, getState: () => RootStateType) => {
     dispatch(setAppStatus('loading'))
-    const {pageCount, page} = getState().cards.params
+    const {pageCount, page, cardQuestion} = getState().cards.params
     const cardsPack_id = getState().cards.currentCardsPack_id;
-    cardsAPI.getCards({cardsPack_id, pageCount, page })
+    cardsAPI.getCards({cardsPack_id, pageCount, page, cardQuestion })
         .then((res) => {
             dispatch(setCardsPack(res.data))
             dispatch(setAppStatus('succeeded'))

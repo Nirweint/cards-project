@@ -59,6 +59,12 @@
     top: 22px;
 }
 
+.paginator {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 0;
+}
+
 @media screen  and (max-width: 1286px){
     .table td {
         min-width: 180px;
@@ -80,8 +86,3 @@
     }
 }
 
-.paginator {
-    display: flex;
-    justify-content: flex-end;
-   margin: 20px 0;
-}

@@ -2,21 +2,26 @@ import React, {useEffect, useState} from 'react';
 import {Navigate, NavLink, useParams} from "react-router-dom";
 import {PATH} from "../../app/routes/RoutesComponent";
 import s from './CardsList.module.css';
-import {Button, Loading, Paginator} from "../../components";
+import {Button, Paginator, Search} from "../../components";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    selectCardsPackParams, selectCardsTotalCount,
+    selectCardsPackParams,
+    selectCardsTotalCount,
     selectCurrentCardsPacksId,
     selectListOfCards
 } from "../../state/selectors/cards";
 import {getCards, setNewCard} from "../../state/middlewares/cards";
-import {setCardsCurrentId, setCurrentCardsPage} from "../../state/actions/cards";
+import {
+    setCardsCurrentId,
+    setCurrentCardsPage,
+    setSearchCard
+} from "../../state/actions/cards";
 import {selectIsAuth} from "../../state/selectors/auth";
 import {selectProfileId} from "../../state/selectors/profile";
 import {selectAppStatus} from "../../state/selectors/app";
 import {CardItem} from "./cardItem";
 import {selectCardPacks} from "../../state/selectors/packs";
-import {PORTION_SIZE} from "../../constants";
+import {EMPTY_STRING, PORTION_SIZE} from "../../constants";
 
 export const CardsList = () => {
     const dispatch = useDispatch()
@@ -29,10 +34,9 @@ export const CardsList = () => {
     const appStatus = useSelector(selectAppStatus)
     const packs = useSelector(selectCardPacks)
     const cardsTotalCount = useSelector(selectCardsTotalCount)
-    const {page, pageCount} = useSelector(selectCardsPackParams)
+    const {page, pageCount, cardQuestion} = useSelector(selectCardsPackParams)
 
     let [portionNumber, setPortionNumber] = useState(1)
-
 
 
     const currentPack = packs.find(pack => pack._id === id)
@@ -48,11 +52,15 @@ export const CardsList = () => {
             dispatch(setCardsCurrentId(id))
         }
         dispatch(getCards())
-    }, [dispatch, page, cardsTotalCount])
+    }, [dispatch, page, cardsTotalCount, cardQuestion])
 
     const onAddNewCardClick = () => {
         dispatch(setNewCard())
-    }
+    };
+
+    const handleSetSearchValue = (value: string) => {
+        dispatch(setSearchCard(value))
+    };
 
     if (!isAuth) {
         return <Navigate replace to={PATH.LOGIN}/>
@@ -60,13 +68,17 @@ export const CardsList = () => {
 
     return (
         <div className={s.wrapper}>
-            <NavLink
-                to={PATH.SHOP_TABLE}
-                className={s.link}
-            >
-                ← {currentPack && currentPack.name}
-            </NavLink>
-            {cards.length === 0 && isUserCardsPack &&
+            <div className={s.header}>
+                <NavLink
+                    to={PATH.SHOP_TABLE}
+                    className={s.link}
+                >
+                    ← {currentPack && currentPack.name}
+                </NavLink>
+                <Search setSearchValue={handleSetSearchValue} className={s.search}/>
+            </div>
+
+            {cards.length === 0 && isUserCardsPack && cardQuestion === EMPTY_STRING &&
 			<Button
 				disabled={appStatus === 'loading'}
 				onClick={onAddNewCardClick}
@@ -104,17 +116,26 @@ export const CardsList = () => {
 
                         }
                     </table>
-                    <Paginator totalCountItems={cardsTotalCount} itemsPerPage={pageCount}
-                               currentPage={page || 1} portionSize={PORTION_SIZE}
-                               portionNumber={portionNumber} setPortionNumber={setPortionNumber} setCurrentPage={handleSetCurrentPage}/>
+                    <div className={s.paginator}>
+                        <Paginator totalCountItems={cardsTotalCount}
+                                   itemsPerPage={pageCount}
+                                   currentPage={page || 1} portionSize={PORTION_SIZE}
+                                   portionNumber={portionNumber}
+                                   setPortionNumber={setPortionNumber}
+                                   setCurrentPage={handleSetCurrentPage}/>
+                    </div>
                 </div>
                 :
                 <div className={s.emptyPackWrapper}>
-                    <p>{isUserCardsPack ?
-                        'This pack is empty. Click add new card to fill this pack'
+                    {cardQuestion !== EMPTY_STRING ?
+                        <p>{`This pack of cards don't have ${cardQuestion}`}</p>
                         :
-                        'This pack is empty.'
-                    }</p>
+                        <p>{isUserCardsPack ?
+                            'This pack is empty. Click add new card to fill this pack'
+                            :
+                            'This pack is empty.'
+                        }</p>
+                    }
                 </div>
             }
 

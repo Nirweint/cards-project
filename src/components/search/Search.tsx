@@ -1,33 +1,38 @@
 import React, {ChangeEvent, useState} from 'react';
 import {Button, InputText} from "../common";
-import {useDispatch, useSelector} from "react-redux";
-import {searchPack} from "../../state/actions/packs";
+import {useSelector} from "react-redux";
 import {selectAppStatus} from "../../state/selectors/app";
 import s from './Search.module.css'
 
-export const Search = () => {
-    const dispatch = useDispatch()
+type SearchType = {
+    setSearchValue: (value: string) => void
+    className?: string
+}
+
+export const Search = ({setSearchValue, className}: SearchType) => {
     const appStatus = useSelector(selectAppStatus)
     const [query, setQuery] = useState<string>('')
     const [value, setValue] = useState<string>('')
+
+    const finalStyle = `${s.search} ${className}`
 
     const onChangeQueryHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setQuery(e.currentTarget.value)
     }
 
     const searchQueryHandler = () => {
-        dispatch(searchPack(query))
+        setSearchValue(query)
         setQuery('')
         setValue(query)
     }
     const resetSearchHandler = () => {
-        dispatch(searchPack(''))
+        setSearchValue('')
         setValue('')
     }
 
 
     return (
-        <div className={s.search}>
+        <div className={finalStyle}>
             <InputText
                 style={{marginRight: '5px'}}
                 placeholder={'🔍 Search...'}

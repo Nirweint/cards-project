@@ -49,8 +49,8 @@ export const setPageSize = (payload: number) => {
     } as const
 }
 
-export type SearchPackType = ReturnType<typeof searchPack>
-export const searchPack = (payload: string) => {
+export type SearchPackType = ReturnType<typeof setSearchPack>
+export const setSearchPack = (payload: string) => {
     return {
         type: PACKS_ACTIONS.SEARCH_PACK,
         payload,
