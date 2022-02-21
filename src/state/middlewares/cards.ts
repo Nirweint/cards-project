@@ -4,12 +4,13 @@ import {cardsAPI} from "../../api";
 import {RootStateType} from "../store";
 import {PostCardDataType, updateCardType} from "../../api/cardsAPI";
 import {setCardsPack} from "../actions/cards";
+import {fetchAuthMe} from "./authMe";
 
 export const getCards = (): ThunkType => (dispatch, getState: () => RootStateType) => {
     dispatch(setAppStatus('loading'))
-
+    const {pageCount, page} = getState().cards.params
     const cardsPack_id = getState().cards.currentCardsPack_id;
-    cardsAPI.getCards({cardsPack_id, pageCount: 10})
+    cardsAPI.getCards({cardsPack_id, pageCount, page })
         .then((res) => {
             dispatch(setCardsPack(res.data))
             dispatch(setAppStatus('succeeded'))
@@ -37,6 +38,9 @@ export const setNewCard = (): ThunkType => (dispatch, getState: () => RootStateT
         .catch((e) => {
             dispatch(setAppStatus('failed'))
             const error = e.response ? e.response.data.error : e.message;
+            if (error === 'you are not authorized /ᐠ-ꞈ-ᐟ\\') {
+                dispatch(fetchAuthMe())
+            }
             dispatch(setAppError(error))
         })
 }

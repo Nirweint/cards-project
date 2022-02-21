@@ -4,6 +4,7 @@ import {packsAPI} from "../../api";
 import {setAppError, setAppStatus} from "../actions/app";
 import {setCurrentPack} from "../actions/packs";
 import {CardPacksParamsType} from "../../api/packsAPI";
+import {fetchAuthMe} from "./authMe";
 
 
 export const getPacksOfCards = (): ThunkType => (dispatch, getState: () => RootStateType) => {
@@ -25,6 +26,9 @@ export const getPacksOfCards = (): ThunkType => (dispatch, getState: () => RootS
         .catch((e) => {
             dispatch(setAppStatus('failed'))
             const error = e.response ? e.response.data.error : e.message;
+            if (error === 'you are not authorized /ᐠ-ꞈ-ᐟ\\') {
+                dispatch(fetchAuthMe())
+            }
             dispatch(setAppError(error))
         })
 }

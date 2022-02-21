@@ -23,7 +23,7 @@ export type CardPacksParamsType = {
     max?: number
     sortPacks?: '0updated' | '1updated'
     page?: number
-    pageCount?: number
+    pageCount: number
     user_id?: string
 }
 

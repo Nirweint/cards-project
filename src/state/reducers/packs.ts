@@ -23,7 +23,7 @@ const initState: packsReducerStateType = {
     params: {
         packName: '',
         min: 0,
-        max: 9,
+        max: 1000,
         sortPacks: '0updated',
         page: 1,
         pageCount: 10,

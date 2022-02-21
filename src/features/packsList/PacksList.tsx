@@ -22,12 +22,13 @@ import SideBar from "./sideBar/SideBar";
 import s from './PacksList.module.css'
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../app/routes/RoutesComponent";
+import {PORTION_SIZE} from "../../constants";
 import {selectIsAuth} from "../../state/selectors/auth";
 import {Sort} from "../../components/sort";
 import {Modal} from "../../components/modal";
 import {UpdatePackTitle} from "./updatePackTitle/UpdatePackTitle";
+import {setCurrentPage} from "../../state/actions/packs";
 
-let PORTION_SIZE = 5    //размер одной порции страниц пагинации
 
 const PacksList = () => {
 
@@ -45,7 +46,7 @@ const PacksList = () => {
     const searchPack = useSelector(selectSearchPack)
     const sortPacks = useSelector(selectSortPacks)
 
-    let [portionNumber, setPortionNumber] = useState(1)     //изменение текущей порции
+    const [portionNumber, setPortionNumber] = useState(1)     //изменение текущей порции
     const [showAddNewPackModal, setShowAddNewPackModal] = useState<boolean>(false)
 
     const dispatch = useDispatch()
@@ -61,6 +62,10 @@ const PacksList = () => {
         setShowAddNewPackModal(false)
         dispatch(addPackTC(title));
     };
+
+    const handleSetCurrentPage = (page: number) => {
+        dispatch(setCurrentPage(page))
+    }
 
     useEffect(() => {
         dispatch(getPacksOfCards())
@@ -97,9 +102,15 @@ const PacksList = () => {
                         </table>
                         <div className={s.paginator}>
                             <Select selectItemsPerPage={selectItem} listValues={[5, 10, 20]}/>
-                            <Paginator totalCountItems={totalCountPacks} itemsPerPage={packsPerPage}
-                                       currentPage={currentPage || 1} portionSize={PORTION_SIZE}
-                                       portionNumber={portionNumber} setPortionNumber={setPortionNumber}/>
+                            <Paginator
+                                totalCountItems={totalCountPacks}
+                                itemsPerPage={packsPerPage}
+                                currentPage={currentPage || 1}
+                                portionSize={PORTION_SIZE}
+                                portionNumber={portionNumber}
+                                setPortionNumber={setPortionNumber}
+                                setCurrentPage={handleSetCurrentPage}
+                            />
                         </div>
                     </div>
                 </div>

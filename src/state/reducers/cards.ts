@@ -18,9 +18,9 @@ const initState: cardsReducerStateType = {
         packUserId: '60141d7ef8f3eb00042c7c40',
     },
     params: {
-        pageCount: 1000,
+        pageCount: 10,
         page: 1,
-        max: 6,
+        max: 1000,
         cardAnswer: 'cardAnswer',
         cardQuestion: 'cardQuestion',
         sortCards: '',
@@ -35,6 +35,8 @@ export const cardsReducer = (state = initState, action: CardsActionsType): cards
             return {...state, cardsPack: action.payload}
         case CARDS_ACTIONS.SET_CARDS_CURRENT_ID:
             return {...state, currentCardsPack_id: action.payload}
+        case CARDS_ACTIONS.SET_CURRENT_CARDS_PAGE:
+            return {...state, params: {...state.params, page: action.payload}}
         default:
             return state;
     }

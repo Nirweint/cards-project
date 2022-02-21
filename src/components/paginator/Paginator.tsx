@@ -1,23 +1,29 @@
 import React from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import s from './Paginator.module.css'
 import {Button} from "../common";
-import {setCurrentPage} from "../../state/actions/packs";
 import {selectAppStatus} from "../../state/selectors/app";
 
 type PaginatorType = {
-    totalCountItems: number,
-    itemsPerPage: number,
+    totalCountItems: number
+    itemsPerPage: number
     currentPage: number
-    portionSize: number,
-    portionNumber: number,
-    setPortionNumber: (portionNumber: number)=> void,
+    portionSize: number
+    portionNumber: number
+    setPortionNumber: (portionNumber: number) => void
+    setCurrentPage: (page: number) => void
 }
 
 export const Paginator = (props: PaginatorType) => {
-    const {totalCountItems, itemsPerPage, currentPage, portionSize, portionNumber, setPortionNumber} = props
-
-    const dispatch = useDispatch()
+    const {
+        totalCountItems,
+        itemsPerPage,
+        currentPage,
+        portionSize,
+        portionNumber,
+        setPortionNumber,
+        setCurrentPage
+    } = props
 
     const appStatus = useSelector(selectAppStatus)
 
@@ -33,7 +39,7 @@ export const Paginator = (props: PaginatorType) => {
     let rightPortionPageNumber = portionNumber * portionSize         //стр конец порции
 
     const onClickPageChange = (page: number) => {
-        dispatch(setCurrentPage(page))
+        setCurrentPage(page)
     }
     const onClickPreviousPortion = () => {
         setPortionNumber(portionNumber - 1)
@@ -44,7 +50,8 @@ export const Paginator = (props: PaginatorType) => {
 
     return (
         <div>
-            <Button disabled={portionNumber === 1} onClick={onClickPreviousPortion}>PREV</Button>
+            <Button disabled={portionNumber === 1}
+                    onClick={onClickPreviousPortion}>PREV</Button>
 
             {pagesCountArr
                 .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
@@ -56,7 +63,7 @@ export const Paginator = (props: PaginatorType) => {
             }
 
             {portionCount > portionNumber &&
-            <Button onClick={onClickNextPortion}>NEXT</Button>
+			<Button onClick={onClickNextPortion}>NEXT</Button>
             }
         </div>
     );

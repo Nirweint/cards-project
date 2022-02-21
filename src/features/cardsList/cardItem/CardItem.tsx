@@ -23,6 +23,8 @@ export const CardItem: FC<CardItemType> = ({question,updated,answer, cardId}) =>
     const profileId = useSelector(selectProfileId)
     const appStatus = useSelector(selectAppStatus)
 
+    const updatedDate = new Date(updated).toLocaleDateString()
+
     const isUserCardsPack = cardsPackId === profileId
 
     const onDeleteCardClick = () => {
@@ -37,7 +39,7 @@ export const CardItem: FC<CardItemType> = ({question,updated,answer, cardId}) =>
         <tr>
             <td>{question}</td>
             <td>{answer}</td>
-            <td>{updated}</td>
+            <td>{updatedDate}</td>
             {isUserCardsPack && <td>
 				<Button disabled={appStatus === 'loading'} onClick={onDeleteCardClick}>delete</Button>
 				<Button disabled={appStatus === 'loading'} onClick={onUpdateCardClick}>update</Button>

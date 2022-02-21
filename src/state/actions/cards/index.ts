@@ -16,3 +16,11 @@ export const setCardsCurrentId = (payload: string) => {
         payload,
     } as const
 }
+
+export type SetCurrentCardsPageType = ReturnType<typeof setCurrentCardsPage>
+export const setCurrentCardsPage = (payload: number) => {
+    return {
+        type: CARDS_ACTIONS.SET_CURRENT_CARDS_PAGE,
+        payload,
+    } as const
+}

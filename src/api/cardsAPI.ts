@@ -25,7 +25,7 @@ export type CardsParamsType = {
     max?: number
     sortCards?: string // '0grade' или '1grade'
     page?: number
-    pageCount?: number
+    pageCount: number
 }
 
 export type PostCardDataType = {
