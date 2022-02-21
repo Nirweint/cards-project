@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import s from './Select.module.css'
+import s from './Sort.module.css'
 import imgSort from '../../assets/images/sort.svg'
 import {useDispatch} from "react-redux";
 import {setCurrentPage, SortPacksName} from "../../state/actions/packs";
@@ -33,12 +33,12 @@ export const Sort = ({setPortionNumber}: SortType) => {
     return (
         <>
             {sort === SORT_HIGH &&
-            <div onClick={sortLowHandler} className={sort === SORT_HIGH && s.sort}>
+            <div onClick={sortLowHandler} className={s.sort}>
                <img src={imgSort} alt={'sorting'}/>
             </div>
             }
             {sort === SORT_LOW &&
-            <div onClick={sortHighHandler} className={sort === SORT_LOW && s.sort}>
+            <div onClick={sortHighHandler} className={s.sort}>
                 <img src={imgSort} alt={'sorting'}/>
             </div>
             }

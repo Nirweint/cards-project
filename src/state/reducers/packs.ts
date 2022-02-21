@@ -26,13 +26,13 @@ const initState: packsReducerStateType = {
         max: 9,
         sortPacks: '0updated',
         page: 1,
-        pageCount: 5,
+        pageCount: 10,
         user_id: '',
     },
     showAllPacks: true,
     minRangeValue: 0,
     maxRangeValue: 103,
-    selectQuantityItems: 5,
+    selectQuantityItems: 10,
 }
 
 export const packsReducer = (state = initState, action: PacksActionsType): packsReducerStateType => {

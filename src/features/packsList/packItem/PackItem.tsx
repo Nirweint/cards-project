@@ -6,6 +6,7 @@ import {NavLink} from "react-router-dom";
 import {Modal} from "../../../components/modal";
 import {DeletePack} from "../deletePack/DeletePack";
 import {UpdatePackTitle} from "../updatePackTitle/UpdatePackTitle";
+import s from './PackItem.module.css';
 
 type PackItemType = {
     name: string,
@@ -20,6 +21,8 @@ export const PackItem: FC<PackItemType> = ({name, cardsCount, update, _id}) => {
     const [showUpdateModal, setShowUpdateModal] = useState<boolean>(false)
 
     const dispatch = useDispatch();
+
+    const updateDate = new Date(update).toLocaleDateString()
 
     const updateHandler = () => {
         setShowUpdateModal(true)
@@ -47,32 +50,30 @@ export const PackItem: FC<PackItemType> = ({name, cardsCount, update, _id}) => {
         <>
             <tr>
                 <td>
-                    <NavLink to={`/cards-list/${_id}`}>{name}</NavLink>
+                    <NavLink className={s.link} to={`/cards-list/${_id}`}>{name}</NavLink>
                 </td>
                 <td>{cardsCount}</td>
-                <td>{update}</td>
+                <td>{updateDate}</td>
                 <td>
-                    <Button onClick={updateHandler}>Update</Button>
-                    <Button onClick={deleteHandler}>Delete</Button>
+                    <Button className={s.btn} onClick={updateHandler}>Update</Button>
+                    <Button className={s.btn} onClick={deleteHandler}>Delete</Button>
                 </td>
             </tr>
             {showDeleteModal &&
-            <Modal setShow={setShowDeleteModal}>
-                <DeletePack deletedTitle={name}
-                    cancelHandler={cancelModalHandler}
-                            submitHandler={deleteModalHandler}/>
-            </Modal>
+			<Modal setShow={setShowDeleteModal}>
+				<DeletePack deletedTitle={name}
+							cancelHandler={cancelModalHandler}
+							submitHandler={deleteModalHandler}/>
+			</Modal>
             }
             {showUpdateModal &&
-                <Modal setShow={setShowUpdateModal}>
-                    <UpdatePackTitle title={'Change title'}
-                                     cancelHandler={cancelUpdateHandler}
-                                     submitHandler={updateModalHandler}/>
-                </Modal>
+			<Modal setShow={setShowUpdateModal}>
+				<UpdatePackTitle title={'Change title'}
+								 cancelHandler={cancelUpdateHandler}
+								 submitHandler={updateModalHandler}/>
+			</Modal>
             }
-
         </>
-
     );
 };
 

@@ -86,7 +86,7 @@ const PacksList = () => {
                             <tr>
                                 <th>Name</th>
                                 <th>Cards Count</th>
-                                <th>Update <Sort setPortionNumber={setPortionNumber}/></th>
+                                <th className={s.sortWrapper}>Update <div className={s.sort}><Sort setPortionNumber={setPortionNumber}/></div></th>
                                 <th>
                                     <Button onClick={onAddNewPackClick}>Add</Button>
                                 </th>

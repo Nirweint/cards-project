@@ -1,11 +1,13 @@
 import React, {ChangeEvent, useState} from 'react';
-import s from './Search.module.css'
 import {Button, InputText} from "../common";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {searchPack} from "../../state/actions/packs";
+import {selectAppStatus} from "../../state/selectors/app";
+import s from './Search.module.css'
 
 export const Search = () => {
     const dispatch = useDispatch()
+    const appStatus = useSelector(selectAppStatus)
     const [query, setQuery] = useState<string>('')
     const [value, setValue] = useState<string>('')
 
@@ -26,9 +28,24 @@ export const Search = () => {
 
     return (
         <div className={s.search}>
-            <InputText placeholder={'🔍 Search...'} name='Search' value={query} onChange={onChangeQueryHandler}/>
-            <Button onClick={searchQueryHandler}> Search! </Button>
-            <Button onClick={resetSearchHandler}> Reset </Button>
+            <InputText
+                style={{marginRight: '5px'}}
+                placeholder={'🔍 Search...'}
+                name='Search'
+                value={query}
+                onChange={onChangeQueryHandler}
+            />
+            <Button
+                className={s.btn}
+                disabled={appStatus === 'loading'}
+                onClick={searchQueryHandler}
+            > Search!
+            </Button>
+            <Button
+                className={s.btn}
+                disabled={appStatus === 'loading'}
+                onClick={resetSearchHandler}> Reset
+            </Button>
             <div className={s.searchedValue}>{value}</div>
         </div>
     );

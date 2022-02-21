@@ -7,15 +7,19 @@
     min-height: 70vh;
 }
 
-
-
 .link {
-
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 33px;
+    text-decoration: none;
+    color: #000;
+    margin-right: 10px;
 }
 
 .table {
     width: 100%;
     border-collapse: collapse;
+    transition: .4s;
 }
 
 .table tr:nth-child(even){background-color: #F8F7FD;}
@@ -38,6 +42,17 @@
     min-width: 300px;
     height: 40px;
     min-height: 40px;
+}
+
+.emptyPackWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+}
+
+.emptyPackWrapper p {
+    opacity: .5;
 }
 
 @media screen  and (max-width: 1286px){

@@ -49,6 +49,16 @@
     min-width: 240px;
 }
 
+.sortWrapper {
+    position: relative;
+}
+
+.sort {
+    position: absolute;
+    left: 55px;
+    top: 22px;
+}
+
 @media screen  and (max-width: 1286px){
     .table td {
         min-width: 180px;

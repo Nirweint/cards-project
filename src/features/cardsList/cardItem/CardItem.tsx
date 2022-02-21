@@ -2,7 +2,9 @@ import React, {FC} from 'react';
 import {Button} from "../../../components";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteCard, updateCard} from "../../../state/middlewares/cards";
-import {selectCurrentCardsPacksId} from "../../../state/selectors/cards";
+import {
+    selectCurrentCardsPacksId
+} from "../../../state/selectors/cards";
 import {selectProfileId} from "../../../state/selectors/profile";
 import {selectAppStatus} from "../../../state/selectors/app";
 

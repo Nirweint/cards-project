@@ -1,0 +1,14 @@
+.link {
+    text-decoration: none;
+    font-size: 18px;
+    color: #000;
+    transition: .4s;
+}
+
+.link:hover {
+    color: #548bf4;
+}
+
+.btn {
+    margin-right: 5px;
+}
