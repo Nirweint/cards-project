@@ -1,18 +1,19 @@
 import React, {ChangeEvent, useState} from 'react';
 import {Button, InputText} from "../../../components";
 import s from './UpdateCard.module.css';
+import {EMPTY_STRING} from "../../../constants";
 
 type UpdatePackTitleType = {
     cancelHandler: () => void,
     submitHandler: (questionValue: string, answerValue: string) => void,
-    question: string
-    answer: string
+    question?: string
+    answer?: string
 }
 
 export const UpdateCard = ({cancelHandler, submitHandler, question, answer}: UpdatePackTitleType) => {
 
-    const [questionValue, setQuestionValue] = useState(question)
-    const [answerValue, setAnswerValue] = useState(answer)
+    const [questionValue, setQuestionValue] = useState(question || EMPTY_STRING)
+    const [answerValue, setAnswerValue] = useState(answer || EMPTY_STRING)
 
     const handleQuestionValueChange = (e: ChangeEvent<HTMLInputElement>) => {
         setQuestionValue(e.currentTarget.value)
@@ -24,6 +25,9 @@ export const UpdateCard = ({cancelHandler, submitHandler, question, answer}: Upd
 
     return (
         <>
+            <div className={s.title}>
+                <h2>Card Info</h2>
+            </div>
             <h2>Question</h2>
             <InputText style={{marginBottom: '20px', width: '95%'}} autoFocus
                        placeholder={'Question'} value={questionValue}

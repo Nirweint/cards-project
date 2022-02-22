@@ -22,14 +22,14 @@ export const getCards = (): ThunkType => (dispatch, getState: () => RootStateTyp
         })
 }
 
-export const setNewCard = (): ThunkType => (dispatch, getState: () => RootStateType) => {
+export const setNewCard = (question: string, answer: string): ThunkType => (dispatch, getState: () => RootStateType) => {
     dispatch(setAppStatus('loading'))
 
     const cardsPack_id = getState().cards.currentCardsPack_id;
     const data: PostCardDataType = {
         cardsPack_id,
-        question: 'new question',
-        answer: 'new answer',
+        question,
+        answer,
     }
     cardsAPI.postCard(data)
         .then((res) => {

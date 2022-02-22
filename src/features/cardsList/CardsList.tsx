@@ -10,7 +10,7 @@ import {
     selectCurrentCardsPacksId,
     selectListOfCards
 } from "../../state/selectors/cards";
-import {getCards, setNewCard} from "../../state/middlewares/cards";
+import {getCards, setNewCard, updateCard} from "../../state/middlewares/cards";
 import {
     setCardsCurrentId,
     setCurrentCardsPage,
@@ -38,14 +38,10 @@ export const CardsList = () => {
     const {page, pageCount, cardQuestion} = useSelector(selectCardsPackParams)
 
     const [portionNumber, setPortionNumber] = useState(1)
+    const [showUpdateModal, setShowUpdateModal] = useState<boolean>(false)
 
     const currentPack = packs.find(pack => pack._id === id)
-
     const isUserCardsPack = cardsPacksUserId === profileId
-
-    const handleSetCurrentPage = (page: number) => {
-        dispatch(setCurrentCardsPage(page))
-    }
 
     useEffect(() => {
         if (id) {
@@ -54,14 +50,26 @@ export const CardsList = () => {
         dispatch(getCards())
     }, [dispatch, page, cardsTotalCount, cardQuestion])
 
-    const onAddNewCardClick = () => {
-        dispatch(setNewCard())
+    const handleSetCurrentPage = (page: number) => {
+        dispatch(setCurrentCardsPage(page))
+    }
+
+    const onShowModalForAddNewCardClick = () => {
+        setShowUpdateModal(true)
+    }
+
+    const handleAddNewCardClick = (questionValue: string, answerValue: string) => {
+        setShowUpdateModal(false)
+        dispatch(setNewCard(questionValue, answerValue))
+    }
+
+    const handleCancelAddNewCardClick = () => {
+        setShowUpdateModal(false)
     };
 
     const handleSetSearchValue = (value: string) => {
         dispatch(setSearchCard(value))
     };
-
 
     if (!isAuth) {
         return <Navigate replace to={PATH.LOGIN}/>
@@ -83,7 +91,7 @@ export const CardsList = () => {
                 {cards.length === 0 && isUserCardsPack && cardQuestion === EMPTY_STRING &&
 				<Button
 					disabled={appStatus === 'loading'}
-					onClick={onAddNewCardClick}
+					onClick={onShowModalForAddNewCardClick}
 				>
 					Add new card
 				</Button>}
@@ -98,7 +106,8 @@ export const CardsList = () => {
                                 <th>Last Updated</th>
                                 {isUserCardsPack && <th>
 									<Button disabled={appStatus === 'loading'}
-											onClick={onAddNewCardClick}>Add new
+											onClick={onShowModalForAddNewCardClick}>Add
+										new
 										card</Button>
 								</th>}
 
@@ -143,7 +152,14 @@ export const CardsList = () => {
                 }
 
             </div>
-
+            {showUpdateModal &&
+			<Modal setShow={setShowUpdateModal}>
+				<UpdateCard
+					cancelHandler={handleCancelAddNewCardClick}
+					submitHandler={handleAddNewCardClick}
+				/>
+			</Modal>
+            }
         </>
     );
 };
