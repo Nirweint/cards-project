@@ -43,4 +43,5 @@ export type PostCardDataType = {
 export type updateCardType = {
     _id: string
     question: string
+    answer: string
 }

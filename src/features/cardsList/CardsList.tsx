@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Navigate, NavLink, useParams} from "react-router-dom";
 import {PATH} from "../../app/routes/RoutesComponent";
 import s from './CardsList.module.css';
-import {Button, Paginator, Search} from "../../components";
+import {Button, Modal, Paginator, Search} from "../../components";
 import {useDispatch, useSelector} from "react-redux";
 import {
     selectCardsPackParams,
@@ -22,6 +22,7 @@ import {selectAppStatus} from "../../state/selectors/app";
 import {CardItem} from "./cardItem";
 import {selectCardPacks} from "../../state/selectors/packs";
 import {EMPTY_STRING, PORTION_SIZE} from "../../constants";
+import {UpdateCard} from "./updateCard/UpdateCard";
 
 export const CardsList = () => {
     const dispatch = useDispatch()
@@ -36,8 +37,7 @@ export const CardsList = () => {
     const cardsTotalCount = useSelector(selectCardsTotalCount)
     const {page, pageCount, cardQuestion} = useSelector(selectCardsPackParams)
 
-    let [portionNumber, setPortionNumber] = useState(1)
-
+    const [portionNumber, setPortionNumber] = useState(1)
 
     const currentPack = packs.find(pack => pack._id === id)
 
@@ -62,84 +62,88 @@ export const CardsList = () => {
         dispatch(setSearchCard(value))
     };
 
+
     if (!isAuth) {
         return <Navigate replace to={PATH.LOGIN}/>
     }
 
     return (
-        <div className={s.wrapper}>
-            <div className={s.header}>
-                <NavLink
-                    to={PATH.SHOP_TABLE}
-                    className={s.link}
-                >
-                    ← {currentPack && currentPack.name}
-                </NavLink>
-                <Search setSearchValue={handleSetSearchValue} className={s.search}/>
+        <>
+            <div className={s.wrapper}>
+                <div className={s.header}>
+                    <NavLink
+                        to={PATH.SHOP_TABLE}
+                        className={s.link}
+                    >
+                        ← {currentPack && currentPack.name}
+                    </NavLink>
+                    <Search setSearchValue={handleSetSearchValue} className={s.search}/>
+                </div>
+
+                {cards.length === 0 && isUserCardsPack && cardQuestion === EMPTY_STRING &&
+				<Button
+					disabled={appStatus === 'loading'}
+					onClick={onAddNewCardClick}
+				>
+					Add new card
+				</Button>}
+
+                {cards.length > 0 ?
+                    <div>
+                        <table className={s.table}>
+                            <thead>
+                            <tr>
+                                <th>Question</th>
+                                <th>Answer</th>
+                                <th>Last Updated</th>
+                                {isUserCardsPack && <th>
+									<Button disabled={appStatus === 'loading'}
+											onClick={onAddNewCardClick}>Add new
+										card</Button>
+								</th>}
+
+                            </tr>
+                            </thead>
+                            {cards.map(({answer, question, updated, _id}) => {
+                                return (
+                                    <tbody key={_id}>
+                                    <CardItem
+                                        answer={answer}
+                                        question={question}
+                                        updated={updated}
+                                        cardId={_id}
+                                    />
+                                    </tbody>
+                                )
+                            })
+
+                            }
+                        </table>
+                        <div className={s.paginator}>
+                            <Paginator totalCountItems={cardsTotalCount}
+                                       itemsPerPage={pageCount}
+                                       currentPage={page || 1} portionSize={PORTION_SIZE}
+                                       portionNumber={portionNumber}
+                                       setPortionNumber={setPortionNumber}
+                                       setCurrentPage={handleSetCurrentPage}/>
+                        </div>
+                    </div>
+                    :
+                    <div className={s.emptyPackWrapper}>
+                        {cardQuestion !== EMPTY_STRING ?
+                            <p>{`This pack of cards don't have ${cardQuestion}`}</p>
+                            :
+                            <p>{isUserCardsPack ?
+                                'This pack is empty. Click add new card to fill this pack'
+                                :
+                                'This pack is empty.'
+                            }</p>
+                        }
+                    </div>
+                }
+
             </div>
 
-            {cards.length === 0 && isUserCardsPack && cardQuestion === EMPTY_STRING &&
-			<Button
-				disabled={appStatus === 'loading'}
-				onClick={onAddNewCardClick}
-			>
-				Add new card
-			</Button>}
-
-            {cards.length > 0 ?
-                <div>
-                    <table className={s.table}>
-                        <thead>
-                        <tr>
-                            <th>Question</th>
-                            <th>Answer</th>
-                            <th>Last Updated</th>
-                            {isUserCardsPack && <th>
-								<Button disabled={appStatus === 'loading'}
-										onClick={onAddNewCardClick}>Add new card</Button>
-							</th>}
-
-                        </tr>
-                        </thead>
-                        {cards.map(({answer, question, updated, _id}) => {
-                            return (
-                                <tbody key={_id}>
-                                <CardItem
-                                    answer={answer}
-                                    question={question}
-                                    updated={updated}
-                                    cardId={_id}
-                                />
-                                </tbody>
-                            )
-                        })
-
-                        }
-                    </table>
-                    <div className={s.paginator}>
-                        <Paginator totalCountItems={cardsTotalCount}
-                                   itemsPerPage={pageCount}
-                                   currentPage={page || 1} portionSize={PORTION_SIZE}
-                                   portionNumber={portionNumber}
-                                   setPortionNumber={setPortionNumber}
-                                   setCurrentPage={handleSetCurrentPage}/>
-                    </div>
-                </div>
-                :
-                <div className={s.emptyPackWrapper}>
-                    {cardQuestion !== EMPTY_STRING ?
-                        <p>{`This pack of cards don't have ${cardQuestion}`}</p>
-                        :
-                        <p>{isUserCardsPack ?
-                            'This pack is empty. Click add new card to fill this pack'
-                            :
-                            'This pack is empty.'
-                        }</p>
-                    }
-                </div>
-            }
-
-
-        </div>
+        </>
     );
 };
