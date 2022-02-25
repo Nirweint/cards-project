@@ -10,6 +10,7 @@ import {
     SignUp,
 } from "../../features";
 import PacksList from "../../features/packsList/PacksList";
+import {LearnPage} from "../../features/learnPage";
 
 export const PATH = {
     PROFILE: '/profile',
@@ -20,6 +21,7 @@ export const PATH = {
     ERROR_404: '/error404',
     SHOP_TABLE: '/shoptable',
     CARDS_LIST: '/cards-list/:id',
+    LEARN_PAGE: '/learn/:id',
 };
 
 export const RoutesComponent = () => {
@@ -36,6 +38,7 @@ export const RoutesComponent = () => {
                 <Route path={PATH.ERROR_404} element={<Error404/>}/>
                 <Route path={PATH.SHOP_TABLE} element={<PacksList/>}/>
                 <Route path={PATH.CARDS_LIST} element={<CardsList/>}/>
+                <Route path={PATH.LEARN_PAGE} element={<LearnPage/>}/>
             </Routes>
         </>
     );

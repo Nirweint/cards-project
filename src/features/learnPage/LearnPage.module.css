@@ -1,0 +1,31 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: #F9F9FE;
+    border-radius: 8px;
+    min-height: 200px;
+    min-width: 300px;
+    padding: 30px;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 33px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.text {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.btn {
+    margin-top: 40px;
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+}
