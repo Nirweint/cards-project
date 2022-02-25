@@ -56,8 +56,8 @@ export const LearnPage = () => {
         setCard(getCard(cards))
     }
 
-    const handleGradeClick = () => {
-        dispatch(updateCardGrade({grade: card.grade, card_id: card._id}))
+    const handleGradeClick = (grade: number) => {
+        dispatch(updateCardGrade({grade, card_id: card._id}))
     }
 
     return (
@@ -79,7 +79,7 @@ export const LearnPage = () => {
                         <div className={s.grades}>
                             {grades.map((g, i) => (
                                 <Button key={'grade-' + i}
-                                        onClick={handleGradeClick}>{g}</Button>
+                                        onClick={() => handleGradeClick(i)}>{g}</Button>
                             ))}
                         </div>
 
@@ -89,7 +89,10 @@ export const LearnPage = () => {
                 )}
 
                 {!isChecked &&
-				<Button onClick={() => setIsChecked(true)}>Show answer</Button>
+				<Button onClick={() => {
+                    setIsChecked(true)
+                    setCard(getCard(cards))
+                }}>Show answer</Button>
                 }
 
             </div>
