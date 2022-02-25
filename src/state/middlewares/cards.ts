@@ -2,7 +2,11 @@ import {ThunkType} from "../types";
 import {setAppError, setAppStatus} from "../actions/app";
 import {cardsAPI} from "../../api";
 import {RootStateType} from "../store";
-import {PostCardDataType, updateCardType} from "../../api/cardsAPI";
+import {
+    PostCardDataType,
+    UpdateCardType,
+    UpgradeCardGradePayloadType
+} from "../../api/cardsAPI";
 import {setCardsPack} from "../actions/cards";
 import {fetchAuthMe} from "./authMe";
 
@@ -59,10 +63,24 @@ export const deleteCard = (cardId: string): ThunkType => dispatch => {
         })
 }
 
-export const updateCard = (data: updateCardType): ThunkType => dispatch => {
+export const updateCard = (data: UpdateCardType): ThunkType => dispatch => {
     dispatch(setAppStatus('loading'))
 
     cardsAPI.updateCard(data)
+        .then((res) => {
+            dispatch(getCards())
+        })
+        .catch((e) => {
+            dispatch(setAppStatus('failed'))
+            const error = e.response ? e.response.data.error : e.message;
+            dispatch(setAppError(error))
+        })
+}
+
+export const updateCardGrade = (payload: UpgradeCardGradePayloadType): ThunkType => dispatch => {
+    dispatch(setAppStatus('loading'))
+
+    cardsAPI.updateCardGrade(payload)
         .then((res) => {
             dispatch(getCards())
         })

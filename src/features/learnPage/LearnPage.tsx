@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {NavLink, useParams} from "react-router-dom";
 import {CardType} from "../../state/reducers/cards";
-import {getCards} from "../../state/middlewares/cards";
+import {getCards, updateCardGrade} from "../../state/middlewares/cards";
 import {Button} from "../../components";
 import {setCardsCurrentId} from "../../state/actions/cards";
 import {selectListOfCards} from "../../state/selectors/cards";
@@ -56,6 +56,10 @@ export const LearnPage = () => {
         setCard(getCard(cards))
     }
 
+    const handleGradeClick = () => {
+        dispatch(updateCardGrade({grade: card.grade, card_id: card._id}))
+    }
+
     return (
         <div className={s.wrapper}>
             <div className={s.title}>
@@ -64,30 +68,29 @@ export const LearnPage = () => {
             <div className={s.text}>
                 Question: {card.question}
             </div>
-            <div className={s.btn}>
+            <div className={s.btnWrapper}>
                 <NavLink to={PATH.SHOP_TABLE}>
                     <Button>Cancel</Button>
                 </NavLink>
 
                 {isChecked && (
-                    <>
+                    <div>
                         <div className={s.text}>Answer: {card.answer}</div>
+                        <div className={s.grades}>
+                            {grades.map((g, i) => (
+                                <Button key={'grade-' + i}
+                                        onClick={handleGradeClick}>{g}</Button>
+                            ))}
+                        </div>
 
-                        {grades.map((g, i) => (
-                            <Button key={'grade-' + i} onClick={() => {
-                            }}>{g}</Button>
-                        ))}
-
-                        <div className={s.btn}><Button onClick={onNext}>Next</Button></div>
-                    </>
+                        <div className={s.btn}><Button onClick={onNext}>Next</Button>
+                        </div>
+                    </div>
                 )}
 
                 {!isChecked &&
-                    <Button onClick={() => setIsChecked(true)}>Show answer</Button>
+				<Button onClick={() => setIsChecked(true)}>Show answer</Button>
                 }
-
-
-
 
             </div>
 

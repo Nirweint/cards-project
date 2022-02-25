@@ -17,6 +17,7 @@
 
 .tableWrapper {
     margin: 0 10px;
+    width: 100%;
 }
 
 .link {
@@ -46,7 +47,8 @@
 }
 
 .table td {
-    min-width: 240px;
+    max-width: 240px;
+    padding: 10px 10px 10px 0;
 }
 
 .sortWrapper {
@@ -67,7 +69,7 @@
 
 @media screen  and (max-width: 1286px){
     .table td {
-        min-width: 180px;
+        max-width: 180px;
     }
 
     .wrapper {
@@ -77,12 +79,12 @@
 
 @media screen  and (max-width: 946px){
     .table td {
-        min-width: 145px;
+        max-width: 145px;
     }
 
 
     .wrapper {
-        /*width: 500px;*/
+        width: 800px;
     }
 }
 

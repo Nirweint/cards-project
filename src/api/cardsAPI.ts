@@ -11,8 +11,11 @@ export const cardsAPI = {
     deleteCard(cardId: string) {
         return instance.delete(`cards/card?id=${cardId}`)
     },
-    updateCard(card: updateCardType) {
+    updateCard(card: UpdateCardType) {
         return instance.put('cards/card', {card})
+    },
+    updateCardGrade(payload: UpgradeCardGradePayloadType) {
+        return instance.put('cards/grade', payload)
     },
 }
 
@@ -40,8 +43,13 @@ export type PostCardDataType = {
     answerVideo?: string
 }
 
-export type updateCardType = {
+export type UpdateCardType = {
     _id: string
     question: string
     answer: string
+}
+
+export type UpgradeCardGradePayloadType = {
+    grade: number
+    card_id: string
 }

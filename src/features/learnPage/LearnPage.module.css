@@ -24,8 +24,12 @@
     margin-bottom: 40px;
 }
 
-.btn {
+.btnWrapper {
     margin-top: 40px;
-    /*display: flex;*/
-    /*justify-content: space-between;*/
+    display: flex;
+    justify-content: space-between;
+}
+
+.grades {
+    padding: 0 0 10px 0;
 }

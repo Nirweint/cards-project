@@ -97,7 +97,7 @@ export const CardsList = () => {
 				</Button>}
 
                 {cards.length > 0 ?
-                    <div>
+                    <div className={s.tableWrapper}>
                         <table className={s.table}>
                             <thead>
                             <tr>
