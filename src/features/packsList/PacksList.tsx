@@ -24,13 +24,14 @@ import {Navigate} from "react-router-dom";
 import {PATH} from "../../app/routes/RoutesComponent";
 import {PORTION_SIZE} from "../../constants";
 import {selectIsAuth} from "../../state/selectors/auth";
-import {Modal} from "../../components/modal";
+import {Modal} from "../../components";
 import {UpdatePackTitle} from "./updatePackTitle/UpdatePackTitle";
 import {setCurrentPage, setSearchPack} from "../../state/actions/packs";
 
 
 const PacksList = () => {
 
+    const cardPacks = useSelector(selectCardPacks)
     const isAuth = useSelector(selectIsAuth)
     const totalCountPacks = useSelector(selectPacksTotalCount)    //всего эл-тов
     const packsPerPage = useSelector(selectPageCount)   //кол-во элементов на стр
@@ -49,7 +50,6 @@ const PacksList = () => {
     const [showAddNewPackModal, setShowAddNewPackModal] = useState<boolean>(false)
 
     const dispatch = useDispatch()
-    const cardPacks = useSelector(selectCardPacks)
 
     const onAddNewPackClick = () => {
         setShowAddNewPackModal(true)
@@ -98,13 +98,14 @@ const PacksList = () => {
                                 <th className={s.sortWrapper}>Update <div
                                     className={s.sort}><Sort
                                     setPortionNumber={setPortionNumber}/></div></th>
-                                <th>
-                                    <Button onClick={onAddNewPackClick}>Add</Button>
+                                <th className={s.actions}>
+                                    <Button onClick={onAddNewPackClick}>Add new pack</Button>
                                 </th>
                             </tr>
-                            {cardPacks.map(({_id, cardsCount, updated, name}) => {
+                            {cardPacks.map(({_id, cardsCount, updated, user_id, name}) => {
                                 return <PackItem key={_id} name={name}
                                                  cardsCount={cardsCount}
+                                                 user_id={user_id}
                                                  update={updated} _id={_id}/>
                             })}
                         </table>
