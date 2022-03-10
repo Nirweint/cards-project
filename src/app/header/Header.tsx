@@ -9,7 +9,7 @@ export const Header = () => {
             <nav className={s.nav}>
                 <NavLink to={PATH.LOGIN}>Login</NavLink>
                 <NavLink to={PATH.PROFILE}>Profile</NavLink>
-                <NavLink to={PATH.SHOP_TABLE}>Packs</NavLink>
+                <NavLink to={PATH.PACKS_LIST}>Packs</NavLink>
             </nav>
         </header>
     );
