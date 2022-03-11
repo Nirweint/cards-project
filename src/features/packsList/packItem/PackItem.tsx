@@ -1,21 +1,25 @@
 import React, {FC, useState} from 'react';
 import {Button} from "../../../components";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {deletePackTC, updatePackTC} from "../../../state/middlewares/packs";
 import {NavLink} from "react-router-dom";
 import {Modal} from "../../../components";
 import {DeletePack} from "../deletePack/DeletePack";
 import {UpdatePackTitle} from "../updatePackTitle/UpdatePackTitle";
 import s from './PackItem.module.css';
+import {selectProfileId} from "../../../state/selectors/profile";
 
 type PackItemType = {
     name: string,
     cardsCount: number,
     update: string
     _id: string
+    user_id: string
 }
 
-export const PackItem: FC<PackItemType> = ({name, cardsCount, update, _id}) => {
+export const PackItem: FC<PackItemType> = ({name, cardsCount, update, user_id, _id}) => {
+
+    const profileId = useSelector(selectProfileId)
 
     const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false)
     const [showUpdateModal, setShowUpdateModal] = useState<boolean>(false)
@@ -58,27 +62,44 @@ export const PackItem: FC<PackItemType> = ({name, cardsCount, update, _id}) => {
                 </td>
                 <td>{cardsCount}</td>
                 <td>{updateDate}</td>
-                <td>
-                    <Button className={s.btn} onClick={updateHandler}>Update</Button>
-                    <Button className={s.btn} onClick={deleteHandler}>Delete</Button>
-                    <NavLink className={s.link} to={`/learn/${_id}`}>
-                        <Button className={s.btn} onClick={learnHandler}>Learn</Button>
-                    </NavLink>
-                </td>
+                {
+                    profileId === user_id ? (
+                            <td className={s.actions}>
+                                <Button className={s.btn}
+                                        onClick={updateHandler}>Update</Button>
+                                <Button className={s.btn}
+                                        red
+                                        onClick={deleteHandler}>Delete</Button>
+                                <NavLink className={s.link} to={`/learn/${_id}`}>
+                                    <Button className={s.btn}
+                                            onClick={learnHandler}>Learn</Button>
+                                </NavLink>
+                            </td>
+                        )
+                        : (
+                            <td className={s.actions}>
+                                <NavLink className={s.link} to={`/learn/${_id}`}>
+                                    <Button className={s.btn}
+                                            onClick={learnHandler}>Learn</Button>
+                                </NavLink>
+                            </td>
+                        )
+                }
+
             </tr>
             {showDeleteModal &&
-            <Modal setShow={setShowDeleteModal}>
-                <DeletePack deletedTitle={name}
-                            cancelHandler={cancelModalHandler}
-                            submitHandler={deleteModalHandler}/>
-            </Modal>
+			<Modal setShow={setShowDeleteModal}>
+				<DeletePack deletedTitle={name}
+							cancelHandler={cancelModalHandler}
+							submitHandler={deleteModalHandler}/>
+			</Modal>
             }
             {showUpdateModal &&
-            <Modal setShow={setShowUpdateModal}>
-                <UpdatePackTitle title={'Change title'}
-                                 cancelHandler={cancelUpdateHandler}
-                                 submitHandler={updateModalHandler}/>
-            </Modal>
+			<Modal setShow={setShowUpdateModal}>
+				<UpdatePackTitle title={'Change title'}
+								 cancelHandler={cancelUpdateHandler}
+								 submitHandler={updateModalHandler}/>
+			</Modal>
             }
         </>
     );

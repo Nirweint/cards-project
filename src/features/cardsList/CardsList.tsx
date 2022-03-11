@@ -80,7 +80,7 @@ export const CardsList = () => {
             <div className={s.wrapper}>
                 <div className={s.header}>
                     <NavLink
-                        to={PATH.SHOP_TABLE}
+                        to={PATH.PACKS_LIST}
                         className={s.link}
                     >
                         ← {currentPack && currentPack.name}

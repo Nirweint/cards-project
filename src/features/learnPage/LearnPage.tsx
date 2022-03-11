@@ -63,7 +63,6 @@ export const LearnPage = () => {
         setRating(0)
     }
 
-
     return (
         <div className={s.wrapper}>
             <div className={s.title}>
@@ -85,7 +84,7 @@ export const LearnPage = () => {
                 }
 
                 {isChecked && (
-                    <div >
+                    <div>
                         <div className={s.text}>Answer: {card.answer}</div>
                         <div className={s.grades}>
                             Rate yourself:

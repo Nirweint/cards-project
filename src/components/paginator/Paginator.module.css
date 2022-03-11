@@ -8,6 +8,8 @@
 }
 
 .selectedPage {
-    border: 2px solid gray;
+    border: 2px solid #fff;
+    background-color: #548bf4;
+    color: #fff;
     font-weight: bold;
 }

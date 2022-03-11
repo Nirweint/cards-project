@@ -9,6 +9,7 @@ import {selectProfileId} from "../../../state/selectors/profile";
 import {selectAppStatus} from "../../../state/selectors/app";
 import {UpdateCard} from "../updateCard/UpdateCard";
 import {Rating} from "../../../components/rating";
+import s from './CardItem.module.css';
 
 type CardItemType = {
     question: string
@@ -57,8 +58,11 @@ export const CardItem: FC<CardItemType> = ({question, updated, answer, cardId, g
             <td>{updatedDate}</td>
             {isUserCardsPack && <td>
 				<Button disabled={appStatus === 'loading'}
+						className={s.btn}
+                        red
 						onClick={onDeleteCardClick}>delete</Button>
 				<Button disabled={appStatus === 'loading'}
+						className={s.btn}
 						onClick={onShowModalForUpdateClick}>update</Button>
 			</td>}
             <td><Rating value={Math.round((grade)*10)/10} max={5}/></td>
