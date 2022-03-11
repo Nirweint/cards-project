@@ -8,15 +8,17 @@ import {
 import {selectProfileId} from "../../../state/selectors/profile";
 import {selectAppStatus} from "../../../state/selectors/app";
 import {UpdateCard} from "../updateCard/UpdateCard";
+import {Rating} from "../../../components/rating";
 
 type CardItemType = {
     question: string
     answer: string
     updated: string
     cardId: string
+    grade: number
 }
 
-export const CardItem: FC<CardItemType> = ({question, updated, answer, cardId}) => {
+export const CardItem: FC<CardItemType> = ({question, updated, answer, cardId, grade}) => {
 
     const dispatch = useDispatch()
 
@@ -48,7 +50,6 @@ export const CardItem: FC<CardItemType> = ({question, updated, answer, cardId}) 
         setShowUpdateModal(false)
     };
 
-
     return (
         <tr>
             <td>{question}</td>
@@ -60,6 +61,7 @@ export const CardItem: FC<CardItemType> = ({question, updated, answer, cardId}) 
 				<Button disabled={appStatus === 'loading'}
 						onClick={onShowModalForUpdateClick}>update</Button>
 			</td>}
+            <td><Rating value={Math.round((grade)*10)/10} max={5}/></td>
             {showUpdateModal &&
 			<Modal setShow={setShowUpdateModal}>
 				<UpdateCard

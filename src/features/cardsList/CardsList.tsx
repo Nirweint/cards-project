@@ -10,7 +10,7 @@ import {
     selectCurrentCardsPacksId,
     selectListOfCards
 } from "../../state/selectors/cards";
-import {getCards, setNewCard, updateCard} from "../../state/middlewares/cards";
+import {getCards, setNewCard} from "../../state/middlewares/cards";
 import {
     setCardsCurrentId,
     setCurrentCardsPage,
@@ -110,10 +110,10 @@ export const CardsList = () => {
 										new
 										card</Button>
 								</th>}
-
+                                <th>Grade</th>
                             </tr>
                             </thead>
-                            {cards.map(({answer, question, updated, _id}) => {
+                            {cards.map(({answer, question, updated, _id, grade}) => {
                                 return (
                                     <tbody key={_id}>
                                     <CardItem
@@ -121,6 +121,7 @@ export const CardsList = () => {
                                         question={question}
                                         updated={updated}
                                         cardId={_id}
+                                        grade = {grade}
                                     />
                                     </tbody>
                                 )

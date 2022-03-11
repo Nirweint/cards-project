@@ -25,6 +25,7 @@
 }
 
 .btnWrapper {
+    min-width: 300px;
     margin-top: 40px;
     display: flex;
     justify-content: space-between;
@@ -32,4 +33,8 @@
 
 .grades {
     padding: 0 0 10px 0;
+}
+.grade {
+    display: flex;
+    padding: 10px 0;
 }
