@@ -73,7 +73,7 @@ export const LearnPage = () => {
             </div>
             <div className={s.btnWrapper}>
                 {!isChecked &&
-                <NavLink to={PATH.SHOP_TABLE}>
+                <NavLink to={PATH.PACKS_LIST}>
                     <Button>Cancel</Button>
                 </NavLink>
                 }
@@ -99,7 +99,7 @@ export const LearnPage = () => {
                             ))}
                         </div>
                         <div className={s.btnWrapper}>
-                            <NavLink to={PATH.SHOP_TABLE}>
+                            <NavLink to={PATH.PACKS_LIST}>
                                 <Button>Cancel</Button>
                             </NavLink>
                             <Button disabled={!rating} onClick={onNext}>Next</Button>
