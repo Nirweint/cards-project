@@ -56,6 +56,7 @@ export const CardItem: FC<CardItemType> = ({question, updated, answer, cardId, g
             <td>{question}</td>
             <td>{answer}</td>
             <td>{updatedDate}</td>
+            <td><Rating value={Math.round((grade)*10)/10} max={5}/></td>
             {isUserCardsPack && <td>
 				<Button disabled={appStatus === 'loading'}
 						className={s.btn}
@@ -65,7 +66,6 @@ export const CardItem: FC<CardItemType> = ({question, updated, answer, cardId, g
 						className={s.btn}
 						onClick={onShowModalForUpdateClick}>update</Button>
 			</td>}
-            <td><Rating value={Math.round((grade)*10)/10} max={5}/></td>
             {showUpdateModal &&
 			<Modal setShow={setShowUpdateModal}>
 				<UpdateCard

@@ -89,12 +89,12 @@ export const CardsList = () => {
                 </div>
 
                 {cards.length === 0 && isUserCardsPack && cardQuestion === EMPTY_STRING &&
-				<Button
-					disabled={appStatus === 'loading'}
-					onClick={onShowModalForAddNewCardClick}
-				>
-					Add new card
-				</Button>}
+                <Button
+                    disabled={appStatus === 'loading'}
+                    onClick={onShowModalForAddNewCardClick}
+                >
+                    Add new card
+                </Button>}
 
                 {cards.length > 0 ?
                     <div className={s.tableWrapper}>
@@ -104,13 +104,13 @@ export const CardsList = () => {
                                 <th>Question</th>
                                 <th>Answer</th>
                                 <th>Last Updated</th>
-                                {isUserCardsPack && <th>
-									<Button disabled={appStatus === 'loading'}
-											onClick={onShowModalForAddNewCardClick}>Add
-										new
-										card</Button>
-								</th>}
                                 <th>Grade</th>
+                                {isUserCardsPack && <th>
+                                    <Button disabled={appStatus === 'loading'}
+                                            onClick={onShowModalForAddNewCardClick}>Add
+                                        new
+                                        card</Button>
+                                </th>}
                             </tr>
                             </thead>
                             {cards.map(({answer, question, updated, _id, grade}) => {
@@ -121,7 +121,7 @@ export const CardsList = () => {
                                         question={question}
                                         updated={updated}
                                         cardId={_id}
-                                        grade = {grade}
+                                        grade={grade}
                                     />
                                     </tbody>
                                 )
@@ -154,12 +154,12 @@ export const CardsList = () => {
 
             </div>
             {showUpdateModal &&
-			<Modal setShow={setShowUpdateModal}>
-				<UpdateCard
-					cancelHandler={handleCancelAddNewCardClick}
-					submitHandler={handleAddNewCardClick}
-				/>
-			</Modal>
+            <Modal setShow={setShowUpdateModal}>
+                <UpdateCard
+                    cancelHandler={handleCancelAddNewCardClick}
+                    submitHandler={handleAddNewCardClick}
+                />
+            </Modal>
             }
         </>
     );
