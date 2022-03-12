@@ -10,8 +10,8 @@ import s from './PackItem.module.css';
 import {selectProfileId} from "../../../state/selectors/profile";
 
 type PackItemType = {
-    name: string,
-    cardsCount: number,
+    name: string
+    cardsCount: number
     update: string
     _id: string
     user_id: string

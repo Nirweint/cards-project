@@ -89,12 +89,12 @@ export const CardsList = () => {
                 </div>
 
                 {cards.length === 0 && isUserCardsPack && cardQuestion === EMPTY_STRING &&
-                <Button
-                    disabled={appStatus === 'loading'}
-                    onClick={onShowModalForAddNewCardClick}
-                >
-                    Add new card
-                </Button>}
+				<Button
+					disabled={appStatus === 'loading'}
+					onClick={onShowModalForAddNewCardClick}
+				>
+					Add new card
+				</Button>}
 
                 {cards.length > 0 ?
                     <div className={s.tableWrapper}>
@@ -106,28 +106,27 @@ export const CardsList = () => {
                                 <th>Last Updated</th>
                                 <th>Grade</th>
                                 {isUserCardsPack && <th>
-                                    <Button disabled={appStatus === 'loading'}
-                                            onClick={onShowModalForAddNewCardClick}>Add
-                                        new
-                                        card</Button>
-                                </th>}
+									<Button disabled={appStatus === 'loading'}
+											onClick={onShowModalForAddNewCardClick}>Add
+										new
+										card</Button>
+								</th>}
                             </tr>
                             </thead>
+                            <tbody>
                             {cards.map(({answer, question, updated, _id, grade}) => {
                                 return (
-                                    <tbody key={_id}>
                                     <CardItem
+                                        key={_id}
                                         answer={answer}
                                         question={question}
                                         updated={updated}
                                         cardId={_id}
                                         grade={grade}
                                     />
-                                    </tbody>
                                 )
-                            })
-
-                            }
+                            })}
+                            </tbody>
                         </table>
                         <div className={s.paginator}>
                             <Paginator totalCountItems={cardsTotalCount}
@@ -154,12 +153,12 @@ export const CardsList = () => {
 
             </div>
             {showUpdateModal &&
-            <Modal setShow={setShowUpdateModal}>
-                <UpdateCard
-                    cancelHandler={handleCancelAddNewCardClick}
-                    submitHandler={handleAddNewCardClick}
-                />
-            </Modal>
+			<Modal setShow={setShowUpdateModal}>
+				<UpdateCard
+					cancelHandler={handleCancelAddNewCardClick}
+					submitHandler={handleAddNewCardClick}
+				/>
+			</Modal>
             }
         </>
     );

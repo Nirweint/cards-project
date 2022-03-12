@@ -92,6 +92,7 @@ const PacksList = () => {
                     <div className={s.tableWrapper}>
                         <Search setSearchValue={handleSetSearchValue}/>
                         <table className={s.table}>
+                            <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Cards Count</th>
@@ -99,15 +100,25 @@ const PacksList = () => {
                                     className={s.sort}><Sort
                                     setPortionNumber={setPortionNumber}/></div></th>
                                 <th className={s.actions}>
-                                    <Button onClick={onAddNewPackClick}>Add new pack</Button>
+                                    <Button onClick={onAddNewPackClick}>Add new
+                                        pack</Button>
                                 </th>
                             </tr>
-                            {cardPacks.map(({_id, cardsCount, updated, user_id, name}) => {
+                            </thead>
+                            <tbody>
+                            {cardPacks.map(({
+                                                _id,
+                                                cardsCount,
+                                                updated,
+                                                user_id,
+                                                name
+                                            }) => {
                                 return <PackItem key={_id} name={name}
                                                  cardsCount={cardsCount}
                                                  user_id={user_id}
                                                  update={updated} _id={_id}/>
                             })}
+                            </tbody>
                         </table>
                         <div className={s.paginator}>
                             <Select selectItemsPerPage={selectItem}
