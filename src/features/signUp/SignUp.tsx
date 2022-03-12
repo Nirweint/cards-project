@@ -3,7 +3,7 @@ import {InputText} from "../../components";
 import {Button} from "../../components";
 import {useDispatch, useSelector} from "react-redux";
 import {signUpThunk} from "../../state/middlewares/signUp";
-import {Navigate} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 import {PATH} from "../../app/routes/RoutesComponent";
 import {isEmailValid, isPasswordLengthValid} from "../../utils";
 import {selectIsSignUpSuccess} from "../../state/selectors/auth";
@@ -37,10 +37,6 @@ export const SignUp = () => {
         }
     }
 
-    const cancelHandler = () => {
-        console.log('dont work')
-    }
-
     if (isSignUpSuccess) {
         return <Navigate to={PATH.LOGIN}/>
     }
@@ -66,7 +62,9 @@ export const SignUp = () => {
                 />
                 {error && <div className={s.error}>{error}</div>}
                 <div className={style.btnWrapper}>
-                    <Button className={style.btnCancel} onClick={cancelHandler}>Cancel</Button>
+                    <NavLink className={s.link} to={PATH.LOGIN}>
+                        <Button className={style.btnCancel}>Cancel</Button>
+                    </NavLink>
                     <Button className={style.btnRegister} onClick={submitRegister}>Register</Button>
                 </div>
 
