@@ -37,7 +37,7 @@ export const UpdateCard = ({cancelHandler, submitHandler, question, answer}: Upd
                        placeholder={'Answer'} value={answerValue}
                        onChange={handleAnswerValueChange}/>
             <div className={s.btn}>
-                <Button onClick={cancelHandler}>Cancel</Button>
+                <Button onClick={cancelHandler} red>Cancel</Button>
                 <Button
                     onClick={() => submitHandler(questionValue, answerValue)}>Save</Button>
             </div>

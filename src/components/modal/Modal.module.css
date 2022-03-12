@@ -18,9 +18,9 @@
 }
 
 .modal {
-    background-color: #ECECF9;
-    border-radius: 2px;
-    min-height: 200px;
+    background-color: #fff;
+    border-radius: 5px;
+    min-height: 300px;
     min-width: 300px;
     padding: 30px;
     position: absolute;

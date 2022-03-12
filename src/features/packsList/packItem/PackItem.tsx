@@ -50,9 +50,6 @@ export const PackItem: FC<PackItemType> = ({name, cardsCount, update, user_id, _
         dispatch(updatePackTC(_id, title));
     };
 
-    const learnHandler = () => {
-
-    };
 
     return (
         <>
@@ -70,18 +67,16 @@ export const PackItem: FC<PackItemType> = ({name, cardsCount, update, user_id, _
                                 <Button className={s.btn}
                                         red
                                         onClick={deleteHandler}>Delete</Button>
-                                <NavLink className={s.link} to={`/learn/${_id}`}>
-                                    <Button className={s.btn}
-                                            onClick={learnHandler}>Learn</Button>
-                                </NavLink>
+                                {cardsCount > 0 && <NavLink className={s.link} to={`/learn/${_id}`}>
+									<Button className={s.btn}>Learn</Button>
+								</NavLink>}
                             </td>
                         )
                         : (
                             <td className={s.actions}>
-                                <NavLink className={s.link} to={`/learn/${_id}`}>
-                                    <Button className={s.btn}
-                                            onClick={learnHandler}>Learn</Button>
-                                </NavLink>
+                                {cardsCount > 0 && <NavLink className={s.link} to={`/learn/${_id}`}>
+									<Button className={s.btn}>Learn</Button>
+								</NavLink>}
                             </td>
                         )
                 }
@@ -96,9 +91,12 @@ export const PackItem: FC<PackItemType> = ({name, cardsCount, update, user_id, _
             }
             {showUpdateModal &&
 			<Modal setShow={setShowUpdateModal}>
-				<UpdatePackTitle title={'Change title'}
-								 cancelHandler={cancelUpdateHandler}
-								 submitHandler={updateModalHandler}/>
+				<UpdatePackTitle
+                    title={'Change title'}
+                    name={name}
+                    cancelHandler={cancelUpdateHandler}
+                    submitHandler={updateModalHandler}
+                />
 			</Modal>
             }
         </>

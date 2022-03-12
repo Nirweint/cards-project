@@ -16,7 +16,7 @@ export const DeletePack = ({deletedTitle, cancelHandler, submitHandler}: DeleteP
             <p>Do you really remove <b>{deletedTitle}</b> pack?</p>
             <p>All cards will be excluded from this course.</p>
             <div className={s.btn}>
-                <Button onClick={cancelHandler}>Cancel</Button>
+                <Button onClick={cancelHandler} red>Cancel</Button>
                 <Button onClick={submitHandler}>Delete</Button>
             </div>
         </>

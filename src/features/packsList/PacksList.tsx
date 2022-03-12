@@ -96,12 +96,16 @@ const PacksList = () => {
                             <tr>
                                 <th>Name</th>
                                 <th>Cards Count</th>
-                                <th className={s.sortWrapper}>Update <div
-                                    className={s.sort}><Sort
-                                    setPortionNumber={setPortionNumber}/></div></th>
+                                <th className={s.sortWrapper}>
+                                    Update
+                                    <div className={s.sort}>
+                                        <Sort setPortionNumber={setPortionNumber}/>
+                                    </div>
+                                </th>
                                 <th className={s.actions}>
-                                    <Button onClick={onAddNewPackClick}>Add new
-                                        pack</Button>
+                                    <Button onClick={onAddNewPackClick}>
+                                        Add new pack
+                                    </Button>
                                 </th>
                             </tr>
                             </thead>
