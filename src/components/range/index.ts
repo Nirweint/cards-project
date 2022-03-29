@@ -1,1 +1,1 @@
-export {PriceRange} from './PriceRange'
+export { PriceRange } from './PriceRange';

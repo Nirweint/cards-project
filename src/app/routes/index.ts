@@ -1,1 +1,1 @@
-export {RoutesComponent} from './RoutesComponent';
+export { RoutesComponent } from './RoutesComponent';

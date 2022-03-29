@@ -1,15 +1,17 @@
 import React from 'react';
-import {RoutesComponent} from "../routes";
-import {Header} from "../header";
-import s from './Main.module.css'
 
-export const Main = () => {
-    return (
-        <div>
-            <Header/>
-            <div className={s.wrapper}>
-                <RoutesComponent/>
-            </div>
-        </div>
-    );
-}
+import { Header } from '../header';
+import { RoutesComponent } from '../routes';
+
+import s from './Main.module.css';
+
+import { ReturnComponentType } from 'types';
+
+export const Main = (): ReturnComponentType => (
+  <div>
+    <Header />
+    <div className={s.wrapper}>
+      <RoutesComponent />
+    </div>
+  </div>
+);

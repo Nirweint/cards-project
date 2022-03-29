@@ -1,31 +1,38 @@
-import React, {useEffect} from 'react';
-import s from './AppError.module.css'
-import {useDispatch, useSelector} from "react-redux";
-import {selectAppError} from "../../state/selectors/app";
-import {setAppError} from "../../state/actions/app";
-import errorIcon from '../../assets/images/errorIcon.png'
+import React, { useEffect } from 'react';
 
-export const AppError = () => {
-    const dispatch = useDispatch()
-    const appError = useSelector(selectAppError)
+import { useDispatch, useSelector } from 'react-redux';
 
-    useEffect(() => {
-        const id = setTimeout(() => {
-            dispatch(setAppError(null))
-            return () => clearTimeout(id)
-        }, 3000)
-    }, [appError, dispatch])
+import errorIcon from '../../assets/images/errorIcon.png';
 
-    const showError = appError !== null
+import s from './AppError.module.css';
 
-    const wrapperStyle = `${s.wrapper} ${showError ? s.show : ''}`
+import { setAppError } from 'state/actions/app';
+import { selectAppError } from 'state/selectors/app';
+import { ReturnComponentType } from 'types';
 
-    return (
-        <div className={wrapperStyle}>
-            <div className={s.notification}>
-                <img src={errorIcon} alt='err' className={s.errorIcon}/>
-                <span>Error: {appError}</span>
-            </div>
-        </div>
-    );
+const SHOW_ERROR_TIME = 3000;
+
+export const AppError = (): ReturnComponentType => {
+  const dispatch = useDispatch();
+  const appError = useSelector(selectAppError);
+
+  useEffect(() => {
+    const id = setTimeout(() => {
+      dispatch(setAppError(null));
+      return () => clearTimeout(id);
+    }, SHOW_ERROR_TIME);
+  }, [appError, dispatch]);
+
+  const showError = appError !== null;
+
+  const wrapperStyle = `${s.wrapper} ${showError ? s.show : ''}`;
+
+  return (
+    <div className={wrapperStyle}>
+      <div className={s.notification}>
+        <img src={errorIcon} alt="err" className={s.errorIcon} />
+        <span>Error: {appError}</span>
+      </div>
+    </div>
+  );
 };

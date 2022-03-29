@@ -1,1 +1,1 @@
-export {Sort} from './Sort'
+export { Sort } from './Sort';

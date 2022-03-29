@@ -1,1 +1,1 @@
-export {instance} from './config';
+export { instance } from './config';

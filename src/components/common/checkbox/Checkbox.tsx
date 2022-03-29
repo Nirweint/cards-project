@@ -1,40 +1,42 @@
-import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes} from 'react'
-import s from './Checkbox.module.css'
+import React, { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes } from 'react';
 
-type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+import s from './Checkbox.module.css';
+
+type DefaultInputPropsType = DetailedHTMLProps<
+  InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+>;
 
 type SuperCheckboxPropsType = DefaultInputPropsType & {
-    onChangeChecked?: (checked: boolean) => void
-    spanClassName?: string
-}
+  onChangeChecked: (checked: boolean) => void;
+  spanClassName?: string;
+};
 
-export const Checkbox: React.FC<SuperCheckboxPropsType> = (
-    {
-        type,
-        onChange, onChangeChecked,
-        className, spanClassName,
-        children,
+export const Checkbox: React.FC<SuperCheckboxPropsType> = ({
+  onChangeChecked,
+  className,
+  children,
 
-        ...restProps
-    }
-) => {
-    const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-        onChange && onChange(e)
-        onChangeChecked && onChangeChecked(e.currentTarget.checked)
-    }
+  ...restProps
+}) => {
+  const onChangeCallback = (e: ChangeEvent<HTMLInputElement>): void => {
+    onChangeChecked(e.currentTarget.checked);
+  };
 
-    const finalInputClassName = `${s.checkbox} ${className ? className : ''}`
+  const finalInputClassName = `${s.checkbox} ${className || ''}`;
+  return (
+    <label className={s.label}>
+      <input
+        type="checkbox"
+        onChange={onChangeCallback}
+        className={finalInputClassName}
+        {...restProps}
+      />
+      {children && <span className={s.spanClassName}>{children}</span>}
+    </label>
+  );
+};
 
-    return (
-        <label className={s.label}>
-            <input
-                type={'checkbox'}
-                onChange={onChangeCallback}
-                className={finalInputClassName}
-
-                {...restProps}
-            />
-            {children && <span className={s.spanClassName}>{children}</span>}
-        </label>
-    )
-}
+Checkbox.defaultProps = {
+  spanClassName: '',
+};

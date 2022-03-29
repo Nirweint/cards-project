@@ -1,10 +1,7 @@
 import React from 'react';
-import spinner from '../../../assets/images/spinner.svg'
 
-export const Loading = () => {
-    return (
-        <>
-            <img src={spinner} alt="loading..."/>
-        </>
-    );
-};
+import spinner from '../../../assets/images/spinner.svg';
+
+import { ReturnComponentType } from 'types';
+
+export const Loading = (): ReturnComponentType => <img src={spinner} alt="loading..." />;

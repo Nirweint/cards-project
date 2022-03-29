@@ -1,24 +1,27 @@
-import React, {ButtonHTMLAttributes, DetailedHTMLProps} from 'react'
-import s from './Button.module.css'
+import React, { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 
-type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+import s from './Button.module.css';
+
+type DefaultButtonPropsType = DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>;
 
 type SuperButtonPropsType = DefaultButtonPropsType & {
-    red?: boolean
-}
+  red?: boolean;
+};
 
-export const Button: React.FC<SuperButtonPropsType> = (
-    {
-        red, className,
-        ...restProps
-    }
-) => {
-    const finalClassName = `${className} ${s.btn} ${red ? s.red : s.default}`
+export const Button: React.FC<SuperButtonPropsType> = ({
+  red,
+  className,
+  ...restProps
+}) => {
+  const finalClassName = `${className} ${s.btn} ${red ? s.red : s.default}`;
 
-    return (
-        <button
-            className={finalClassName}
-            {...restProps}
-        />
-    )
-}
+  // eslint-disable-next-line react/button-has-type
+  return <button className={finalClassName} {...restProps} />;
+};
+
+Button.defaultProps = {
+  red: false,
+};
