@@ -1,51 +1,53 @@
-import React, {useState} from 'react';
-import {InputText, Loading} from "../../components";
-import {Button} from "../../components";
-import {useDispatch, useSelector} from "react-redux";
-import {Navigate, useParams} from "react-router-dom";
-import {PATH} from "../../app/routes/RoutesComponent";
-import {setNewPasswordTC} from "../../state/middlewares/forgotPassword";
-import {selectIsSettingNewPasswordSucceeded} from "../../state/selectors/forgotPassword";
-import {selectAppStatus} from "../../state/selectors/app";
-import s from '../../components/common/styles/Common.module.css'
+import React, { useState } from 'react';
 
-export const NewPasswordEnter = () => {
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate, useParams } from 'react-router-dom';
 
-    const dispatch = useDispatch();
-    const {token} = useParams<'token'>();
+import s from '../../components/common/styles/Common.module.css';
 
-    const appStatus = useSelector(selectAppStatus)
-    const isSettingNewPasswordSucceeded = useSelector(selectIsSettingNewPasswordSucceeded)
+import { PATH } from 'app/routes/RoutesComponent';
+import { InputText, Loading, Button } from 'components';
+import { setNewPasswordTC } from 'state/middlewares/forgotPassword';
+import { selectAppStatus } from 'state/selectors/app';
+import { selectIsSettingNewPasswordSucceeded } from 'state/selectors/forgotPassword';
+import { ReturnComponentType } from 'types';
 
-    const [newPassword, setNewPassword] = useState<string>('');
+export const NewPasswordEnter = (): ReturnComponentType => {
+  const dispatch = useDispatch();
+  const { token } = useParams<'token'>();
 
-    const createNewPasswordHandler = () => {
-        dispatch(setNewPasswordTC(newPassword, token))
-    };
+  const appStatus = useSelector(selectAppStatus);
+  const isSettingNewPasswordSucceeded = useSelector(selectIsSettingNewPasswordSucceeded);
 
-    if (appStatus === 'loading') {
-        return <Loading/>
-    }
+  const [newPassword, setNewPassword] = useState<string>('');
 
-    if (isSettingNewPasswordSucceeded) {
-        return <Navigate to={PATH.LOGIN}/>
-    }
+  const createNewPasswordHandler = (): void => {
+    dispatch(setNewPasswordTC(newPassword, token));
+  };
 
-    return (
-        <div className={s.wrapper}>
-            <h2>Create new password</h2>
-            <div>
-                <InputText placeholder="Password"
-                           type="password"
-                           onChangeText={setNewPassword}/>
+  if (appStatus === 'loading') {
+    return <Loading />;
+  }
 
-                <p>
-                    Create new password and we will send you<br/>
-                    further instructions to email
-                </p>
-            </div>
-                <Button className={s.button} onClick={createNewPasswordHandler}>Create new password</Button>
+  if (isSettingNewPasswordSucceeded) {
+    return <Navigate to={PATH.LOGIN} />;
+  }
 
-        </div>
-    );
+  return (
+    <div className={s.wrapper}>
+      <h2>Create new password</h2>
+      <div>
+        <InputText placeholder="Password" type="password" onChangeText={setNewPassword} />
+
+        <p>
+          Create new password and we will send you
+          <br />
+          further instructions to email
+        </p>
+      </div>
+      <Button className={s.button} onClick={createNewPasswordHandler}>
+        Create new password
+      </Button>
+    </div>
+  );
 };

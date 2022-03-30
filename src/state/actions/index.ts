@@ -1,14 +1,14 @@
-import {ProfileActionsType} from "./profile/types";
-import {PasswordRecoveryActionsType} from "./passwordRecovery/types";
-import {AppActionsType} from "./app/types";
-import {AuthActionsType} from "./auth/types";
-import {PacksActionsType} from "./packs/types";
-import {CardsActionsType} from "./cards/types";
+import { AppActionsType } from './app/types';
+import { AuthActionsType } from './auth/types';
+import { CardsActionsType } from './cards/types';
+import { PacksActionsType } from './packs/types';
+import { PasswordRecoveryActionsType } from './passwordRecovery/types';
+import { ProfileActionsType } from './profile/types';
 
 export type RootActionsType =
-    ProfileActionsType
-    | PasswordRecoveryActionsType
-    | AppActionsType
-    | AuthActionsType
-    | PacksActionsType
-    | CardsActionsType
+  | ProfileActionsType
+  | PasswordRecoveryActionsType
+  | AppActionsType
+  | AuthActionsType
+  | PacksActionsType
+  | CardsActionsType;

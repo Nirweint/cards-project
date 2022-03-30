@@ -1,5 +1,4 @@
-import {RootStateType} from "../store";
+import { RootStateType } from '../store';
 
-export const selectIsSettingNewPasswordSucceeded = (state: RootStateType): boolean => {
-    return state.passwordRecovery.isSettingNewPasswordSucceeded
-}
+export const selectIsSettingNewPasswordSucceeded = (state: RootStateType): boolean =>
+  state.passwordRecovery.isSettingNewPasswordSucceeded;

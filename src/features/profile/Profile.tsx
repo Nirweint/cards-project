@@ -1,29 +1,33 @@
 import React from 'react';
-import {Navigate} from "react-router-dom";
-import {PATH} from "../../app/routes/RoutesComponent";
-import {useDispatch, useSelector} from "react-redux";
-import {selectIsAuth} from "../../state/selectors/auth";
-import {ProfileInfo} from "./profileInfo/profileInfo";
-import {LogOutTC} from "../../state/middlewares/login";
-import {Button} from "../../components";
 
-export const Profile = () => {
-    const isAuth = useSelector(selectIsAuth)
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
-    const dispatch = useDispatch()
+import { ProfileInfo } from './profileInfo/profileInfo';
 
-    const onLogoutClick = () => {
-        dispatch(LogOutTC())
-    }
+import { PATH } from 'app/routes/RoutesComponent';
+import { Button } from 'components';
+import { LogOutTC } from 'state/middlewares/login';
+import { selectIsAuth } from 'state/selectors/auth';
+import { ReturnComponentType } from 'types';
 
-    if (!isAuth) {
-        return <Navigate replace to={PATH.LOGIN}/>
-    }
+export const Profile = (): ReturnComponentType => {
+  const isAuth = useSelector(selectIsAuth);
 
-    return (
-        <div>
-            <ProfileInfo/>
-            {isAuth && <Button onClick={onLogoutClick}>Log Out</Button>}
-        </div>
-    );
+  const dispatch = useDispatch();
+
+  const onLogoutClick = (): void => {
+    dispatch(LogOutTC());
+  };
+
+  if (!isAuth) {
+    return <Navigate replace to={PATH.LOGIN} />;
+  }
+
+  return (
+    <div>
+      <ProfileInfo />
+      {isAuth && <Button onClick={onLogoutClick}>Log Out</Button>}
+    </div>
+  );
 };

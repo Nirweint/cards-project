@@ -1,40 +1,50 @@
-import React, {ChangeEvent, useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {changeProfileName} from "../../../state/middlewares/profile";
-import {selectProfileName} from "../../../state/selectors/profile";
+import React, { ChangeEvent, useState } from 'react';
 
-export const ProfileInfoName = () => {
+import { useDispatch, useSelector } from 'react-redux';
 
-    const profileName = useSelector(selectProfileName)
-    const dispatch = useDispatch()
+import { changeProfileName } from 'state/middlewares/profile';
+import { selectProfileName } from 'state/selectors/profile';
+import { ReturnComponentType } from 'types';
 
-    let [editMode, setEditMode] = useState(false);
-    let [name, setName] = useState(profileName);
+export const ProfileInfoName = (): ReturnComponentType => {
+  const profileName = useSelector(selectProfileName);
+  const dispatch = useDispatch();
 
-    const changeTitleName = (e: ChangeEvent<HTMLInputElement>) => {
-        setName(e.currentTarget.value)
+  const [editMode, setEditMode] = useState(false);
+  const [name, setName] = useState(profileName);
+
+  const changeTitleName = (e: ChangeEvent<HTMLInputElement>): void => {
+    setName(e.currentTarget.value);
+  };
+
+  const activateEditModeName = (): void => {
+    setEditMode(true);
+    setName(name);
+  };
+
+  const activateViewModeName = (): void => {
+    if (name) {
+      setEditMode(false);
+      dispatch(changeProfileName(name));
     }
+  };
 
-    const activateEditModeName = () => {
-        setEditMode(true);
-        setName(name);
-    }
-
-    const activateViewModeName = () => {
-        if (name) {
-            setEditMode(false);
-            dispatch(changeProfileName(name))
-        }
-    }
-
-    return (
+  return (
+    <div>
+      {!editMode ? (
+        <div onDoubleClick={activateEditModeName}>Name: {profileName}</div>
+      ) : (
         <div>
-            {!editMode
-                ? <div onDoubleClick={activateEditModeName}>Name: {profileName}</div>
-                : <div>
-                    Name: <input autoFocus value={name} onChange={changeTitleName} onBlur={activateViewModeName}/>
-                </div>
-            }
+          Name:{' '}
+          <input
+            // eslint-disable-next-line jsx-a11y/no-autofocus
+            autoFocus
+            value={name}
+            onChange={changeTitleName}
+            onBlur={activateViewModeName}
+          />
         </div>
-    );
+      )}
+    </div>
+  );
 };

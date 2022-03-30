@@ -1,6 +1,6 @@
-import { CardsPackType } from 'state/reducers/cards';
-
 import { instance } from './config';
+
+import { CardsPackType } from 'state/reducers/cards';
 
 export const cardsAPI = {
   getCards(payload: CardsParamsType) {

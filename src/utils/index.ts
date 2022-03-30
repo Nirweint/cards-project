@@ -1,1 +1,1 @@
-export {isEmailValid, isPasswordLengthValid} from './validator';
+export { isEmailValid, isPasswordLengthValid } from './validator';

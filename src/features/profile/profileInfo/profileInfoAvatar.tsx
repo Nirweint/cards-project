@@ -1,47 +1,56 @@
-import React, {ChangeEvent, useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {changeProfileAvatar} from "../../../state/middlewares/profile";
-import {selectProfileAvatar} from "../../../state/selectors/profile";
-import s from './profileInfo.module.css'
+import React, { ChangeEvent, useState } from 'react';
 
-export const ProfileInfoAvatar = () => {
+import { useDispatch, useSelector } from 'react-redux';
 
-    const profileAvatar = useSelector(selectProfileAvatar)
-    const dispatch = useDispatch()
+import s from './profileInfo.module.css';
 
-    let [editMode, setEditMode] = useState(false);
-    let [avatar, setAvatar] = useState(profileAvatar);
+import { changeProfileAvatar } from 'state/middlewares/profile';
+import { selectProfileAvatar } from 'state/selectors/profile';
+import { ReturnComponentType } from 'types';
 
-    const changeTitleAvatar = (e: ChangeEvent<HTMLInputElement>) => {
-        setAvatar(e.currentTarget.value)
+export const ProfileInfoAvatar = (): ReturnComponentType => {
+  const profileAvatar = useSelector(selectProfileAvatar);
+  const dispatch = useDispatch();
+
+  const [editMode, setEditMode] = useState(false);
+  const [avatar, setAvatar] = useState(profileAvatar);
+
+  const changeTitleAvatar = (e: ChangeEvent<HTMLInputElement>): void => {
+    setAvatar(e.currentTarget.value);
+  };
+
+  const activateEditModeAvatar = (): void => {
+    setEditMode(true);
+    setAvatar(avatar);
+  };
+
+  const activateViewModeAvatar = (): void => {
+    if (avatar) {
+      setEditMode(false);
+      dispatch(changeProfileAvatar(avatar));
     }
+  };
 
-    const activateEditModeAvatar = () => {
-        setEditMode(true);
-        setAvatar(avatar)
-    }
+  return (
+    <div>
+      <div className={s.imgAvatarZone}>
+        <img className={s.imgAvatarPic} src={avatar} alt="Avatar" />
+      </div>
 
-    const activateViewModeAvatar = () => {
-        if (avatar) {
-            setEditMode(false);
-            dispatch(changeProfileAvatar(avatar))
-        }
-    }
-
-
-    return (
+      {!editMode ? (
+        <div onDoubleClick={activateEditModeAvatar}>Avatar url: {profileAvatar}</div>
+      ) : (
         <div>
-            <div className={s.imgAvatarZone}>
-                <img className={s.imgAvatarPic} src={avatar} alt={'Avatar'}/>
-            </div>
-
-            {!editMode
-                ? <div onDoubleClick={activateEditModeAvatar}>Avatar url: {profileAvatar}</div>
-                : <div>
-                    Avatar url: <input autoFocus value={avatar} onChange={changeTitleAvatar}
-                                       onBlur={activateViewModeAvatar}/>
-                </div>
-            }
+          Avatar url:{' '}
+          <input
+            // eslint-disable-next-line jsx-a11y/no-autofocus
+            autoFocus
+            value={avatar}
+            onChange={changeTitleAvatar}
+            onBlur={activateViewModeAvatar}
+          />
         </div>
-    );
+      )}
+    </div>
+  );
 };

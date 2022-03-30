@@ -1,4 +1,5 @@
-import {RootStateType} from "../store";
+import { RootStateType } from '../store';
 
-export const selectIsAuth = (state: RootStateType): boolean => state.auth.auth
-export const selectIsSignUpSuccess = (state: RootStateType): boolean => state.auth.signUpSuccess
+export const selectIsAuth = (state: RootStateType): boolean => state.auth.auth;
+export const selectIsSignUpSuccess = (state: RootStateType): boolean =>
+  state.auth.signUpSuccess;
