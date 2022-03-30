@@ -9,7 +9,6 @@ type DefaultInputPropsType = DetailedHTMLProps<
 
 type SuperCheckboxPropsType = DefaultInputPropsType & {
   onChangeChecked: (checked: boolean) => void;
-  spanClassName?: string;
 };
 
 export const Checkbox: React.FC<SuperCheckboxPropsType> = ({
@@ -35,8 +34,4 @@ export const Checkbox: React.FC<SuperCheckboxPropsType> = ({
       {children && <span className={s.spanClassName}>{children}</span>}
     </label>
   );
-};
-
-Checkbox.defaultProps = {
-  spanClassName: '',
 };

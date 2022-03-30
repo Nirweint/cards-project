@@ -11,6 +11,7 @@ import { setCardsCurrentId } from 'state/actions/cards';
 import { getCards, updateCardGrade } from 'state/middlewares/cards';
 import { CardType } from 'state/reducers/cards';
 import { selectListOfCards } from 'state/selectors/cards';
+import { selectCardPacks } from 'state/selectors/packs';
 import { ReturnComponentType } from 'types';
 
 const GRADE_NUMBER = 6;
@@ -54,6 +55,10 @@ export const LearnPage = (): ReturnComponentType => {
 
   const { id } = useParams<'id'>();
   const cards = useSelector(selectListOfCards);
+  const packs = useSelector(selectCardPacks);
+
+  // eslint-disable-next-line no-underscore-dangle
+  const currentPack = packs.find(pack => pack._id === id);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -61,7 +66,7 @@ export const LearnPage = (): ReturnComponentType => {
       dispatch(setCardsCurrentId(id));
     }
     dispatch(getCards());
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   const handleGradeClick = (grade: number): void => {
     setRating(grade);
@@ -76,7 +81,7 @@ export const LearnPage = (): ReturnComponentType => {
 
   return (
     <div className={s.wrapper}>
-      <div className={s.title}>Learn PACK_NAME</div>
+      <div className={s.title}>Learn {currentPack && currentPack.name}</div>
       <div className={s.text}>Question: {card.question}</div>
       <div className={s.btnWrapper}>
         {!isChecked && (
